@@ -818,7 +818,7 @@ const CONFIG = {
     chainRange: 150,   
     bulletAuraRange: 180, 
     chainCount: 2,       
-    chainHitCooldown: 300, 
+    chainHitCooldown: 400, 
     meteorStartWave: 5, 
     meteorMaxWave: 50,
     meteorMaxCount: 20 
@@ -1876,9 +1876,9 @@ class Plant {
         const oldLevel = this.level;
 
         let newLevel = 1;
-        if (this.ultUseCount >= 30) newLevel = 4;
-        else if (this.ultUseCount >= 15) newLevel = 3;
-        else if (this.ultUseCount >= 5) newLevel = 2;
+        if (this.ultUseCount >= 20) newLevel = 4;
+        else if (this.ultUseCount >= 10) newLevel = 3;
+        else if (this.ultUseCount >= 3) newLevel = 2;
 
         if (newLevel > oldLevel) {
             this.level = newLevel;
@@ -1888,7 +1888,7 @@ class Plant {
             game.shakeTimer = 300;
             game.recoverLife();
         } 
-        else if (this.level === 4 && this.ultUseCount > 30 && (this.ultUseCount % 10 === 0)) {
+        else if (this.level === 4 && this.ultUseCount > 20 && (this.ultUseCount % 10 === 0)) {
              game.recoverLife();
         }
     }
@@ -3060,7 +3060,7 @@ class Game {
         if (this.heroPlant) {
             document.getElementById('stat-level').innerText = this.heroPlant.level >= 4 ? "4 (MAX)" : this.heroPlant.level;
             
-            const thresholds = [5, 15, 30];
+            const thresholds = [3, 10, 20];
             let nextGoal = "MAX";
             if (this.heroPlant.level < 4) {
                 for(let t of thresholds) {
