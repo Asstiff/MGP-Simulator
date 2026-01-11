@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>超级机枪豌豆 - 修复版</title>
+    <title>超级机枪豌豆 - 增强版</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -97,6 +97,7 @@
         }
         .stat-row { display: flex; justify-content: space-between; margin-bottom: 4px; }
         .buff-active { color: #facc15; animation: pulse 1s infinite; }
+        .buff-dome { color: #60a5fa; animation: pulse 1s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
 
         /* Scoring & Combo UI */
@@ -244,8 +245,20 @@
             filter: grayscale(1);
         }
         
+        /* 商店闪烁动画 */
+        .shop-btn.flash-highlight {
+            animation: shop-flash 0.5s infinite alternate;
+        }
+        @keyframes shop-flash {
+            from { box-shadow: 0 0 10px #fff; border-color: #fff; transform: scale(1.0); }
+            to { box-shadow: 0 0 30px #facc15; border-color: #facc15; transform: scale(1.1); }
+        }
+        
         #btn-stun.affordable { background: #ca8a04; border-color: #facc15; }
         #btn-stun.affordable:hover { background: #a16207; }
+        
+        #btn-dome.affordable { background: #0369a1; border-color: #38bdf8; }
+        #btn-dome.affordable:hover { background: #0284c7; }
 
         .cost-badge {
             position: absolute;
@@ -437,6 +450,43 @@
             font-size: 2rem;
             font-weight: bold;
         }
+
+        /* 暂停菜单样式 */
+        #pause-menu {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 150;
+            color: white;
+        }
+        .pause-title { font-size: 4rem; font-weight: bold; margin-bottom: 30px; letter-spacing: 5px; }
+        .pause-hint { font-size: 1.5rem; color: #ccc; }
+
+        /* 能量豆溢出提示 banner */
+        #overflow-banner {
+            position: absolute;
+            bottom: 130px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            display: none;
+            z-index: 100;
+            text-shadow: 1px 1px 0 #000;
+            border: 2px solid rgba(255,255,255,0.3);
+            opacity: 1;
+            transition: opacity 0.5s;
+        }
+
     </style>
 </head>
 <body>
@@ -446,10 +496,15 @@
     
     <div id="loading-overlay">LOADING AUDIO...</div>
 
+    <div id="pause-menu">
+        <div class="pause-title">PAUSED</div>
+        <div class="pause-hint">Press [P] to Resume</div>
+    </div>
+
     <div id="game-over-screen">
         <h1 id="game-over-text">僵尸吃掉了你的脑子!</h1>
         <div style="font-size: 2rem; margin-bottom: 20px;">FINAL SCORE: <span id="final-score" class="text-yellow-400">0</span></div>
-        <button id="restart-btn">重新开始</button>
+        <button id="restart-btn">重新开始 <span style="font-size: 0.6em">[R]</span></button>
     </div>
 
     <div id="ui-layer">
@@ -457,7 +512,6 @@
             <div style="display:flex; flex-direction:column; gap: 10px;">
                 <div>
                     <div>WAVE <span id="wave-num" class="text-yellow-400">1</span></div>
-                    <!-- 修复：添加了 id="zombie-count" 的元素，解决报错 -->
                     <div style="font-size: 0.8rem; color: #aaa;">ZOMBIES: <span id="zombie-count" class="text-red-400">0</span></div>
                     
                     <div id="lives-container">
@@ -466,7 +520,6 @@
                         <span class="heart" id="life-3">♥</span>
                     </div>
                 </div>
-                <!-- 植物状态面板 -->
                 <div id="stats-panel">
                     <div class="stat-row">
                         <span>LEVEL:</span>
@@ -480,11 +533,22 @@
                         <span>BUFF:</span>
                         <span id="stat-buff" class="buff-active">STUN 3s</span>
                     </div>
+                    <div class="stat-row" id="dome-row" style="display:none;">
+                        <span>DOME:</span>
+                        <span id="stat-dome" class="buff-dome">5s</span>
+                    </div>
                 </div>
             </div>
             
             <div style="text-align:center">
-                <span style="font-size:0.8em; color:#ccc"><span class="text-yellow-400">WASD</span> / 点击移动 | <span class="text-yellow-400">SPACE</span> 大招 | <span class="text-yellow-400">N</span> 下一波</span>
+                <span style="font-size:0.8em; color:#ccc">
+                    <span class="text-yellow-400">WASD</span> 移动 | 
+                    <span class="text-yellow-400">SPACE</span> 大招 | 
+                    <span class="text-yellow-400">N</span> 下一波 | 
+                    <span class="text-yellow-400">P</span> 暂停 | 
+                    <span class="text-yellow-400">R</span> 重开 | 
+                    <span class="text-yellow-400">1/2/3/4</span> 道具
+                </span>
             </div>
             
             <div id="score-area">
@@ -493,7 +557,6 @@
             </div>
         </div>
 
-        <!-- Combo Display -->
         <div id="combo-container">
             <div id="combo-count">0</div>
             <div id="combo-label">COMBO</div>
@@ -505,6 +568,8 @@
         <div id="toast">WAVE 1</div>
 
         <button id="next-wave-btn">下一波<span class="key-hint">[N]</span></button>
+
+        <div id="overflow-banner">能量豆已满，使用大招或购买道具</div>
 
         <div id="controls-wrapper">
             <div id="pf-wrapper">
@@ -520,7 +585,6 @@
                 </div>
             </div>
 
-            <!-- 商店按钮 -->
             <div class="shop-btn" id="btn-shield">
                 <div class="cost-badge">2</div>
                 <div class="btn-icon">🛡️</div>
@@ -535,11 +599,18 @@
                 <span class="key-hint">[2]</span>
             </div>
 
+            <div class="shop-btn" id="btn-dome">
+                <div class="cost-badge">3</div>
+                <div class="btn-icon">🔮</div>
+                <div>穹顶</div>
+                <span class="key-hint">[3]</span>
+            </div>
+
             <div class="shop-btn" id="btn-mower">
                 <div class="cost-badge">5</div>
                 <div class="btn-icon">🚜</div>
                 <div>小推车</div>
-                <span class="key-hint">[3]</span>
+                <span class="key-hint">[4]</span>
             </div>
         </div>
     </div>
@@ -581,9 +652,6 @@ class WebAudioManager {
             plant1: './sounds/plant1.wav',
             plant2: './sounds/plant2.wav',
             button: './sounds/button.wav',
-            // 修复：移除 warning 和 explosion 的文件引用，避免 404
-            // warning: './warning.wav', 
-            // explosion: './explosion.wav',
             meteor_fall: './sounds/meteor_fall.wav',
             meteor_hit1: './sounds/meteor_hit1.wav', 
             meteor_hit2: './sounds/meteor_hit2.wav', 
@@ -604,6 +672,8 @@ class WebAudioManager {
             countdown_1: './sounds/countdown_1.wav',
             countdown_2: './sounds/countdown_2.wav',
             countdown_3: './sounds/countdown_3.wav',
+            countdown_4: './sounds/countdown_4.wav',
+            countdown_5: './sounds/countdown_5.wav',
 
             // 新增购买音效
             button_buy: './sounds/button_buy.wav',
@@ -724,7 +794,6 @@ class WebAudioManager {
         } else if (key === 'button_buy') {
             volume = 0.9;
         } else if (key === 'explosion') {
-            // 修复：如果没有 explosion 音效，使用 zap1 代替
             if (!this.buffers.explosion) bufferKey = 'zap1';
             volume = 0.8;
         } else if (key === 'meteor_fall') {
@@ -821,11 +890,11 @@ const CONFIG = {
     chainHitCooldown: 400, 
     meteorStartWave: 5, 
     meteorMaxWave: 50,
-    meteorMaxCount: 20 
+    meteorMaxCount: 20,
+    meteorDamage: 500 // 陨石对僵尸的伤害
 };
 
 /* --- 僵尸类型定义 --- */
-// 修复：分离 cost (难度消耗) 和 score (得分)
 const ZOMBIE_TYPES = {
     BASIC: { 
         id: 'BASIC', hp: 150, speed: 0.08, color: '#64748b', scale: 1.0, cost: 1, score: 100, name: "BASIC"
@@ -1145,6 +1214,85 @@ class AshEffect {
     }
 }
 
+// 陨石爆炸特效类
+class MeteorExplosion {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.life = 1.0;
+        this.maxLife = 1.0;
+        this.particles = [];
+        
+        // 生成火焰和岩石碎片粒子
+        for(let i = 0; i < 30; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 2 + Math.random() * 6;
+            const isFlame = Math.random() < 0.6;
+            this.particles.push({
+                x: 0,
+                y: 0,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed - 2,
+                size: isFlame ? (8 + Math.random() * 12) : (4 + Math.random() * 8),
+                color: isFlame ? 
+                    (Math.random() < 0.5 ? '#ff6b35' : '#fbbf24') : 
+                    '#5d4037',
+                life: 0.5 + Math.random() * 0.5,
+                isFlame: isFlame
+            });
+        }
+    }
+    
+    update(dt) {
+        this.life -= dt * 0.002;
+        if (this.life <= 0) this.dead = true;
+        
+        this.particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.15; // 重力
+            p.life -= 0.03;
+            if (p.isFlame) {
+                p.size *= 0.95; // 火焰逐渐变小
+            }
+        });
+    }
+    
+    draw(ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        
+        // 画爆炸光环
+        const progress = 1 - (this.life / this.maxLife);
+        const ringSize = 20 + progress * 60;
+        const ringAlpha = Math.max(0, this.life);
+        
+        ctx.strokeStyle = `rgba(255, 107, 53, ${ringAlpha})`;
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.arc(0, 0, ringSize, 0, Math.PI * 2);
+        ctx.stroke();
+        
+        // 画粒子
+        this.particles.forEach(p => {
+            if (p.life <= 0) return;
+            ctx.globalAlpha = Math.max(0, p.life);
+            ctx.fillStyle = p.color;
+            if (p.isFlame) {
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = p.color;
+            } else {
+                ctx.shadowBlur = 0;
+            }
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+        });
+        
+        ctx.restore();
+    }
+}
+
 class Meteor {
     constructor(row, col) {
         this.row = row;
@@ -1154,6 +1302,9 @@ class Meteor {
         this.timer = 1000 + Math.random() * 2000; 
         this.maxTimer = this.timer;
         this.hasImpacted = false;
+        
+        // 固定旋转角度（不在下落时旋转）
+        this.rotation = Math.random() * Math.PI * 2;
     }
 
     update(dt) {
@@ -1171,6 +1322,7 @@ class Meteor {
         ctx.save();
         ctx.translate(this.x, this.y);
         
+        // 地面警告圈
         ctx.strokeStyle = `rgba(239, 68, 68, ${alpha + 0.3})`;
         ctx.lineWidth = 4;
         ctx.beginPath();
@@ -1188,6 +1340,76 @@ class Meteor {
         ctx.moveTo(-10, 0); ctx.lineTo(10, 0);
         ctx.moveTo(0, -10); ctx.lineTo(0, 10);
         ctx.stroke();
+
+        // --- 真正的陨石坠落动画 ---
+        // 最后 500ms 陨石从天而降
+        if (this.timer <= 500 && this.timer > 0) {
+            const dropProgress = 1 - (this.timer / 500); // 0 (start) -> 1 (land)
+            const startY = -600; 
+            const endY = 0;
+            const currentY = startY + (endY - startY) * dropProgress;
+
+            ctx.save();
+            ctx.translate(0, currentY); // 移动到当前高度
+            // 使用固定的旋转角度，不再随下落进度旋转
+            ctx.rotate(this.rotation);
+
+            // 绘制陨石本体 (石头颜色 + 纹理)
+            ctx.fillStyle = '#5d4037';
+            ctx.beginPath();
+            ctx.arc(0, 0, 25, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // 陨石表面纹理
+            ctx.fillStyle = '#4e342e';
+            ctx.beginPath();
+            ctx.arc(-8, -5, 8, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(5, 8, 6, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.restore();
+            
+            // 火焰拖尾 - 在旋转之外绘制，始终朝上
+            ctx.save();
+            ctx.translate(0, currentY);
+            
+            // 外层火焰（橙红色）
+            ctx.fillStyle = `rgba(255, 87, 34, ${0.8 - dropProgress * 0.3})`;
+            ctx.beginPath();
+            ctx.moveTo(-18, -15);
+            ctx.quadraticCurveTo(-5, -80 - (1-dropProgress)*40, 0, -120 - (1-dropProgress)*60);
+            ctx.quadraticCurveTo(5, -80 - (1-dropProgress)*40, 18, -15);
+            ctx.arc(0, 0, 25, Math.PI * 1.2, Math.PI * 1.8, true);
+            ctx.fill();
+            
+            // 内层火焰（黄色）
+            ctx.fillStyle = `rgba(255, 193, 7, ${0.6 - dropProgress * 0.2})`;
+            ctx.beginPath();
+            ctx.moveTo(-10, -20);
+            ctx.quadraticCurveTo(0, -60 - (1-dropProgress)*30, 0, -80 - (1-dropProgress)*40);
+            ctx.quadraticCurveTo(0, -60 - (1-dropProgress)*30, 10, -20);
+            ctx.arc(0, 0, 15, Math.PI * 1.3, Math.PI * 1.7, true);
+            ctx.fill();
+
+            // 陨石核心亮斑
+            ctx.fillStyle = '#ffcc80';
+            ctx.beginPath();
+            ctx.arc(-5, -5, 8, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.restore();
+            
+            // 地面阴影 (随高度变化)
+            ctx.save();
+            ctx.scale(1, 0.5);
+            ctx.fillStyle = `rgba(0,0,0, ${0.2 + dropProgress * 0.5})`;
+            ctx.beginPath();
+            ctx.arc(0, 0, 10 + dropProgress * 20, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
 
         ctx.restore();
     }
@@ -1785,6 +2007,9 @@ class Plant {
         this.stunBuffTimer = 0; 
         this.lastBuffSec = 0; 
         
+        this.domeTimer = 0; // 穹顶护盾计时器
+        this.domeLastSec = 0; // 穹顶倒计时音效控制
+        
         this.ultStartTime = 0; 
         this.invincibleTimer = 0; // 无敌帧计时器
     }
@@ -1793,6 +2018,7 @@ class Plant {
         if (this.recoil > 0) this.recoil -= dt * 0.1;
         if (this.invincibleTimer > 0) this.invincibleTimer -= dt;
         
+        // 电击 buff 倒计时
         if (this.stunBuffTimer > 0) {
             this.stunBuffTimer -= dt;
 
@@ -1809,6 +2035,25 @@ class Plant {
             }
         } else {
             this.lastBuffSec = 0;
+        }
+        
+        // 穹顶护盾倒计时
+        if (this.domeTimer > 0) {
+            this.domeTimer -= dt;
+
+            const currentSec = Math.ceil(this.domeTimer / 1000);
+            
+            if (currentSec < this.domeLastSec && currentSec >= 1) {
+                SM.play(`countdown_${currentSec}`);
+                this.domeLastSec = currentSec;
+            }
+
+            if (this.domeTimer <= 0) {
+                this.domeTimer = 0;
+                SM.play('countdown_0');
+            }
+        } else {
+            this.domeLastSec = 0;
         }
 
         if (this.isUltimating) {
@@ -2017,11 +2262,15 @@ class Game {
         this.state = {
             wave: 1,
             lastWaveTime: Date.now(),
-            pfCount: 0, 
+            pfCount: 2, // 开局自带2颗能量豆
             nextWaveAvailable: false,
             gameOver: false,
-            lives: 3
+            lives: 3,
+            hasFlashedShop: false, // 是否已经触发过商店满能量豆的闪烁提示
+            hasShownOverflowBanner: false // 是否已经显示过能量豆溢出提示
         };
+
+        this.paused = false; // 暂停状态
 
         // Score & Combo
         this.score = 0;
@@ -2029,7 +2278,6 @@ class Game {
         this.comboTimer = 0;
         this.maxCombo = 0;
         
-        // 修复：LocalStorage 安全访问
         try {
             this.highScore = parseInt(localStorage.getItem('smgp_highscore') || '0');
             this.maxCombo = parseInt(localStorage.getItem('smgp_maxcombo') || '0');
@@ -2066,6 +2314,10 @@ class Game {
         this.startWave();
         this.updateUI();
         this.updateLivesUI();
+        
+        // 隐藏暂停菜单和溢出提示
+        document.getElementById('pause-menu').style.display = 'none';
+        document.getElementById('overflow-banner').style.display = 'none';
     }
 
     reset() {
@@ -2077,6 +2329,20 @@ class Game {
         SM.stopBGM(); 
         SM.playBGM(); 
         this.initGame();
+    }
+
+    togglePause() {
+        if (this.state.gameOver) return;
+        this.paused = !this.paused;
+        document.getElementById('pause-menu').style.display = this.paused ? 'flex' : 'none';
+        
+        // 当取消暂停时，重置 lastTime 以防止 dt 过大
+        if (!this.paused) {
+            this.lastTime = performance.now();
+            this.state.lastWaveTime += (Date.now() - this.pauseStartTime); // 补偿暂停时间
+        } else {
+            this.pauseStartTime = Date.now();
+        }
     }
 
     fitScreen() {
@@ -2104,7 +2370,7 @@ class Game {
         window.addEventListener('keydown', unlockAudio);
 
         this.canvas.addEventListener('mousedown', (e) => {
-            if (this.state.gameOver) return;
+            if (this.state.gameOver || this.paused) return;
             const rect = this.canvas.getBoundingClientRect();
             const x = (e.clientX - rect.left) / this.scaleFactor;
             const y = (e.clientY - rect.top) / this.scaleFactor;
@@ -2120,7 +2386,7 @@ class Game {
         });
 
         document.getElementById('next-wave-btn').addEventListener('click', () => {
-            this.startNextWave("BUTTON");
+            if (!this.paused) this.startNextWave("BUTTON");
         });
 
         document.getElementById('restart-btn').addEventListener('click', () => {
@@ -2130,16 +2396,29 @@ class Game {
         
         const slots = document.querySelectorAll('.plant-food-slot');
         slots.forEach(s => {
-            s.addEventListener('click', () => this.tryUsePlantFood());
+            s.addEventListener('click', () => {
+                if (!this.paused) this.tryUsePlantFood();
+            });
         });
 
         // 商店按钮事件
-        document.getElementById('btn-shield').addEventListener('click', () => this.buyShield());
-        document.getElementById('btn-mower').addEventListener('click', () => this.buyMower());
-        document.getElementById('btn-stun').addEventListener('click', () => this.buyStun());
+        document.getElementById('btn-shield').addEventListener('click', () => { if(!this.paused) this.buyShield(); });
+        document.getElementById('btn-stun').addEventListener('click', () => { if(!this.paused) this.buyStun(); });
+        document.getElementById('btn-dome').addEventListener('click', () => { if(!this.paused) this.buyDome(); });
+        document.getElementById('btn-mower').addEventListener('click', () => { if(!this.paused) this.buyMower(); });
 
         window.addEventListener('keydown', (e) => {
-            if (this.state.gameOver) return;
+            // 全局功能键
+            if (e.code === 'KeyR') {
+                this.reset();
+                return;
+            }
+            if (e.code === 'KeyP') {
+                this.togglePause();
+                return;
+            }
+
+            if (this.state.gameOver || this.paused) return;
 
             // WASD 移动逻辑
             if (this.heroPlant) {
@@ -2168,7 +2447,8 @@ class Game {
             // 商店快捷键
             else if (e.code === 'Digit1') this.buyShield();
             else if (e.code === 'Digit2') this.buyStun(); 
-            else if (e.code === 'Digit3') this.buyMower(); 
+            else if (e.code === 'Digit3') this.buyDome();
+            else if (e.code === 'Digit4') this.buyMower(); 
         });
     }
 
@@ -2293,6 +2573,20 @@ class Game {
         }
     }
 
+    buyDome() {
+        if (this.state.pfCount >= 3 && !this.state.gameOver && this.heroPlant) {
+            this.state.pfCount -= 3;
+            this.heroPlant.domeTimer = 5000; // 5秒
+            this.heroPlant.domeLastSec = 6; // 从6开始，这样5秒时会播放countdown_5
+            SM.play('button_buy'); 
+            SM.play('shield_on'); 
+            this.updateUI();
+            this.addEffect(new FloatText("DOME UP!", this.heroPlant.x, this.heroPlant.y - 60, "#38bdf8"));
+        } else if (this.state.pfCount < 3) {
+            SM.play('buzzer');
+        }
+    }
+
     moveHeroTo(r, c, silent = false) {
         if (this.heroPlant && this.heroPlant.row === r && this.heroPlant.col === c) {
             return;
@@ -2352,7 +2646,7 @@ class Game {
         
         // 视觉特效：黄白色闪屏
         this.addEffect(new ScreenVignette('parry'));
-        this.addEffect(new FloatText("PERFECT DODGE!", this.heroPlant.x, this.heroPlant.y - 80, "#fef08a"));
+        this.addEffect(new FloatText("完美闪避!", this.heroPlant.x, this.heroPlant.y - 80, "#fef08a"));
         this.shakeTimer = 400;
 
         // 0.3秒无敌帧
@@ -2460,7 +2754,6 @@ class Game {
         while (currentDifficulty < waveDifficulty && spawnList.length < MAX_ZOMBIES_PER_WAVE) {
             const type = pickZombie();
             spawnList.push(type);
-            // 修复：使用 cost 而不是 score 来计算难度
             currentDifficulty += type.cost; 
         }
         
@@ -2521,6 +2814,7 @@ class Game {
         this.combo++;
         this.comboTimer = 500; // 0.5s to expire
         if (this.combo > this.maxCombo) {
+            this.maxCombo = this.combo;
             this.maxCombo = this.combo;
             try { localStorage.setItem('smgp_maxcombo', this.maxCombo); } catch(e){}
             
@@ -2613,9 +2907,41 @@ class Game {
             m.update(dt);
             if (m.hasImpacted) {
                 SM.play('meteor_fall'); 
+                
+                // 检查穹顶护盾
+                const hasDome = this.heroPlant && this.heroPlant.domeTimer > 0;
+                
+                // 对玩家造成伤害（如果有穹顶则免疫）
                 if (this.heroPlant && this.heroPlant.row === m.row && this.heroPlant.col === m.col) {
-                    this.playerHit();
+                    if (hasDome) {
+                        this.addEffect(new FloatText("穹顶抵挡!", m.x, m.y - 60, "#38bdf8"));
+                    } else {
+                        this.playerHit();
+                    }
                 }
+                
+                // 对同格僵尸造成伤害
+                let hitZombieCount = 0;
+                this.zombies.forEach(z => {
+                    if (z.isDead || z.isDropping) return;
+                    
+                    // 检查僵尸是否在陨石落点格子内（允许一定容差）
+                    const inColRange = Math.abs(z.x - m.x) < CELL_WIDTH * 0.7;
+                    
+                    if (z.row === m.row && inColRange) {
+                        z.takeDamage(CONFIG.meteorDamage, this, 'meteor');
+                        this.addEffect(new Particle(z.x, z.y - 40, '#ff6b35', 15, 4));
+                        hitZombieCount++;
+                    }
+                });
+                
+                // 如果砸中了僵尸，显示提示文字
+                if (hitZombieCount > 0) {
+                    this.addEffect(new FloatText(`陨石 x${hitZombieCount}`, m.x, m.y - 60, "#ff6b35"));
+                }
+                
+                // 添加爆炸特效
+                this.addEffect(new MeteorExplosion(m.x, m.y));
                 this.addEffect(new AshEffect(m.x, m.y)); 
                 SM.play('explosion');
                 this.meteors.splice(i, 1);
@@ -2683,7 +3009,7 @@ class Game {
         }
 
         if (this.heroPlant && this.heroPlant.isUltimating) {
-            this.addEffect(new FloatText("INVINCIBLE!", this.heroPlant.x, this.heroPlant.y - 60, "#fff"));
+            this.addEffect(new FloatText("无敌!", this.heroPlant.x, this.heroPlant.y - 60, "#fff"));
             return;
         }
 
@@ -2691,7 +3017,7 @@ class Game {
             this.hasShield = false;
             SM.play('shield_break'); 
             this.addEffect(new Particle(this.heroPlant.x, this.heroPlant.y, '#60a5fa', 40, 8));
-            this.addEffect(new FloatText("BLOCKED!", this.heroPlant.x, this.heroPlant.y - 60, "#60a5fa"));
+            this.addEffect(new FloatText("抵挡!", this.heroPlant.x, this.heroPlant.y - 60, "#60a5fa"));
             return;
         }
 
@@ -2700,7 +3026,7 @@ class Game {
         this.updateLivesUI();
         this.updateUI(); 
         SM.play('meteor_hit'); 
-        this.addEffect(new FloatText("-1 LIFE!", this.heroPlant.x, this.heroPlant.y - 60, "red"));
+        this.addEffect(new FloatText("-1 生命!", this.heroPlant.x, this.heroPlant.y - 60, "red"));
         
         // 受伤红屏
         this.addEffect(new ScreenVignette('damage'));
@@ -2733,7 +3059,9 @@ class Game {
         
         if (dt > 100) dt = 100; 
 
-        if (!this.state.gameOver) {
+        // 如果暂停，跳过逻辑更新，但仍然进行绘制（可能需要调整draw以支持暂停界面）
+        // 实际上 draw 会一直调用，保持画面静止
+        if (!this.paused && !this.state.gameOver) {
             this.update(dt, Date.now());
         }
         this.draw();
@@ -2804,7 +3132,7 @@ class Game {
                         const x = LEFT_MARGIN + tile.col * CELL_WIDTH + CELL_WIDTH/2;
                         const y = TOP_MARGIN + tile.row * CELL_HEIGHT + CELL_HEIGHT/2;
                         this.spawnPFOrb(x, y); 
-                        this.addEffect(new FloatText("+BEAN!", x, y - 40, "#00ffea"));
+                        this.addEffect(new FloatText("+能量豆!", x, y - 40, "#00ffea"));
                         this.energyTiles.splice(i, 1);
                     }
                 }
@@ -2996,7 +3324,46 @@ class Game {
                 void targetSlot.offsetWidth; 
                 targetSlot.classList.add('pf-gain-anim');
             }
+            
+            // 第一次满能量豆时触发商店闪烁提示
+            if (this.state.pfCount === 5 && !this.state.hasFlashedShop) {
+                this.state.hasFlashedShop = true;
+                this.triggerShopHighlight();
+            }
+        } else {
+            // 能量豆溢出
+            SM.play('buzzer');
+            if (!this.state.hasShownOverflowBanner) {
+                this.state.hasShownOverflowBanner = true;
+                this.showOverflowBanner();
+            }
         }
+    }
+    
+    showOverflowBanner() {
+        const banner = document.getElementById('overflow-banner');
+        banner.style.display = 'block';
+        banner.style.opacity = '1';
+        
+        setTimeout(() => {
+            banner.style.opacity = '0';
+            setTimeout(() => {
+                banner.style.display = 'none';
+            }, 500);
+        }, 3000);
+    }
+    
+    triggerShopHighlight() {
+        const btns = document.querySelectorAll('.shop-btn');
+        btns.forEach(btn => {
+            btn.classList.add('flash-highlight');
+        });
+        
+        setTimeout(() => {
+            btns.forEach(btn => {
+                btn.classList.remove('flash-highlight');
+            });
+        }, 3000); // 闪烁 3 秒
     }
 
     addEffect(e) { this.effects.push(e); }
@@ -3011,7 +3378,6 @@ class Game {
 
     updateUI() {
         document.getElementById('wave-num').innerText = this.state.wave;
-        // 修复：增加空值检查，且现在 HTML 中存在 id="zombie-count"
         if (this.zombies) {
             const el = document.getElementById('zombie-count');
             if (el) el.innerText = this.zombies.length;
@@ -3084,11 +3450,22 @@ class Game {
             } else {
                 buffRow.style.display = 'none';
             }
+            
+            // 穹顶状态显示
+            const domeRow = document.getElementById('dome-row');
+            const domeText = document.getElementById('stat-dome');
+            if (this.heroPlant.domeTimer > 0) {
+                domeRow.style.display = 'flex';
+                domeText.innerText = `${(this.heroPlant.domeTimer/1000).toFixed(1)}s`;
+            } else {
+                domeRow.style.display = 'none';
+            }
         }
 
         const btnShield = document.getElementById('btn-shield');
         const btnMower = document.getElementById('btn-mower');
         const btnStun = document.getElementById('btn-stun');
+        const btnDome = document.getElementById('btn-dome');
 
         const updateBtn = (btn, cost, condition) => {
             if (this.state.pfCount >= cost && condition) {
@@ -3104,6 +3481,7 @@ class Game {
         updateBtn(btnShield, 2, !this.hasShield);
         updateBtn(btnMower, 5, !this.lawnMower);
         updateBtn(btnStun, 2, true); 
+        updateBtn(btnDome, 3, true);
     }
 
     draw() {
@@ -3154,6 +3532,7 @@ class Game {
         this.ctx.fillStyle = 'rgba(255, 0, 0, 0.1)';
         this.ctx.fillRect(0, TOP_MARGIN, LEFT_MARGIN, CONFIG.canvasH - TOP_MARGIN);
 
+        // 电击buff倒计时图形（黄色）
         if (this.heroPlant && this.heroPlant.stunBuffTimer > 0) {
             const ctx = this.ctx;
             const gridX = LEFT_MARGIN;
@@ -3185,6 +3564,44 @@ class Game {
                 ctx.closePath();
                 
                 ctx.fillStyle = 'rgba(250, 204, 21, 0.15)'; 
+                ctx.fill();
+            }
+
+            ctx.restore();
+        }
+        
+        // 穹顶护盾倒计时图形（蓝色）
+        if (this.heroPlant && this.heroPlant.domeTimer > 0) {
+            const ctx = this.ctx;
+            const gridX = LEFT_MARGIN;
+            const gridY = TOP_MARGIN;
+            const gridW = GRID_COLS * CELL_WIDTH;
+            const gridH = GRID_ROWS * CELL_HEIGHT;
+            
+            const centerX = gridX + gridW / 2;
+            const centerY = gridY + gridH / 2;
+            const radius = Math.hypot(gridW/2, gridH/2) + 20; 
+
+            const maxTime = 5000;
+            const progress = this.heroPlant.domeTimer / maxTime;
+
+            ctx.save();
+
+            ctx.strokeStyle = 'rgba(56, 189, 248, 0.8)'; // 蓝色边框
+            ctx.lineWidth = 5;
+            ctx.strokeRect(gridX, gridY, gridW, gridH);
+
+            if (progress > 0) {
+                ctx.beginPath();
+                ctx.rect(gridX, gridY, gridW, gridH);
+                ctx.clip();
+
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, -Math.PI / 2, -Math.PI / 2 + (Math.PI * 2 * progress), false);
+                ctx.closePath();
+                
+                ctx.fillStyle = 'rgba(56, 189, 248, 0.15)'; // 蓝色填充
                 ctx.fill();
             }
 
@@ -3235,7 +3652,7 @@ class Game {
                 this.ctx.shadowColor = 'black';
                 this.ctx.shadowBlur = 4;
                 this.ctx.textAlign = 'center';
-                this.ctx.fillText("DODGE!", 0, -80);
+                this.ctx.fillText("闪!", 0, -80);
                 
                 this.ctx.restore();
             }
