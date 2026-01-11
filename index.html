@@ -891,7 +891,8 @@ const CONFIG = {
     meteorStartWave: 5, 
     meteorMaxWave: 50,
     meteorMaxCount: 20,
-    meteorDamage: 500 // 陨石对僵尸的伤害
+    meteorDamage: 500, // 陨石对僵尸的伤害
+    ultDuration: 2500  // 大招持续时间
 };
 
 /* --- 僵尸类型定义 --- */
@@ -2012,6 +2013,8 @@ class Plant {
         
         this.ultStartTime = 0; 
         this.invincibleTimer = 0; // 无敌帧计时器
+        
+        this.preInputUlt = false; // 预输入大招标记
     }
 
     update(dt, hasEnemy, game) {
@@ -2073,8 +2076,16 @@ class Plant {
                 
                 game.projectiles.push(new Projectile(this.x + 40, this.y - 20, angle, true, stunMode));
             }
-            if (this.ultTimer > 2500) { 
+            if (this.ultTimer > CONFIG.ultDuration) { 
                 this.isUltimating = false;
+                
+                // 处理预输入：大招结束后检查是否有预输入请求
+                if (this.preInputUlt) {
+                    this.preInputUlt = false;
+                    if (game.state.pfCount > 0) {
+                        game.usePlantFood(this);
+                    }
+                }
             }
             return;
         }
@@ -2116,6 +2127,7 @@ class Plant {
         this.isUltimating = true;
         this.ultTimer = 0;
         this.ultStartTime = Date.now(); 
+        this.preInputUlt = false; // 开始新大招时清除预输入标记
         
         this.ultUseCount++;
         const oldLevel = this.level;
@@ -2178,6 +2190,43 @@ class Plant {
             ctx.beginPath();
             ctx.arc(0, -20, 35, 0, Math.PI*2);
             ctx.stroke();
+        }
+
+        // 大招剩余时间条
+        if (this.isUltimating) {
+            const remaining = Math.max(0, 1 - (this.ultTimer / CONFIG.ultDuration));
+            const barWidth = 60;
+            const barHeight = 8;
+            const barX = -barWidth / 2;
+            const barY = -105;
+            
+            // 背景
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+            ctx.fillRect(barX - 2, barY - 2, barWidth + 4, barHeight + 4);
+            
+            // 进度条背景
+            ctx.fillStyle = 'rgba(59, 130, 246, 0.3)';
+            ctx.fillRect(barX, barY, barWidth, barHeight);
+            
+            // 进度条（渐变蓝色）
+            const gradient = ctx.createLinearGradient(barX, 0, barX + barWidth, 0);
+            gradient.addColorStop(0, '#93c5fd');
+            gradient.addColorStop(1, '#3b82f6');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(barX, barY, barWidth * remaining, barHeight);
+            
+            // 发光效果
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = '#60a5fa';
+            ctx.strokeStyle = '#60a5fa';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(barX, barY, barWidth, barHeight);
+            ctx.shadowBlur = 0;
+            
+            // 白色边框
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(barX - 1, barY - 1, barWidth + 2, barHeight + 2);
         }
 
         if (this.isUltimating) {
@@ -2453,9 +2502,28 @@ class Game {
     }
 
     tryUsePlantFood() {
-        if (this.state.pfCount > 0 && !this.state.gameOver && this.heroPlant) {
-            this.usePlantFood(this.heroPlant);
+        if (this.state.gameOver || !this.heroPlant) return;
+        
+        // 检查能量豆是否足够
+        if (this.state.pfCount <= 0) {
+            SM.play('buzzer');
+            return;
         }
+        
+        // 如果正在释放大招
+        if (this.heroPlant.isUltimating) {
+            // 检查是否在预输入窗口（最后10%）
+            const preInputThreshold = CONFIG.ultDuration * 0.9;
+            if (this.heroPlant.ultTimer >= preInputThreshold) {
+                // 静默接受预输入
+                this.heroPlant.preInputUlt = true;
+            }
+            // 不在预输入窗口则忽略
+            return;
+        }
+        
+        // 没有在放大招，直接激活
+        this.usePlantFood(this.heroPlant);
     }
 
     usePlantFood(plant) {
