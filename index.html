@@ -87,9 +87,6 @@
             to { text-shadow: 0 0 30px #ef4444, 0 0 50px red; transform: scale(1.3); }
         }
 
-
-
-
         #stats-panel {
             font-size: 1rem;
             background: rgba(0,0,0,0.5);
@@ -102,9 +99,6 @@
         .buff-active { color: #facc15; animation: pulse 1s infinite; }
         .buff-dome { color: #60a5fa; animation: pulse 1s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-
-
-
 
         /* Scoring & Combo UI */
         #score-area {
@@ -153,24 +147,15 @@
             text-shadow: 1px 1px 0 #000;
         }
 
-
-
-
         /* Combo Colors */
         .combo-green { color: #4ade80; text-shadow: 2px 2px 0 #000, 0 0 10px #22c55e; }
         .combo-yellow { color: #facc15; text-shadow: 2px 2px 0 #000, 0 0 15px #eab308; }
         .combo-orange { color: #fb923c; text-shadow: 2px 2px 0 #000, 0 0 20px #ea580c; }
         .combo-red { color: #ef4444; text-shadow: 2px 2px 0 #000, 0 0 25px #dc2626; }
 
-
-
-
         /* Animations */
         .combo-pop { animation: combo-scale 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         @keyframes combo-scale { 0% { transform: scale(1); } 50% { transform: scale(1.4); } 100% { transform: scale(1); } }
-
-
-
 
         .new-record-anim {
             animation: record-flash 1s ease-out;
@@ -181,9 +166,6 @@
             100% { transform: scale(1); }
         }
 
-
-
-
         #controls-wrapper {
             position: absolute;
             bottom: 30px;
@@ -193,9 +175,6 @@
             align-items: flex-end;
             gap: 20px;
         }
-
-
-
 
         #pf-wrapper {
             display: flex;
@@ -231,9 +210,6 @@
         .plant-food-slot:active { transform: scale(0.9); }
         .plant-food-leaf { display: none; font-size: 24px; }
         .plant-food-slot.filled .plant-food-leaf { display: block; }
-
-
-
 
         .shop-btn {
             width: 70px;
@@ -284,9 +260,6 @@
         #btn-dome.affordable { background: #0369a1; border-color: #38bdf8; }
         #btn-dome.affordable:hover { background: #0284c7; }
 
-
-
-
         .cost-badge {
             position: absolute;
             top: -10px;
@@ -305,9 +278,6 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         .btn-icon { font-size: 1.8rem; margin-bottom: 2px; }
-
-
-
 
         #next-wave-btn {
             position: absolute;
@@ -339,13 +309,7 @@
         #next-wave-btn:hover { filter: brightness(1.1); transform: translateY(-50%) scale(1.05); }
         #next-wave-btn:active { transform: translateY(-50%) scale(0.95); }
 
-
-
-
         @keyframes pop-in { from { transform: translateY(-50%) scale(0); } to { transform: translateY(-50%) scale(1); } }
-
-
-
 
         #wave-timer {
             position: absolute;
@@ -389,9 +353,6 @@
             text-align: center;
         }
 
-
-
-
         .slam-text {
             animation-name: slam-scale, slam-opacity, fade-out;
             animation-duration: 0.6s, 0.6s, 0.5s;
@@ -400,18 +361,12 @@
             animation-fill-mode: forwards;
         }
 
-
-
-
         @keyframes slam-scale {
             0% { transform: translate(-50%, -50%) scale(3); }
             100% { transform: translate(-50%, -50%) scale(1); }
         }
         @keyframes slam-opacity { 0% { opacity: 0; } 100% { opacity: 1; } }
         @keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
-
-
-
 
         #game-over-screen {
             position: absolute;
@@ -440,15 +395,9 @@
             transform: scale(0);
         }
 
-
-
-
         .game-over-anim {
             animation: go-shake 0.5s linear forwards;
         }
-
-
-
 
         @keyframes go-shake {
             0% { transform: scale(0); }
@@ -461,9 +410,6 @@
             90% { transform: scale(1) translate(10px, 0); }
             100% { transform: scale(1) translate(0, 0); }
         }
-
-
-
 
         #restart-btn {
             background: #22c55e;
@@ -481,15 +427,9 @@
         }
         @keyframes fade-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-
-
-
         #restart-btn:hover {
             background: #4ade80;
         }
-
-
-
 
         .key-hint {
             font-size: 0.7rem;
@@ -510,60 +450,71 @@
             z-index: 300;
             font-size: 2rem;
             font-weight: bold;
-        }
-        
-        #loading-text {
-            margin-bottom: 20px;
-        }
-        
-        #loading-progress {
-            width: 300px;
-            height: 8px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 30px;
+            gap: 20px;
         }
         
         #loading-progress-bar {
+            width: 300px;
+            height: 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        #loading-progress-fill {
             height: 100%;
             width: 0%;
             background: linear-gradient(90deg, #4ade80, #22c55e);
             transition: width 0.2s;
         }
         
+        #loading-progress-text {
+            font-size: 1rem;
+            color: #aaa;
+        }
+        
         #skip-loading-btn {
-            background: rgba(255,255,255,0.1);
-            border: 2px solid rgba(255,255,255,0.3);
-            color: white;
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
             padding: 12px 30px;
             font-size: 1rem;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s;
-            opacity: 0;
-            animation: fade-in-skip 0.5s ease-out 1s forwards;
+            margin-top: 10px;
         }
         
         #skip-loading-btn:hover {
-            background: rgba(255,255,255,0.2);
-            border-color: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.1);
+            transform: scale(1.05);
         }
         
-        @keyframes fade-in-skip {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        #skip-loading-btn:active {
+            transform: scale(0.95);
         }
         
-        #loading-hint {
+        /* 后台加载提示 */
+        #background-loading-indicator {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            color: #4ade80;
+            padding: 8px 20px;
+            border-radius: 20px;
             font-size: 0.9rem;
-            color: rgba(255,255,255,0.6);
-            margin-top: 15px;
-            font-weight: normal;
+            display: none;
+            z-index: 50;
+            animation: pulse-bg 1s infinite;
         }
-
-
-
+        
+        @keyframes pulse-bg {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
 
         /* 暂停菜单样式 */
         #pause-menu {
@@ -580,9 +531,6 @@
         }
         .pause-title { font-size: 4rem; font-weight: bold; margin-bottom: 30px; letter-spacing: 5px; }
         .pause-hint { font-size: 1.5rem; color: #ccc; }
-
-
-
 
         /* 能量豆溢出提示 banner */
         #overflow-banner {
@@ -604,47 +552,34 @@
             transition: opacity 0.5s;
         }
 
-
-
-
     </style>
 </head>
 <body>
-
-
-
 
 <div id="game-container">
     <canvas id="gameCanvas"></canvas>
     
     <div id="loading-overlay">
-        <div id="loading-text">加载音频中...</div>
-        <div id="loading-progress">
-            <div id="loading-progress-bar"></div>
+        <div>🎮 LOADING AUDIO...</div>
+        <div id="loading-progress-bar">
+            <div id="loading-progress-fill"></div>
         </div>
-        <button id="skip-loading-btn">跳过加载 (无音效)</button>
-        <div id="loading-hint">音频加载可能需要一些时间</div>
+        <div id="loading-progress-text">0 / 0</div>
+        <button id="skip-loading-btn">⏩ 跳过加载 (边玩边加载)</button>
     </div>
-
-
-
+    
+    <div id="background-loading-indicator">🔊 音频加载中... <span id="bg-load-progress">0%</span></div>
 
     <div id="pause-menu">
         <div class="pause-title">PAUSED</div>
         <div class="pause-hint">Press [P] to Resume</div>
     </div>
 
-
-
-
     <div id="game-over-screen">
         <h1 id="game-over-text">僵尸吃掉了你的脑子!</h1>
         <div style="font-size: 2rem; margin-bottom: 20px;">FINAL SCORE: <span id="final-score" class="text-yellow-400">0</span></div>
         <button id="restart-btn">重新开始 <span style="font-size: 0.6em">[R]</span></button>
     </div>
-
-
-
 
     <div id="ui-layer">
         <div class="hud-top">
@@ -696,9 +631,6 @@
             </div>
         </div>
 
-
-
-
         <div id="combo-container">
             <div id="combo-count">0</div>
             <div id="combo-label">COMBO</div>
@@ -706,24 +638,12 @@
             <div id="max-combo-display">MAX: 0</div>
         </div>
 
-
-
-
         <div id="wave-timer"><div id="wave-progress"></div></div>
         <div id="toast">WAVE 1</div>
 
-
-
-
         <button id="next-wave-btn">下一波<span class="key-hint">[N]</span></button>
 
-
-
-
         <div id="overflow-banner">能量豆已满，使用大招或购买道具</div>
-
-
-
 
         <div id="controls-wrapper">
             <div id="pf-wrapper">
@@ -739,18 +659,12 @@
                 </div>
             </div>
 
-
-
-
             <div class="shop-btn" id="btn-shield">
                 <div class="cost-badge">2</div>
                 <div class="btn-icon">🛡️</div>
                 <div>护盾</div>
                 <span class="key-hint">[1]</span>
             </div>
-
-
-
 
             <div class="shop-btn" id="btn-stun">
                 <div class="cost-badge">2</div>
@@ -759,18 +673,12 @@
                 <span class="key-hint">[2]</span>
             </div>
 
-
-
-
             <div class="shop-btn" id="btn-dome">
                 <div class="cost-badge">3</div>
                 <div class="btn-icon">🔮</div>
                 <div>穹顶</div>
                 <span class="key-hint">[3]</span>
             </div>
-
-
-
 
             <div class="shop-btn" id="btn-mower">
                 <div class="cost-badge">5</div>
@@ -782,11 +690,8 @@
     </div>
 </div>
 
-
-
-
 <script>
-/* --- Web Audio API 管理器 (优化低延迟) --- */
+/* --- Web Audio API 管理器 (优化低延迟 + 跳过加载支持) --- */
 class WebAudioManager {
     constructor() {
         this.ctx = null;
@@ -795,11 +700,12 @@ class WebAudioManager {
         this.isInitialized = false;
         this.masterGain = null;
         this.lastPlayTimes = {}; 
-        this.audioEnabled = true; // 音频是否启用
-        this.loadingSkipped = false; // 是否跳过了加载
-
-
-
+        
+        // 加载状态
+        this.loadingSkipped = false;
+        this.loadingComplete = false;
+        this.totalSounds = 0;
+        this.loadedSounds = 0;
 
         this.sources = {
             zap1: './sounds/zap1.wav',
@@ -849,9 +755,6 @@ class WebAudioManager {
             countdown_4: './sounds/countdown_4.wav',
             countdown_5: './sounds/countdown_5.wav',
 
-
-
-
             // 新增购买音效
             button_buy: './sounds/button_buy.wav',
             
@@ -860,9 +763,6 @@ class WebAudioManager {
             hp_take: './sounds/hp_take.wav',
             doom: './sounds/doom.wav',
 
-
-
-
             // 完美格挡音效
             deflect: './sounds/deflect.wav',
             beam: './sounds/beam.wav',
@@ -870,71 +770,79 @@ class WebAudioManager {
             // 升级音效
             levelup: './sounds/levelup.wav',
 
-
-
-
             // 游戏结束音效
             no: './sounds/no.wav'
         };
     }
 
-
-
-
-    async loadAll(onProgress) {
+    initContext() {
+        if (this.ctx) return;
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         this.ctx = new AudioContext({ latencyHint: 'interactive' });
-
-
-
-
         this.masterGain = this.ctx.createGain();
         this.masterGain.connect(this.ctx.destination);
+    }
+
+    async loadAll(onProgress) {
+        this.initContext();
 
         const entries = Object.entries(this.sources);
-        const total = entries.length;
-        let loaded = 0;
+        this.totalSounds = entries.length;
+        this.loadedSounds = 0;
 
-        const promises = entries.map(async ([key, url]) => {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                const arrayBuffer = await response.arrayBuffer();
-                const audioBuffer = await this.ctx.decodeAudioData(arrayBuffer);
-                this.buffers[key] = audioBuffer;
-            } catch (e) {
-                // console.warn(`Failed to load sound: ${key}.`);
+        for (const [key, url] of entries) {
+            if (this.loadingSkipped) {
+                // 跳过后，继续在后台加载剩余的
+                this.loadRemainingAsync(entries.slice(this.loadedSounds));
+                return;
             }
-            loaded++;
-            if (onProgress) {
-                onProgress(loaded / total);
-            }
-        });
 
+            await this.loadSingle(key, url);
+            this.loadedSounds++;
+            if (onProgress) onProgress(this.loadedSounds, this.totalSounds);
+        }
 
-
-
-        await Promise.all(promises);
+        this.loadingComplete = true;
+        document.getElementById('loading-overlay').style.display = 'none';
     }
-    
-    skipLoading() {
-        this.loadingSkipped = true;
-        this.audioEnabled = false;
-        
-        // 初始化空的 AudioContext 以防后续代码需要
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (!this.ctx) {
-            this.ctx = new AudioContext({ latencyHint: 'interactive' });
-            this.masterGain = this.ctx.createGain();
-            this.masterGain.connect(this.ctx.destination);
+
+    async loadSingle(key, url) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const arrayBuffer = await response.arrayBuffer();
+            const audioBuffer = await this.ctx.decodeAudioData(arrayBuffer);
+            this.buffers[key] = audioBuffer;
+        } catch (e) {
+            // 加载失败，忽略
         }
     }
 
+    async loadRemainingAsync(remaining) {
+        const indicator = document.getElementById('background-loading-indicator');
+        const progressText = document.getElementById('bg-load-progress');
+        indicator.style.display = 'block';
 
+        for (const [key, url] of remaining) {
+            await this.loadSingle(key, url);
+            this.loadedSounds++;
+            
+            const pct = Math.round((this.loadedSounds / this.totalSounds) * 100);
+            progressText.innerText = `${pct}%`;
+        }
 
+        this.loadingComplete = true;
+        
+        // 加载完成后隐藏提示
+        indicator.style.display = 'none';
+    }
+
+    skipLoading() {
+        this.loadingSkipped = true;
+        document.getElementById('loading-overlay').style.display = 'none';
+    }
 
     resumeContext() {
-        if (!this.audioEnabled) return;
         if (this.ctx && this.ctx.state === 'suspended') {
             this.ctx.resume();
         }
@@ -944,11 +852,7 @@ class WebAudioManager {
         }
     }
 
-
-
-
     playBGM() {
-        if (!this.audioEnabled) return;
         if (!this.buffers.bgm) return;
         if (this.bgmNode) this.bgmNode.stop();
         this.bgmNode = this.ctx.createBufferSource();
@@ -961,9 +865,6 @@ class WebAudioManager {
         this.bgmNode.start(0);
     }
 
-
-
-
     stopBGM() {
         if (this.bgmNode) {
             try { this.bgmNode.stop(); } catch(e){}
@@ -971,16 +872,9 @@ class WebAudioManager {
         }
     }
 
-
-
-
     play(key, throttleMs = 0, fixedRate = null) {
-        if (!this.audioEnabled) return;
         if (!this.ctx) return;
         if (this.ctx.state === 'suspended') this.ctx.resume();
-
-
-
 
         const now = Date.now();
         if (throttleMs > 0) {
@@ -989,15 +883,9 @@ class WebAudioManager {
             this.lastPlayTimes[key] = now;
         }
 
-
-
-
         let bufferKey = key;
         let volume = 0.6;
         let playbackRate = fixedRate !== null ? fixedRate : 1.0;
-
-
-
 
         if (key === 'zap') {
             const rand = Math.floor(Math.random() * 3) + 1;
@@ -1088,14 +976,8 @@ class WebAudioManager {
             volume = 1.0;
         }
 
-
-
-
         const buffer = this.buffers[bufferKey];
         if (!buffer) return;
-
-
-
 
         const source = this.ctx.createBufferSource();
         source.buffer = buffer;
@@ -1108,13 +990,7 @@ class WebAudioManager {
     }
 }
 
-
-
-
 const SM = new WebAudioManager();
-
-
-
 
 /* --- 游戏常量与配置 --- */
 const GRID_COLS = 9;
@@ -1124,9 +1000,6 @@ const CELL_HEIGHT = 120;
 const TOP_MARGIN = 40;
 const LEFT_MARGIN = 180; 
 const PARRY_WINDOW = 200; // 完美格挡时间窗口 (ms)
-
-
-
 
 const CONFIG = {
     canvasW: LEFT_MARGIN + GRID_COLS * CELL_WIDTH + 50,
@@ -1145,9 +1018,6 @@ const CONFIG = {
     meteorDamage: 500, // 陨石对僵尸的伤害
     ultDuration: 2500  // 大招持续时间
 };
-
-
-
 
 /* --- 僵尸类型定义 --- */
 const ZOMBIE_TYPES = {
@@ -1184,13 +1054,7 @@ const ZOMBIE_TYPES = {
     }
 };
 
-
-
-
 /* --- 基础实体类 --- */
-
-
-
 
 class Particle {
     constructor(x, y, color, size, speed) {
@@ -1211,9 +1075,6 @@ class Particle {
     }
 }
 
-
-
-
 class FloatText {
     constructor(text, x, y, color) {
         this.text = text; this.x = x; this.y = y; this.color = color;
@@ -1231,9 +1092,6 @@ class FloatText {
         ctx.restore();
     }
 }
-
-
-
 
 class Projectile {
     constructor(x, y, angleOffset, isUlt, stunMode = 0) {
@@ -1265,9 +1123,6 @@ class Projectile {
             ctx.fillStyle = '#fef08a';
         }
 
-
-
-
         ctx.beginPath(); ctx.arc(0, 0, this.radius, 0, Math.PI*2); ctx.fill();
         ctx.strokeStyle = this.stunMode > 0 ? '#eab308' : '#3b82f6';
         ctx.lineWidth = this.isUlt ? 1 : 2;
@@ -1275,9 +1130,6 @@ class Projectile {
         ctx.restore();
     }
 }
-
-
-
 
 class HolyBeam extends Projectile {
     constructor(x, y) {
@@ -1291,9 +1143,6 @@ class HolyBeam extends Projectile {
         this.hitList = []; 
     }
 
-
-
-
     update(dt) {
         this.life -= dt;
         if (this.life <= 0) this.dead = true;
@@ -1303,9 +1152,6 @@ class HolyBeam extends Projectile {
         }
     }
 
-
-
-
     draw(ctx) {
         ctx.save();
         ctx.translate(this.x, this.y);
@@ -1314,24 +1160,15 @@ class HolyBeam extends Projectile {
         const alpha = Math.min(1, progress * 2);
         const flicker = Math.random() * 0.2 + 0.8;
 
-
-
-
         ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
         ctx.shadowBlur = 20;
         ctx.shadowColor = '#fff';
         ctx.fillRect(0, -this.height/4, this.width, this.height/2);
 
-
-
-
         ctx.fillStyle = `rgba(253, 224, 71, ${alpha * 0.6 * flicker})`; 
         ctx.shadowBlur = 40;
         ctx.shadowColor = '#facc15';
         ctx.fillRect(0, -this.height/2, this.width, this.height);
-
-
-
 
         if (Math.random() < 0.5) {
             ctx.fillStyle = '#fff';
@@ -1340,15 +1177,9 @@ class HolyBeam extends Projectile {
             ctx.fillRect(px, py, Math.random()*20 + 10, 2);
         }
 
-
-
-
         ctx.restore();
     }
 }
-
-
-
 
 class EnemyProjectile {
     constructor(x, y, row) {
@@ -1371,9 +1202,6 @@ class EnemyProjectile {
         ctx.restore();
     }
 }
-
-
-
 
 class LightningBolt {
     constructor(x1, y1, x2, y2, color, width) {
@@ -1418,9 +1246,6 @@ class LightningBolt {
     }
 }
 
-
-
-
 class ScreenVignette {
     constructor(type) {
         this.type = type; // 'damage' (red) or 'parry' (yellow)
@@ -1454,9 +1279,6 @@ class ScreenVignette {
     }
 }
 
-
-
-
 class ScreenFlash {
     constructor() {
         this.life = 1.0;
@@ -1472,9 +1294,6 @@ class ScreenFlash {
         ctx.restore();
     }
 }
-
-
-
 
 class AshEffect {
     constructor(x, y) {
@@ -1519,9 +1338,6 @@ class AshEffect {
         ctx.restore();
     }
 }
-
-
-
 
 // 陨石爆炸特效类
 class MeteorExplosion {
@@ -1602,9 +1418,6 @@ class MeteorExplosion {
     }
 }
 
-
-
-
 class Meteor {
     constructor(row, col) {
         this.row = row;
@@ -1619,18 +1432,12 @@ class Meteor {
         this.rotation = Math.random() * Math.PI * 2;
     }
 
-
-
-
     update(dt) {
         this.timer -= dt;
         if (this.timer <= 0) {
             this.hasImpacted = true;
         }
     }
-
-
-
 
     draw(ctx) {
         const progress = 1 - (this.timer / this.maxTimer);
@@ -1647,16 +1454,10 @@ class Meteor {
         ctx.arc(0, 0, 40 - progress * 10, 0, Math.PI * 2);
         ctx.stroke();
 
-
-
-
         ctx.fillStyle = `rgba(239, 68, 68, ${alpha * 0.5})`;
         ctx.beginPath();
         ctx.arc(0, 0, 30 * progress, 0, Math.PI * 2);
         ctx.fill();
-
-
-
 
         ctx.strokeStyle = `rgba(239, 68, 68, 0.8)`;
         ctx.lineWidth = 2;
@@ -1664,9 +1465,6 @@ class Meteor {
         ctx.moveTo(-10, 0); ctx.lineTo(10, 0);
         ctx.moveTo(0, -10); ctx.lineTo(0, 10);
         ctx.stroke();
-
-
-
 
         // --- 真正的陨石坠落动画 ---
         // 最后 500ms 陨石从天而降
@@ -1676,16 +1474,10 @@ class Meteor {
             const endY = 0;
             const currentY = startY + (endY - startY) * dropProgress;
 
-
-
-
             ctx.save();
             ctx.translate(0, currentY); // 移动到当前高度
             // 使用固定的旋转角度，不再随下落进度旋转
             ctx.rotate(this.rotation);
-
-
-
 
             // 绘制陨石本体 (石头颜色 + 纹理)
             ctx.fillStyle = '#5d4037';
@@ -1701,9 +1493,6 @@ class Meteor {
             ctx.beginPath();
             ctx.arc(5, 8, 6, 0, Math.PI * 2);
             ctx.fill();
-
-
-
 
             ctx.restore();
             
@@ -1729,17 +1518,11 @@ class Meteor {
             ctx.arc(0, 0, 15, Math.PI * 1.3, Math.PI * 1.7, true);
             ctx.fill();
 
-
-
-
             // 陨石核心亮斑
             ctx.fillStyle = '#ffcc80';
             ctx.beginPath();
             ctx.arc(-5, -5, 8, 0, Math.PI * 2);
             ctx.fill();
-
-
-
 
             ctx.restore();
             
@@ -1753,15 +1536,9 @@ class Meteor {
             ctx.restore();
         }
 
-
-
-
         ctx.restore();
     }
 }
-
-
-
 
 class LawnMower {
     constructor() {
@@ -1772,9 +1549,6 @@ class LawnMower {
         this.speed = 20; 
         this.dead = false;
     }
-
-
-
 
     update(dt, game) {
         if (this.active) {
@@ -1787,18 +1561,12 @@ class LawnMower {
                 }
             });
 
-
-
-
             if (this.x > CONFIG.canvasW + 100) {
                 this.dead = true;
             }
         } else {
             let minX = 99999;
             let targetRow = -1;
-
-
-
 
             game.zombies.forEach(z => {
                 if (!z.isDropping && !z.isDead) {
@@ -1808,9 +1576,6 @@ class LawnMower {
                     }
                 }
             });
-
-
-
 
             if (targetRow !== -1) {
                 this.row = targetRow;
@@ -1824,9 +1589,6 @@ class LawnMower {
                 this.y = targetY;
             }
 
-
-
-
             game.zombies.forEach(z => {
                 if (z.row === this.row && !z.isDropping && !z.isDead) {
                     if (z.x > this.x - 40 && z.x < this.x + 60) {
@@ -1839,9 +1601,6 @@ class LawnMower {
         }
     }
 
-
-
-
     draw(ctx) {
         ctx.save();
         ctx.translate(this.x, this.y);
@@ -1853,18 +1612,12 @@ class LawnMower {
         ctx.fillRect(-35, -60, 10, 40);
         ctx.fillRect(-45, -60, 20, 5);
 
-
-
-
         ctx.fillStyle = 'black'; 
         ctx.beginPath(); ctx.arc(-20, -10, 12, 0, Math.PI*2); ctx.fill();
         ctx.beginPath(); ctx.arc(20, -10, 12, 0, Math.PI*2); ctx.fill();
         ctx.fillStyle = '#ccc'; 
         ctx.beginPath(); ctx.arc(-20, -10, 5, 0, Math.PI*2); ctx.fill();
         ctx.beginPath(); ctx.arc(20, -10, 5, 0, Math.PI*2); ctx.fill();
-
-
-
 
         if (this.active) {
             ctx.fillStyle = '#fbbf24';
@@ -1875,15 +1628,9 @@ class LawnMower {
             ctx.fill();
         }
 
-
-
-
         ctx.restore();
     }
 }
-
-
-
 
 class FlyingImp {
     constructor(startX, startY, targetX, targetY, row, onLand) {
@@ -1903,9 +1650,6 @@ class FlyingImp {
         this.y = startY;
     }
 
-
-
-
     update(dt) {
         this.currentTime += dt;
         this.progress = Math.min(this.currentTime / this.duration, 1);
@@ -1916,17 +1660,11 @@ class FlyingImp {
         const arc = Math.sin(this.progress * Math.PI) * this.height;
         this.y = linearY - arc;
 
-
-
-
         if (this.progress >= 1) {
             this.dead = true;
             this.onLand(this.row, this.targetX, this.targetY);
         }
     }
-
-
-
 
     draw(ctx) {
         ctx.save();
@@ -1945,9 +1683,6 @@ class FlyingImp {
     }
 }
 
-
-
-
 class PFOrb {
     constructor(x, y, targetX, targetY, onComplete) {
         this.x = x;
@@ -1959,16 +1694,10 @@ class PFOrb {
         this.trail = [];
     }
 
-
-
-
     update(dt) {
         const dx = this.targetX - this.x;
         const dy = this.targetY - this.y;
         const dist = Math.hypot(dx, dy);
-
-
-
 
         if (dist < 10) {
             this.onComplete();
@@ -1984,9 +1713,6 @@ class PFOrb {
             if(this.trail[i].life <= 0) this.trail.splice(i, 1);
         }
     }
-
-
-
 
     draw(ctx) {
         ctx.save();
@@ -2005,9 +1731,6 @@ class PFOrb {
     }
 }
 
-
-
-
 class HPOrb {
     constructor(x, y, targetX, targetY, onComplete) {
         this.x = x;
@@ -2019,16 +1742,10 @@ class HPOrb {
         this.trail = [];
     }
 
-
-
-
     update(dt) {
         const dx = this.targetX - this.x;
         const dy = this.targetY - this.y;
         const dist = Math.hypot(dx, dy);
-
-
-
 
         if (dist < 10) {
             this.onComplete();
@@ -2044,9 +1761,6 @@ class HPOrb {
             if(this.trail[i].life <= 0) this.trail.splice(i, 1);
         }
     }
-
-
-
 
     draw(ctx) {
         ctx.save();
@@ -2065,9 +1779,6 @@ class HPOrb {
     }
 }
 
-
-
-
 class DoomSeed {
     constructor(x, y, targetX, targetY, onComplete) {
         this.x = x;
@@ -2079,16 +1790,10 @@ class DoomSeed {
         this.trail = [];
     }
 
-
-
-
     update(dt) {
         const dx = this.targetX - this.x;
         const dy = this.targetY - this.y;
         const dist = Math.hypot(dx, dy);
-
-
-
 
         if (dist < 15) {
             this.onComplete();
@@ -2104,9 +1809,6 @@ class DoomSeed {
             if(this.trail[i].life <= 0) this.trail.splice(i, 1);
         }
     }
-
-
-
 
     draw(ctx) {
         ctx.save();
@@ -2125,15 +1827,9 @@ class DoomSeed {
         ctx.lineWidth = 4;
         ctx.beginPath(); ctx.arc(this.x, this.y, 25 + pulse, 0, Math.PI*2); ctx.stroke();
 
-
-
-
         ctx.restore();
     }
 }
-
-
-
 
 class LevelUpEffect {
     constructor(x, y) {
@@ -2159,9 +1855,6 @@ class LevelUpEffect {
         ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.8})`;
         ctx.fillRect(-10, -1000, 20, 1000);
 
-
-
-
         // Rings
         ctx.strokeStyle = `rgba(250, 204, 21, ${alpha})`;
         ctx.lineWidth = 5;
@@ -2174,13 +1867,7 @@ class LevelUpEffect {
     }
 }
 
-
-
-
 /* --- 复杂实体类 --- */
-
-
-
 
 let zIdCounter = 0;
 class Zombie {
@@ -2200,9 +1887,6 @@ class Zombie {
         }
         this.hp = type.hp * hpMultiplier;
         this.maxHp = this.hp;
-
-
-
 
         this.speed = type.speed * (0.9 + Math.random() * 0.2);
         
@@ -2224,15 +1908,9 @@ class Zombie {
         this.targetY = 0;
         this.dropSpeed = 0.3; 
 
-
-
-
         this.shootTimer = 2000 + Math.random() * 2000;
         this.stunTimer = 0; 
     }
-
-
-
 
     update(dt, game) {
         if (!this.isDead) {
@@ -2241,13 +1919,7 @@ class Zombie {
                 return; 
             }
 
-
-
-
             this.animTime += dt * 0.005;
-
-
-
 
             if (this.isDropping) {
                 this.y += this.dropSpeed * dt;
@@ -2261,9 +1933,6 @@ class Zombie {
                     this.x -= this.speed * dt;
                 }
 
-
-
-
                 if (this.type.id === 'GUNNER') {
                     this.shootTimer -= dt;
                     if (this.shootTimer <= 0) {
@@ -2272,9 +1941,6 @@ class Zombie {
                         this.shootTimer = 3000 + Math.random() * 1000; 
                     }
                 }
-
-
-
 
                 if (this.type.id === 'GIANT' && game.heroPlant && game.heroPlant.row === this.row) {
                     const dist = Math.abs(this.x - game.heroPlant.x);
@@ -2289,22 +1955,13 @@ class Zombie {
         }
     }
 
-
-
-
     applyStun(duration) {
         if (this.isDead || this.isDropping) return;
         this.stunTimer = Math.max(this.stunTimer, duration);
     }
 
-
-
-
     takeDamage(amount, game, damageType) {
         if (this.isDead || this.isDropping) return; 
-
-
-
 
         if (this.type.id === 'PHANTOM') {
             if (damageType === 'direct') {
@@ -2316,18 +1973,12 @@ class Zombie {
             }
         }
 
-
-
-
         if (this.type.id === 'GUNNER') {
             if (damageType === 'aura' || damageType === 'chain') {
                 if (Math.random() < 0.1) game.addEffect(new FloatText("SHIELD", this.x, this.y - 50, "#a855f7"));
                 return;
             }
         }
-
-
-
 
         this.hp -= amount;
         
@@ -2340,9 +1991,6 @@ class Zombie {
             }
         }
 
-
-
-
         const thresholdX = LEFT_MARGIN + 5 * CELL_WIDTH;
         
         if (this.type.id === 'GIANT' && !this.hasThrownImp && this.hp < this.maxHp * 0.5) {
@@ -2353,9 +2001,6 @@ class Zombie {
             }
         }
 
-
-
-
         if (this.hp <= 0) {
             this.isDead = true;
             game.addScore(this.type.score); // Add score on kill
@@ -2364,21 +2009,12 @@ class Zombie {
         }
     }
 
-
-
-
     draw(ctx) {
         if (this.isDead) return;
-
-
-
 
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.scale(this.scale, this.scale); 
-
-
-
 
         if (this.isDropping) {
             ctx.save();
@@ -2395,9 +2031,6 @@ class Zombie {
             ctx.restore();
         }
 
-
-
-
         const sway = Math.sin(this.animTime) * 5;
         ctx.rotate(sway * 0.02);
         
@@ -2407,9 +2040,6 @@ class Zombie {
             ctx.globalAlpha = 0.6; 
         }
 
-
-
-
         ctx.fillStyle = this.type.color; 
         ctx.fillRect(-15, -50, 30, 50);
         
@@ -2417,18 +2047,12 @@ class Zombie {
         if (this.hitFlash > 0) { ctx.fillStyle = 'white'; this.hitFlash--; }
         ctx.beginPath(); ctx.arc(0, -65, 20, 0, Math.PI*2); ctx.fill();
 
-
-
-
         ctx.fillStyle = 'white';
         ctx.beginPath(); ctx.arc(-6, -70, 6, 0, Math.PI*2); ctx.fill();
         ctx.beginPath(); ctx.arc(8, -70, 6, 0, Math.PI*2); ctx.fill();
         ctx.fillStyle = 'black';
         ctx.beginPath(); ctx.arc(-6, -70, 2, 0, Math.PI*2); ctx.fill();
         ctx.beginPath(); ctx.arc(8, -70, 2, 0, Math.PI*2); ctx.fill();
-
-
-
 
         if (this.stunTimer > 0) {
             ctx.save();
@@ -2443,9 +2067,6 @@ class Zombie {
             }
             ctx.restore();
         }
-
-
-
 
         if (this.type.accessory === 'cone') {
             if (this.hp > this.maxHp * 0.3) {
@@ -2482,22 +2103,13 @@ class Zombie {
             ctx.fillRect(-40, -48, 5, 8); 
         }
 
-
-
-
         const pct = Math.max(0, this.hp / this.maxHp);
         ctx.fillStyle = 'red'; ctx.fillRect(-20, -90, 40, 5);
         ctx.fillStyle = '#22c55e'; ctx.fillRect(-20, -90, 40*pct, 5);
 
-
-
-
         ctx.restore();
     }
 }
-
-
-
 
 class Plant {
     constructor(row, col, x, y) {
@@ -2529,9 +2141,6 @@ class Plant {
         this.preInputUlt = false; // 预输入大招标记
     }
 
-
-
-
     update(dt, hasEnemy, game) {
         if (this.recoil > 0) this.recoil -= dt * 0.1;
         if (this.invincibleTimer > 0) this.invincibleTimer -= dt;
@@ -2540,18 +2149,12 @@ class Plant {
         if (this.stunBuffTimer > 0) {
             this.stunBuffTimer -= dt;
 
-
-
-
             const currentSec = Math.ceil(this.stunBuffTimer / 1000);
             
             if (currentSec < this.lastBuffSec && currentSec >= 1) {
                 SM.play(`countdown_${currentSec}`);
                 this.lastBuffSec = currentSec;
             }
-
-
-
 
             if (this.stunBuffTimer <= 0) {
                 this.stunBuffTimer = 0;
@@ -2565,18 +2168,12 @@ class Plant {
         if (this.domeTimer > 0) {
             this.domeTimer -= dt;
 
-
-
-
             const currentSec = Math.ceil(this.domeTimer / 1000);
             
             if (currentSec < this.domeLastSec && currentSec >= 1) {
                 SM.play(`countdown_${currentSec}`);
                 this.domeLastSec = currentSec;
             }
-
-
-
 
             if (this.domeTimer <= 0) {
                 this.domeTimer = 0;
@@ -2585,9 +2182,6 @@ class Plant {
         } else {
             this.domeLastSec = 0;
         }
-
-
-
 
         if (this.isUltimating) {
             this.ultTimer += dt;
@@ -2620,22 +2214,13 @@ class Plant {
             return;
         }
 
-
-
-
         this.cooldown += dt; 
-
-
-
 
         if (hasEnemy) {
             while (this.cooldown >= this.interval) {
                 this.cooldown -= this.interval; 
                 
                 const currentPassiveRate = CONFIG.passiveUltRate + (this.level * 0.01);
-
-
-
 
                 if (Math.random() < currentPassiveRate) {
                     this.startUlt(game);
@@ -2647,9 +2232,6 @@ class Plant {
                     this.burstQueue += (this.baseShots + this.level);
                 }
             }
-
-
-
 
             if (this.burstQueue > 0) {
                 this.burstTimer += dt;
@@ -2665,9 +2247,6 @@ class Plant {
         }
     }
 
-
-
-
     startUlt(game) {
         this.isUltimating = true;
         this.ultTimer = 0;
@@ -2677,16 +2256,10 @@ class Plant {
         this.ultUseCount++;
         const oldLevel = this.level;
 
-
-
-
         let newLevel = 1;
         if (this.ultUseCount >= 20) newLevel = 4;
         else if (this.ultUseCount >= 10) newLevel = 3;
         else if (this.ultUseCount >= 3) newLevel = 2;
-
-
-
 
         if (newLevel > oldLevel) {
             this.level = newLevel;
@@ -2701,30 +2274,18 @@ class Plant {
         }
     }
 
-
-
-
     shoot(game) {
         this.recoil = 8;
         let stunMode = 0;
         if (this.stunBuffTimer > 0) stunMode = 2;
         else if (this.level >= 4) stunMode = 1;
 
-
-
-
         game.projectiles.push(new Projectile(this.x + 40, this.y - 20, 0, false, stunMode));
     }
-
-
-
 
     draw(ctx) {
         ctx.save();
         ctx.translate(this.x - this.recoil, this.y);
-
-
-
 
         if (this.level > 1) {
             ctx.lineWidth = 3;
@@ -2732,15 +2293,9 @@ class Plant {
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
 
-
-
-
             const rankCount = this.level - 1;
             const startY = -55; 
             const gap = 6;
-
-
-
 
             for (let i = 0; i < rankCount; i++) {
                 const y = startY - (i * gap);
@@ -2752,9 +2307,6 @@ class Plant {
             }
         }
 
-
-
-
         if (this.stunBuffTimer > 0) {
             const t = Date.now() * 0.01;
             ctx.strokeStyle = `rgba(250, 204, 21, ${0.5 + Math.sin(t)*0.3})`;
@@ -2763,9 +2315,6 @@ class Plant {
             ctx.arc(0, -20, 35, 0, Math.PI*2);
             ctx.stroke();
         }
-
-
-
 
         // 大招剩余时间条
         if (this.isUltimating) {
@@ -2804,9 +2353,6 @@ class Plant {
             ctx.strokeRect(barX - 1, barY - 1, barWidth + 2, barHeight + 2);
         }
 
-
-
-
         if (this.isUltimating) {
             const pulse = (Math.sin(this.ultTimer * 0.01) + 1) / 2; 
             const auraSize = 55 + pulse * 15;
@@ -2820,16 +2366,10 @@ class Plant {
             ctx.shadowColor = '#60a5fa'; 
         }
 
-
-
-
         ctx.fillStyle = 'rgba(0,0,0,0.3)';
         if (!this.isUltimating) { 
             ctx.beginPath(); ctx.ellipse(0, 20, 25, 8, 0, 0, Math.PI*2); ctx.fill();
         }
-
-
-
 
         ctx.fillStyle = this.isUltimating ? '#3b82f6' : '#16a34a'; 
         ctx.beginPath(); ctx.arc(0, -20, 25, 0, Math.PI*2); ctx.fill();
@@ -2868,15 +2408,9 @@ class Plant {
             ctx.beginPath(); ctx.arc(8, -25, 2, 0, Math.PI*2); ctx.fill();
         }
 
-
-
-
         ctx.restore();
     }
 }
-
-
-
 
 /* --- 核心类 --- */
 class Game {
@@ -2889,9 +2423,6 @@ class Game {
         this.fitScreen();
         window.addEventListener('resize', () => this.fitScreen());
 
-
-
-
         this.heroPlant = null;
         this.initGame();
         this.bindInputs();
@@ -2899,9 +2430,6 @@ class Game {
         this.loop = this.loop.bind(this);
         requestAnimationFrame(this.loop);
     }
-
-
-
 
     initGame() {
         this.state = {
@@ -2915,13 +2443,7 @@ class Game {
             hasShownOverflowBanner: false // 是否已经显示过能量豆溢出提示
         };
 
-
-
-
         this.paused = false; // 暂停状态
-
-
-
 
         // Score & Combo
         this.score = 0;
@@ -2937,9 +2459,6 @@ class Game {
             this.highScore = 0;
             this.maxCombo = 0;
         }
-
-
-
 
         this.grid = []; 
         for(let r=0; r<GRID_ROWS; r++) {
@@ -2959,14 +2478,8 @@ class Game {
         this.shakeTimer = 0;
         this.shakeOffset = {x: 0, y: 0};
 
-
-
-
         this.lastTime = performance.now();
         this.waveTotalMaxHp = 0; 
-
-
-
 
         this.heroPlant = null; 
         this.moveHeroTo(2, 2, true); 
@@ -2980,9 +2493,6 @@ class Game {
         document.getElementById('overflow-banner').style.display = 'none';
     }
 
-
-
-
     reset() {
         const goScreen = document.getElementById('game-over-screen');
         goScreen.style.display = 'none';
@@ -2993,9 +2503,6 @@ class Game {
         SM.playBGM(); 
         this.initGame();
     }
-
-
-
 
     togglePause() {
         if (this.state.gameOver) return;
@@ -3010,9 +2517,6 @@ class Game {
             this.pauseStartTime = Date.now();
         }
     }
-
-
-
 
     fitScreen() {
         const aspect = CONFIG.canvasW / CONFIG.canvasH;
@@ -3029,9 +2533,6 @@ class Game {
         this.scaleFactor = scale;
     }
 
-
-
-
     bindInputs() {
         const unlockAudio = () => {
             SM.resumeContext();
@@ -3041,17 +2542,11 @@ class Game {
         window.addEventListener('click', unlockAudio);
         window.addEventListener('keydown', unlockAudio);
 
-
-
-
         this.canvas.addEventListener('mousedown', (e) => {
             if (this.state.gameOver || this.paused) return;
             const rect = this.canvas.getBoundingClientRect();
             const x = (e.clientX - rect.left) / this.scaleFactor;
             const y = (e.clientY - rect.top) / this.scaleFactor;
-
-
-
 
             if (x > LEFT_MARGIN && y > TOP_MARGIN) {
                 const c = Math.floor((x - LEFT_MARGIN) / CELL_WIDTH);
@@ -3063,15 +2558,9 @@ class Game {
             }
         });
 
-
-
-
         document.getElementById('next-wave-btn').addEventListener('click', () => {
             if (!this.paused) this.startNextWave("BUTTON");
         });
-
-
-
 
         document.getElementById('restart-btn').addEventListener('click', () => {
             SM.play('button'); 
@@ -3085,17 +2574,11 @@ class Game {
             });
         });
 
-
-
-
         // 商店按钮事件
         document.getElementById('btn-shield').addEventListener('click', () => { if(!this.paused) this.buyShield(); });
         document.getElementById('btn-stun').addEventListener('click', () => { if(!this.paused) this.buyStun(); });
         document.getElementById('btn-dome').addEventListener('click', () => { if(!this.paused) this.buyDome(); });
         document.getElementById('btn-mower').addEventListener('click', () => { if(!this.paused) this.buyMower(); });
-
-
-
 
         window.addEventListener('keydown', (e) => {
             // 全局功能键
@@ -3108,13 +2591,7 @@ class Game {
                 return;
             }
 
-
-
-
             if (this.state.gameOver || this.paused) return;
-
-
-
 
             // WASD 移动逻辑
             if (this.heroPlant) {
@@ -3134,9 +2611,6 @@ class Game {
                 }
             }
 
-
-
-
             if (e.code === 'Space') this.tryUsePlantFood();
             else if (e.code === 'KeyN') {
                 if (document.getElementById('next-wave-btn').style.display === 'flex') {
@@ -3150,9 +2624,6 @@ class Game {
             else if (e.code === 'Digit4') this.buyMower(); 
         });
     }
-
-
-
 
     tryUsePlantFood() {
         if (this.state.gameOver || !this.heroPlant) return;
@@ -3179,9 +2650,6 @@ class Game {
         this.usePlantFood(this.heroPlant);
     }
 
-
-
-
     usePlantFood(plant) {
         if (plant.isUltimating) return;
         SM.play('use_power');
@@ -3190,9 +2658,6 @@ class Game {
         plant.startUlt(this);
         this.addEffect(new FloatText("POWER UP!", plant.x, plant.y - 40, "#4ade80"));
     }
-
-
-
 
     recoverLife() {
         SM.play('hp_drop');
@@ -3204,24 +2669,15 @@ class Game {
         const targetEl = document.getElementById(targetId);
         if (!targetEl) return;
 
-
-
-
         const rect = targetEl.getBoundingClientRect();
         const canvasRect = this.canvas.getBoundingClientRect();
         const targetX = (rect.left - canvasRect.left + rect.width/2) / this.scaleFactor;
         const targetY = (rect.top - canvasRect.top + rect.height/2) / this.scaleFactor;
 
-
-
-
         this.addEffect(new HPOrb(this.heroPlant.x, this.heroPlant.y, targetX, targetY, () => {
             this.onHPOrbArrive();
         }));
     }
-
-
-
 
     onHPOrbArrive() {
         if (this.state.lives < 3) {
@@ -3234,15 +2690,9 @@ class Game {
         }
     }
 
-
-
-
     triggerDoomSequence() {
         const hearts = document.querySelectorAll('.heart');
         hearts.forEach(h => h.classList.add('glowing'));
-
-
-
 
         const startEl = document.getElementById('lives-container');
         const rect = startEl.getBoundingClientRect();
@@ -3250,23 +2700,14 @@ class Game {
         const startX = (rect.left - canvasRect.left + rect.width/2) / this.scaleFactor;
         const startY = (rect.top - canvasRect.top + rect.height/2) / this.scaleFactor;
 
-
-
-
         const centerX = CONFIG.canvasW / 2;
         const centerY = CONFIG.canvasH / 2;
-
-
-
 
         this.addEffect(new DoomSeed(startX, startY, centerX, centerY, () => {
             hearts.forEach(h => h.classList.remove('glowing'));
             this.triggerScreenClear();
         }));
     }
-
-
-
 
     triggerScreenClear() {
         SM.play('doom'); 
@@ -3276,9 +2717,6 @@ class Game {
         this.addEffect(new ScreenFlash());
         this.addEffect(new FloatText("DOOM!", CONFIG.canvasW/2, CONFIG.canvasH/2, "#fff"));
 
-
-
-
         this.zombies.forEach(z => {
             if (!z.isDead) {
                 z.takeDamage(99999, this, 'direct');
@@ -3286,9 +2724,6 @@ class Game {
             }
         });
     }
-
-
-
 
     buyShield() {
         if (this.state.pfCount >= 2 && !this.hasShield && !this.state.gameOver) {
@@ -3303,9 +2738,6 @@ class Game {
         }
     }
 
-
-
-
     buyMower() {
         if (this.state.pfCount >= 5 && !this.lawnMower && !this.state.gameOver) {
             this.state.pfCount -= 5;
@@ -3318,9 +2750,6 @@ class Game {
             SM.play('buzzer');
         }
     }
-
-
-
 
     buyStun() {
         if (this.state.pfCount >= 2 && !this.state.gameOver && this.heroPlant) {
@@ -3336,9 +2765,6 @@ class Game {
         }
     }
 
-
-
-
     buyDome() {
         if (this.state.pfCount >= 3 && !this.state.gameOver && this.heroPlant) {
             this.state.pfCount -= 3;
@@ -3353,23 +2779,14 @@ class Game {
         }
     }
 
-
-
-
     moveHeroTo(r, c, silent = false) {
         if (this.heroPlant && this.heroPlant.row === r && this.heroPlant.col === c) {
             return;
         }
 
-
-
-
         if (!silent) {
             SM.play('plant_move');
         }
-
-
-
 
         // --- 完美格挡检测逻辑 ---
         let isPerfectDodge = false;
@@ -3382,17 +2799,11 @@ class Game {
                 m.timer > 0
             );
 
-
-
-
             if (threateningMeteor) {
                 isPerfectDodge = true;
             }
         }
         // -----------------------
-
-
-
 
         if (this.heroPlant) {
             const oldRow = this.heroPlant.row;
@@ -3415,17 +2826,11 @@ class Game {
         }
         this.grid[r][c] = this.heroPlant;
 
-
-
-
         // 如果触发了完美闪避，在移动完成后执行反击
         if (isPerfectDodge) {
             this.triggerPerfectDodge();
         }
     }
-
-
-
 
     triggerPerfectDodge() {
         SM.play('deflect');
@@ -3436,23 +2841,14 @@ class Game {
         this.addEffect(new FloatText("完美闪避!", this.heroPlant.x, this.heroPlant.y - 80, "#fef08a"));
         this.shakeTimer = 400;
 
-
-
-
         // 0.3秒无敌帧
         if(this.heroPlant) {
             this.heroPlant.invincibleTimer = 300;
         }
 
-
-
-
         // 发射光波 (从新位置发射)
         this.projectiles.push(new HolyBeam(this.heroPlant.x + 40, this.heroPlant.y));
     }
-
-
-
 
     startWave() {
         this.state.lastWaveTime = Date.now();
@@ -3461,9 +2857,6 @@ class Game {
         
         SM.play('huge_wave');
         SM.play('siren'); 
-
-
-
 
         let themeZombie = null;
         let themeText = "";
@@ -3476,17 +2869,11 @@ class Game {
             if (this.state.wave >= 15) possibleThemes.push(ZOMBIE_TYPES.GUNNER);
             if (this.state.wave >= 15) possibleThemes.push(ZOMBIE_TYPES.GIANT);
 
-
-
-
             if (possibleThemes.length > 0) {
                 themeZombie = possibleThemes[Math.floor(Math.random() * possibleThemes.length)];
                 themeText = `\n${themeZombie.name} RUSH`;
             }
         }
-
-
-
 
         if (this.state.wave === CONFIG.meteorStartWave) {
             this.showToast("METEOR INCOMING!");
@@ -3520,18 +2907,12 @@ class Game {
             }
         }
 
-
-
-
         let rawDifficulty = 10 + this.state.wave * 8 + Math.pow(this.state.wave, 1.65);
         const maxDifficulty = 800; 
         const waveDifficulty = Math.min(rawDifficulty, maxDifficulty);
         
         let currentDifficulty = 0;
         const spawnList = [];
-
-
-
 
         const pool = [];
         pool.push({ type: ZOMBIE_TYPES.BASIC, weight: 50 });
@@ -3542,9 +2923,6 @@ class Game {
         if (this.state.wave >= 3) pool.push({ type: ZOMBIE_TYPES.PHANTOM, weight: 30 });
         if (this.state.wave >= 15) pool.push({ type: ZOMBIE_TYPES.GUNNER, weight: 15 });
 
-
-
-
         if (themeZombie) {
             pool.forEach(item => {
                 if (item.type.id === themeZombie.id) {
@@ -3552,9 +2930,6 @@ class Game {
                 }
             });
         }
-
-
-
 
         const pickZombie = () => {
             const totalWeight = pool.reduce((a, b) => a + b.weight, 0);
@@ -3566,13 +2941,7 @@ class Game {
             return ZOMBIE_TYPES.BASIC;
         };
 
-
-
-
         const MAX_ZOMBIES_PER_WAVE = 50;
-
-
-
 
         while (currentDifficulty < waveDifficulty && spawnList.length < MAX_ZOMBIES_PER_WAVE) {
             const type = pickZombie();
@@ -3581,9 +2950,6 @@ class Game {
         }
         
         spawnList.sort(() => Math.random() - 0.5);
-
-
-
 
         let gunnerCount = 0;
         for (let i = 0; i < spawnList.length; i++) {
@@ -3595,13 +2961,7 @@ class Game {
             }
         }
 
-
-
-
         this.waveTotalMaxHp = 0;
-
-
-
 
         spawnList.forEach(type => {
             const r = Math.floor(Math.random() * GRID_ROWS);
@@ -3621,14 +2981,8 @@ class Game {
             this.zombies.push(z);
         });
 
-
-
-
         this.updateUI();
     }
-
-
-
 
     startNextWave(reason) {
         if (this.state.gameOver) return;
@@ -3636,9 +2990,6 @@ class Game {
         this.startWave();
         this.addEffect(new FloatText(reason === "BUTTON" ? "RUSH!" : "NEXT!", CONFIG.canvasW/2, CONFIG.canvasH/2, "#facc15"));
     }
-
-
-
 
     addScore(amount) {
         // Multiplier based on combo: 1.0x to 1.5x (capped at 50 combo)
@@ -3668,9 +3019,6 @@ class Game {
             }
         }
 
-
-
-
         // Combo Pop Animation
         const comboCountEl = document.getElementById('combo-count');
         if (comboCountEl) {
@@ -3679,14 +3027,8 @@ class Game {
             comboCountEl.classList.add('combo-pop');
         }
 
-
-
-
         this.updateUI();
     }
-
-
-
 
     triggerGameOver(reason) {
         if (this.state.gameOver) return;
@@ -3712,9 +3054,6 @@ class Game {
         }
         finalScoreEl.innerText = this.score;
 
-
-
-
         goScreen.style.display = 'flex';
         goScreen.style.opacity = '1';
         
@@ -3725,9 +3064,6 @@ class Game {
             });
         });
     }
-
-
-
 
     triggerImpThrow(giant) {
         const targetCol = 3; 
@@ -3745,14 +3081,8 @@ class Game {
         }));
     }
 
-
-
-
     updateMeteors(dt) {
         if (this.state.wave < CONFIG.meteorStartWave) return;
-
-
-
 
         const progress = Math.min(1, (this.state.wave - CONFIG.meteorStartWave) / (CONFIG.meteorMaxWave - CONFIG.meteorStartWave));
         
@@ -3760,15 +3090,9 @@ class Game {
         
         const maxMeteors = Math.floor(5 + progress * 15);
 
-
-
-
         if (this.meteors.length < maxMeteors && Math.random() < spawnRate) {
             this.spawnMeteor();
         }
-
-
-
 
         for (let i = this.meteors.length - 1; i >= 0; i--) {
             const m = this.meteors[i];
@@ -3817,16 +3141,10 @@ class Game {
         }
     }
 
-
-
-
     spawnMeteor() {
         let r, c;
         let valid = false;
         let attempts = 0;
-
-
-
 
         const rand = Math.random();
         let targetMode = 'random';
@@ -3836,22 +3154,13 @@ class Game {
             isOnTile = this.energyTiles.some(t => t.row === this.heroPlant.row && t.col === this.heroPlant.col);
         }
 
-
-
-
         let playerTargetChance = isOnTile ? 0.05 : 0.3;
-
-
-
 
         if (rand < playerTargetChance && this.heroPlant) {
             targetMode = 'player'; 
         } else if (rand < 0.8) {
             targetMode = 'left_side'; 
         }
-
-
-
 
         while (attempts < 15 && !valid) {
             if (targetMode === 'player' && this.heroPlant) {
@@ -3869,9 +3178,6 @@ class Game {
                 c = Math.floor(Math.random() * GRID_COLS);
             }
 
-
-
-
             const occupied = this.meteors.some(m => m.row === r && m.col === c);
             if (!occupied) {
                 valid = true;
@@ -3881,38 +3187,23 @@ class Game {
             }
         }
 
-
-
-
         if (valid) {
             this.meteors.push(new Meteor(r, c));
         }
     }
 
-
-
-
     playerHit() {
         if (this.state.gameOver) return;
-
-
-
 
         // 无敌帧检测
         if (this.heroPlant && this.heroPlant.invincibleTimer > 0) {
             return;
         }
 
-
-
-
         if (this.heroPlant && this.heroPlant.isUltimating) {
             this.addEffect(new FloatText("无敌!", this.heroPlant.x, this.heroPlant.y - 60, "#fff"));
             return;
         }
-
-
-
 
         if (this.hasShield) {
             this.hasShield = false;
@@ -3921,9 +3212,6 @@ class Game {
             this.addEffect(new FloatText("抵挡!", this.heroPlant.x, this.heroPlant.y - 60, "#60a5fa"));
             return;
         }
-
-
-
 
         // 正常受伤
         this.state.lives--;
@@ -3939,9 +3227,6 @@ class Game {
             this.triggerGameOver('DEATH');
         }
     }
-
-
-
 
     updateLivesUI(gained = false) {
         for (let i = 1; i <= 3; i++) {
@@ -3959,18 +3244,12 @@ class Game {
         }
     }
 
-
-
-
     loop(timestamp) {
         if (!this.lastTime) this.lastTime = timestamp;
         let dt = timestamp - this.lastTime;
         this.lastTime = timestamp;
         
         if (dt > 100) dt = 100; 
-
-
-
 
         // 如果暂停，跳过逻辑更新，但仍然进行绘制（可能需要调整draw以支持暂停界面）
         // 实际上 draw 会一直调用，保持画面静止
@@ -3980,9 +3259,6 @@ class Game {
         this.draw();
         requestAnimationFrame(this.loop);
     }
-
-
-
 
     update(dt, now) {
         if (this.shakeTimer > 0) {
@@ -3994,9 +3270,6 @@ class Game {
             this.shakeOffset = {x: 0, y: 0};
         }
 
-
-
-
         // Combo Timer Update
         if (this.combo > 0) {
             this.comboTimer -= dt;
@@ -4006,15 +3279,9 @@ class Game {
             }
         }
 
-
-
-
         const timePassed = now - this.state.lastWaveTime;
         const progress = Math.min(timePassed / CONFIG.waveTimeout, 1);
         document.getElementById('wave-progress').style.width = `${progress*100}%`;
-
-
-
 
         if (this.zombies.length === 0 && timePassed > 1000) {
             this.startNextWave("CLEAR");
@@ -4022,9 +3289,6 @@ class Game {
         else if (timePassed > CONFIG.waveTimeout) {
             this.startNextWave("TIMEOUT");
         }
-
-
-
 
         const currentLivingHp = this.zombies.reduce((sum, z) => sum + z.hp, 0);
         const canRush = (this.waveTotalMaxHp > 0) && (currentLivingHp < (this.waveTotalMaxHp * 0.5));
@@ -4036,13 +3300,7 @@ class Game {
             btn.style.display = 'none';
         }
 
-
-
-
         this.updateMeteors(dt);
-
-
-
 
         if (this.lawnMower) {
             this.lawnMower.update(dt, this);
@@ -4051,18 +3309,12 @@ class Game {
             }
         }
 
-
-
-
         for (let i = this.energyTiles.length - 1; i >= 0; i--) {
             const tile = this.energyTiles[i];
             let hasPlant = false;
             if (this.heroPlant && this.heroPlant.row === tile.row && this.heroPlant.col === tile.col) {
                 hasPlant = true;
             }
-
-
-
 
             if (hasPlant) {
                 if (tile.progress < tile.maxProgress) {
@@ -4084,16 +3336,10 @@ class Game {
             }
         }
 
-
-
-
         if (this.heroPlant) {
             const hasEnemy = this.zombies.some(z => z.row === this.heroPlant.row && z.x > this.heroPlant.x && !z.isDropping);
             this.heroPlant.update(dt, hasEnemy, this);
         }
-
-
-
 
         for (let i = this.projectiles.length - 1; i >= 0; i--) {
             const p = this.projectiles[i];
@@ -4104,14 +3350,8 @@ class Game {
                 continue;
             }
 
-
-
-
             for (let z of this.zombies) {
                 if (z.isDropping) continue;
-
-
-
 
                 // HolyBeam 特殊碰撞逻辑
                 if (p instanceof HolyBeam) {
@@ -4126,9 +3366,6 @@ class Game {
                     continue;
                 }
 
-
-
-
                 const hitRadius = (30 + p.radius) * z.scale; 
                 
                 const dist = Math.hypot(z.x - p.x, z.y - p.y);
@@ -4136,9 +3373,6 @@ class Game {
                 const isAuraHit = dist < CONFIG.bulletAuraRange;
                 
                 let dealtDamage = false;
-
-
-
 
                 if (isDirectHit) {
                     if (!p.hitList.includes(z.id)) {
@@ -4150,17 +3384,11 @@ class Game {
                         if (p.stunMode === 2) shouldStun = true; 
                         else if (p.stunMode === 1 && Math.random() < 0.1) shouldStun = true; 
 
-
-
-
                         if (shouldStun) {
                             const duration = p.isUlt ? 500 : (p.stunMode === 2 ? 200 : 300);
                             z.applyStun(duration);
                             this.addEffect(new Particle(z.x, z.y - 60, '#facc15', 10, 2));
                         }
-
-
-
 
                         this.addEffect(new Particle(z.x, z.y - 40*z.scale, '#60a5fa', 8, 3));
                         SM.play('hit', 50);
@@ -4177,16 +3405,10 @@ class Game {
                             z.applyStun(500);
                         }
 
-
-
-
                         this.addEffect(new LightningBolt(p.x, p.y, z.x, z.y - 40*z.scale, '#93c5fd', 2));
                         dealtDamage = true;
                     }
                 }
-
-
-
 
                 if (dealtDamage) {
                     if (z.type.id !== 'PHANTOM') {
@@ -4196,9 +3418,6 @@ class Game {
             }
         }
 
-
-
-
         for (let i = this.enemyProjectiles.length - 1; i >= 0; i--) {
             const ep = this.enemyProjectiles[i];
             ep.update(dt);
@@ -4207,9 +3426,6 @@ class Game {
                 this.enemyProjectiles.splice(i, 1);
                 continue;
             }
-
-
-
 
             if (this.heroPlant && this.heroPlant.row === ep.row) {
                 const dist = Math.abs(this.heroPlant.x - ep.x);
@@ -4222,9 +3438,6 @@ class Game {
             }
         }
 
-
-
-
         for (let i = this.zombies.length - 1; i >= 0; i--) {
             const z = this.zombies[i];
             z.update(dt, this); 
@@ -4232,9 +3445,6 @@ class Game {
             if (z.x < LEFT_MARGIN - 20) {
                  this.triggerGameOver('ZOMBIE');
             }
-
-
-
 
             if (z.isDead) {
                 SM.play('zap');
@@ -4244,23 +3454,14 @@ class Game {
             }
         }
 
-
-
-
         for(let i=this.effects.length-1; i>=0; i--) {
             const e = this.effects[i];
             e.update(dt);
             if(e.dead) this.effects.splice(i,1);
         }
 
-
-
-
         this.updateUI();
     }
-
-
-
 
     triggerChainLightning(sourceZombie, damage, game) {
         const now = Date.now();
@@ -4279,9 +3480,6 @@ class Game {
             .sort((a, b) => a.dist - b.dist)
             .slice(0, CONFIG.chainCount); 
 
-
-
-
         if (targets.length > 0) {
             SM.play('chain', 100);
             targets.forEach(t => {
@@ -4291,9 +3489,6 @@ class Game {
             });
         }
     }
-
-
-
 
     spawnPFOrb(startX, startY) {
         SM.play('power_drop'); 
@@ -4309,9 +3504,6 @@ class Game {
             }));
         }
     }
-
-
-
 
     actualGainPF() {
         if (this.state.pfCount < 5) {
@@ -4366,13 +3558,7 @@ class Game {
         }, 3000); // 闪烁 3 秒
     }
 
-
-
-
     addEffect(e) { this.effects.push(e); }
-
-
-
 
     showToast(text) {
         const t = document.getElementById('toast');
@@ -4381,9 +3567,6 @@ class Game {
         void t.offsetWidth; 
         t.classList.add('slam-text');
     }
-
-
-
 
     updateUI() {
         document.getElementById('wave-num').innerText = this.state.wave;
@@ -4396,17 +3579,11 @@ class Game {
         document.getElementById('score-display').innerText = this.score;
         document.getElementById('highscore-display').innerText = `HI: ${this.highScore}`;
 
-
-
-
         // Combo UI
         const comboContainer = document.getElementById('combo-container');
         const comboCountEl = document.getElementById('combo-count');
         const comboMultEl = document.getElementById('combo-multiplier');
         const maxComboEl = document.getElementById('max-combo-display');
-
-
-
 
         if (this.combo > 0) {
             comboContainer.style.display = 'flex';
@@ -4416,9 +3593,6 @@ class Game {
             const saturation = Math.min(100, (this.comboTimer / 500) * 100);
             comboContainer.style.filter = `saturate(${saturation}%)`;
 
-
-
-
             // Colors
             comboCountEl.className = ''; // Reset classes
             if (this.combo < 10) comboCountEl.classList.add('combo-green');
@@ -4426,32 +3600,20 @@ class Game {
             else if (this.combo < 50) comboCountEl.classList.add('combo-orange');
             else comboCountEl.classList.add('combo-red');
 
-
-
-
             // Multiplier
             const mult = 1 + Math.min(this.combo, 50) * 0.01;
             comboMultEl.innerText = `${mult.toFixed(2)}x`;
-
-
-
 
         } else {
             comboContainer.style.display = 'none';
         }
         maxComboEl.innerText = `MAX: ${this.maxCombo}`;
 
-
-
-
         const slots = document.querySelectorAll('.plant-food-slot');
         slots.forEach((s, i) => {
             if (i < this.state.pfCount) s.classList.add('filled');
             else s.classList.remove('filled');
         });
-
-
-
 
         if (this.heroPlant) {
             document.getElementById('stat-level').innerText = this.heroPlant.level >= 4 ? "4 (MAX)" : this.heroPlant.level;
@@ -4471,9 +3633,6 @@ class Game {
                 nextGoal = `${remainder}/10 (HEAL)`;
             }
             document.getElementById('stat-xp').innerText = nextGoal;
-
-
-
 
             const buffRow = document.getElementById('buff-row');
             const buffText = document.getElementById('stat-buff');
@@ -4495,16 +3654,10 @@ class Game {
             }
         }
 
-
-
-
         const btnShield = document.getElementById('btn-shield');
         const btnMower = document.getElementById('btn-mower');
         const btnStun = document.getElementById('btn-stun');
         const btnDome = document.getElementById('btn-dome');
-
-
-
 
         const updateBtn = (btn, cost, condition) => {
             if (this.state.pfCount >= cost && condition) {
@@ -4517,29 +3670,17 @@ class Game {
             }
         };
 
-
-
-
         updateBtn(btnShield, 2, !this.hasShield);
         updateBtn(btnMower, 5, !this.lawnMower);
         updateBtn(btnStun, 2, true); 
         updateBtn(btnDome, 3, true);
     }
 
-
-
-
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-
-
-
         this.ctx.save();
         this.ctx.translate(this.shakeOffset.x, this.shakeOffset.y);
-
-
-
 
         this.ctx.strokeStyle = 'rgba(0,0,0,0.15)';
         this.ctx.lineWidth = 2;
@@ -4565,15 +3706,9 @@ class Game {
             this.ctx.lineWidth = 2;
             this.ctx.strokeRect(x + 5, y + 5, CELL_WIDTH - 10, CELL_HEIGHT - 10);
 
-
-
-
             this.ctx.fillStyle = 'rgba(0, 255, 234, 0.6)';
             this.ctx.font = '20px Arial';
             this.ctx.fillText('⚡', x + CELL_WIDTH/2 - 10, y + CELL_HEIGHT/2);
-
-
-
 
             if (tile.progress > 0) {
                 const pct = tile.progress / tile.maxProgress;
@@ -4582,21 +3717,12 @@ class Game {
             }
         });
 
-
-
-
         const dangerX = LEFT_MARGIN + 3 * CELL_WIDTH;
         this.ctx.fillStyle = 'rgba(255, 255, 0, 0.03)';
         this.ctx.fillRect(dangerX, TOP_MARGIN, CELL_WIDTH, CONFIG.canvasH - TOP_MARGIN);
 
-
-
-
         this.ctx.fillStyle = 'rgba(255, 0, 0, 0.1)';
         this.ctx.fillRect(0, TOP_MARGIN, LEFT_MARGIN, CONFIG.canvasH - TOP_MARGIN);
-
-
-
 
         // 电击buff倒计时图形（黄色）
         if (this.heroPlant && this.heroPlant.stunBuffTimer > 0) {
@@ -4610,34 +3736,19 @@ class Game {
             const centerY = gridY + gridH / 2;
             const radius = Math.hypot(gridW/2, gridH/2) + 20; 
 
-
-
-
             const maxTime = 3000;
             const progress = this.heroPlant.stunBuffTimer / maxTime;
 
-
-
-
             ctx.save();
-
-
-
 
             ctx.strokeStyle = 'rgba(250, 204, 21, 0.8)'; 
             ctx.lineWidth = 5;
             ctx.strokeRect(gridX, gridY, gridW, gridH);
 
-
-
-
             if (progress > 0) {
                 ctx.beginPath();
                 ctx.rect(gridX, gridY, gridW, gridH);
                 ctx.clip();
-
-
-
 
                 ctx.beginPath();
                 ctx.moveTo(centerX, centerY);
@@ -4647,9 +3758,6 @@ class Game {
                 ctx.fillStyle = 'rgba(250, 204, 21, 0.15)'; 
                 ctx.fill();
             }
-
-
-
 
             ctx.restore();
         }
@@ -4666,34 +3774,19 @@ class Game {
             const centerY = gridY + gridH / 2;
             const radius = Math.hypot(gridW/2, gridH/2) + 20; 
 
-
-
-
             const maxTime = 5000;
             const progress = this.heroPlant.domeTimer / maxTime;
 
-
-
-
             ctx.save();
-
-
-
 
             ctx.strokeStyle = 'rgba(56, 189, 248, 0.8)'; // 蓝色边框
             ctx.lineWidth = 5;
             ctx.strokeRect(gridX, gridY, gridW, gridH);
 
-
-
-
             if (progress > 0) {
                 ctx.beginPath();
                 ctx.rect(gridX, gridY, gridW, gridH);
                 ctx.clip();
-
-
-
 
                 ctx.beginPath();
                 ctx.moveTo(centerX, centerY);
@@ -4704,19 +3797,10 @@ class Game {
                 ctx.fill();
             }
 
-
-
-
             ctx.restore();
         }
 
-
-
-
         this.meteors.forEach(m => m.draw(this.ctx));
-
-
-
 
         // 完美格挡视觉提示检测
         let parryOpportunity = false;
@@ -4730,17 +3814,11 @@ class Game {
             if (threateningMeteor) parryOpportunity = true;
         }
 
-
-
-
         if (parryOpportunity) {
             // 全屏闪烁提示
             this.ctx.fillStyle = `rgba(255, 255, 255, 0.1)`;
             this.ctx.fillRect(0, 0, CONFIG.canvasW, CONFIG.canvasH);
         }
-
-
-
 
         if(this.heroPlant) {
             this.heroPlant.draw(this.ctx);
@@ -4760,9 +3838,6 @@ class Game {
                 this.ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
                 this.ctx.fill();
 
-
-
-
                 // 提示文字
                 this.ctx.fillStyle = '#fff';
                 this.ctx.font = 'bold 24px Arial';
@@ -4773,9 +3848,6 @@ class Game {
                 
                 this.ctx.restore();
             }
-
-
-
 
             if (this.hasShield) {
                 this.ctx.save();
@@ -4794,9 +3866,6 @@ class Game {
             }
         }
 
-
-
-
         if (this.lawnMower) {
             this.lawnMower.draw(this.ctx);
         }
@@ -4808,69 +3877,33 @@ class Game {
             if (!(obj instanceof Projectile)) obj.draw(this.ctx);
         });
 
-
-
-
         this.projectiles.forEach(p => p.draw(this.ctx));
         this.enemyProjectiles.forEach(ep => ep.draw(this.ctx));
-
-
-
 
         this.ctx.restore(); 
     }
 }
 
-
-let gameInstance = null;
-
-function startGame() {
-    document.getElementById('loading-overlay').style.display = 'none';
-    gameInstance = new Game();
-}
-
 window.onload = () => { 
-    const progressBar = document.getElementById('loading-progress-bar');
-    const loadingText = document.getElementById('loading-text');
-    const skipBtn = document.getElementById('skip-loading-btn');
-    const loadingHint = document.getElementById('loading-hint');
+    // 初始化 AudioContext（需要用户交互前先准备好）
+    SM.initContext();
     
-    let loadingComplete = false;
-    
-    // 跳过按钮事件
-    skipBtn.addEventListener('click', () => {
-        if (loadingComplete) return; // 已经加载完成就不处理
+    // 设置跳过按钮事件
+    document.getElementById('skip-loading-btn').addEventListener('click', () => {
         SM.skipLoading();
-        loadingText.innerText = '跳过音频加载...';
-        loadingHint.innerText = '游戏将在无音效模式下运行';
-        
-        setTimeout(() => {
-            startGame();
-        }, 300);
+        new Game();
     });
     
-    SM.loadAll((progress) => {
-        // 更新进度条
-        progressBar.style.width = `${progress * 100}%`;
-        
-        // 更新加载文字
-        const percent = Math.floor(progress * 100);
-        loadingText.innerText = `加载音频中... ${percent}%`;
-        
-        if (progress >= 1) {
-            loadingComplete = true;
-            loadingText.innerText = '加载完成!';
-            loadingHint.innerText = '';
-            
-            setTimeout(() => {
-                startGame();
-            }, 300);
+    // 开始加载音频
+    SM.loadAll((loaded, total) => {
+        const pct = Math.round((loaded / total) * 100);
+        document.getElementById('loading-progress-fill').style.width = `${pct}%`;
+        document.getElementById('loading-progress-text').innerText = `${loaded} / ${total}`;
+    }).then(() => {
+        // 如果没有跳过加载，正常启动游戏
+        if (!SM.loadingSkipped) {
+            new Game();
         }
-    }).catch(err => {
-        // 加载失败时也允许继续
-        console.warn('Audio loading failed:', err);
-        loadingText.innerText = '音频加载失败';
-        loadingHint.innerText = '点击跳过按钮继续游戏';
     });
 };
 </script>
