@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>超级机枪豌豆 - 增强版</title>
+    <title>超级机枪豌豆 - 性能优化版</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -84,9 +84,6 @@
             to { filter: drop-shadow(0 0 30px #ef4444) drop-shadow(0 0 50px red); transform: scale(1.3); }
         }
 
-
-
-
         #stats-panel {
             font-size: 1rem;
             background: rgba(0,0,0,0.5);
@@ -99,9 +96,6 @@
         .buff-active { color: #facc15; animation: pulse 1s infinite; }
         .buff-dome { color: #60a5fa; animation: pulse 1s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-
-
-
 
         #score-area {
             display: flex;
@@ -149,22 +143,13 @@
             text-shadow: 1px 1px 0 #000;
         }
 
-
-
-
         .combo-green { color: #4ade80; text-shadow: 2px 2px 0 #000, 0 0 10px #22c55e; }
         .combo-yellow { color: #facc15; text-shadow: 2px 2px 0 #000, 0 0 15px #eab308; }
         .combo-orange { color: #fb923c; text-shadow: 2px 2px 0 #000, 0 0 20px #ea580c; }
         .combo-red { color: #ef4444; text-shadow: 2px 2px 0 #000, 0 0 25px #dc2626; }
 
-
-
-
         .combo-pop { animation: combo-scale 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         @keyframes combo-scale { 0% { transform: scale(1); } 50% { transform: scale(1.4); } 100% { transform: scale(1); } }
-
-
-
 
         .new-record-anim {
             animation: record-flash 1s ease-out;
@@ -175,9 +160,6 @@
             100% { transform: scale(1); }
         }
 
-
-
-
         #controls-wrapper {
             position: absolute;
             bottom: 30px;
@@ -187,9 +169,6 @@
             align-items: flex-end;
             gap: 20px;
         }
-
-
-
 
         #pf-wrapper {
             display: flex;
@@ -231,9 +210,6 @@
             object-fit: contain;
         }
         .plant-food-slot.filled .plant-food-img { display: block; }
-
-
-
 
         .shop-btn {
             width: 70px;
@@ -283,9 +259,6 @@
         #btn-dome.affordable { background: #0369a1; border-color: #38bdf8; }
         #btn-dome.affordable:hover { background: #0284c7; }
 
-
-
-
         .cost-badge {
             position: absolute;
             top: -10px;
@@ -309,9 +282,6 @@
             object-fit: contain;
             margin-bottom: 2px; 
         }
-
-
-
 
         #next-wave-btn {
             position: absolute;
@@ -343,13 +313,7 @@
         #next-wave-btn:hover { filter: brightness(1.1); transform: translateY(-50%) scale(1.05); }
         #next-wave-btn:active { transform: translateY(-50%) scale(0.95); }
 
-
-
-
         @keyframes pop-in { from { transform: translateY(-50%) scale(0); } to { transform: translateY(-50%) scale(1); } }
-
-
-
 
         #wave-timer {
             position: absolute;
@@ -393,9 +357,6 @@
             text-align: center;
         }
 
-
-
-
         .slam-text {
             animation-name: slam-scale, slam-opacity, fade-out;
             animation-duration: 0.6s, 0.6s, 0.5s;
@@ -404,18 +365,12 @@
             animation-fill-mode: forwards;
         }
 
-
-
-
         @keyframes slam-scale {
             0% { transform: translate(-50%, -50%) scale(3); }
             100% { transform: translate(-50%, -50%) scale(1); }
         }
         @keyframes slam-opacity { 0% { opacity: 0; } 100% { opacity: 1; } }
         @keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
-
-
-
 
         #game-over-screen {
             position: absolute;
@@ -444,15 +399,9 @@
             transform: scale(0);
         }
 
-
-
-
         .game-over-anim {
             animation: go-shake 0.5s linear forwards;
         }
-
-
-
 
         @keyframes go-shake {
             0% { transform: scale(0); }
@@ -465,9 +414,6 @@
             90% { transform: scale(1) translate(10px, 0); }
             100% { transform: scale(1) translate(0, 0); }
         }
-
-
-
 
         #restart-btn {
             background: #22c55e;
@@ -485,15 +431,9 @@
         }
         @keyframes fade-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-
-
-
         #restart-btn:hover {
             background: #4ade80;
         }
-
-
-
 
         .key-hint {
             font-size: 0.7rem;
@@ -579,9 +519,6 @@
             50% { opacity: 1; }
         }
 
-
-
-
         #pause-menu {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -596,9 +533,6 @@
         }
         .pause-title { font-size: 4rem; font-weight: bold; margin-bottom: 30px; letter-spacing: 5px; }
         .pause-hint { font-size: 1.5rem; color: #ccc; }
-
-
-
 
         #overflow-banner {
             position: absolute;
@@ -619,9 +553,6 @@
             transition: opacity 0.5s;
         }
 
-
-
-
         /* 精灵层 - 覆盖在Canvas上方用于渲染WebP动画 */
         #sprite-layer {
             position: absolute;
@@ -638,19 +569,88 @@
             pointer-events: none;
             image-rendering: auto;
             transform-origin: center bottom;
+            will-change: transform, left, top;
+        }
+        
+        /* ========== 性能监控面板 ========== */
+        #perf-panel {
+            position: absolute;
+            top: 100px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.85);
+            color: #0f0;
+            font-family: monospace;
+            font-size: 12px;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 999;
+            pointer-events: auto;
+            min-width: 200px;
+            border: 1px solid #0f0;
+        }
+        #perf-panel.hidden { display: none; }
+        #perf-panel .warn { color: #ff0; }
+        #perf-panel .error { color: #f00; }
+        #perf-panel div { margin: 2px 0; }
+        #perf-toggle {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #333;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 5px 10px;
+            cursor: pointer;
+            z-index: 1000;
+            font-family: monospace;
+            pointer-events: auto;
+        }
+        
+        /* 错误日志面板 */
+        #error-log {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(100, 0, 0, 0.9);
+            color: #fff;
+            font-family: monospace;
+            font-size: 11px;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 999;
+            max-width: 400px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+            border: 1px solid #f00;
         }
     </style>
 </head>
 <body>
-
-
-
 
 <div id="game-container">
     <canvas id="gameCanvas"></canvas>
     
     <!-- 精灵层 - 用于渲染WebP动画 -->
     <div id="sprite-layer"></div>
+    
+    <!-- 性能监控 -->
+    <button id="perf-toggle">F3: 性能</button>
+    <div id="perf-panel" class="hidden">
+        <div>FPS: <span id="perf-fps">0</span></div>
+        <div>Frame: <span id="perf-frame">0</span>ms</div>
+        <div>Update: <span id="perf-update">0</span>ms</div>
+        <div>Draw: <span id="perf-draw">0</span>ms</div>
+        <div>---</div>
+        <div>Zombies: <span id="perf-zombies">0</span></div>
+        <div>Projectiles: <span id="perf-projectiles">0</span></div>
+        <div>Effects: <span id="perf-effects">0</span></div>
+        <div>DOM Sprites: <span id="perf-sprites">0</span></div>
+        <div>---</div>
+        <div>Heap: <span id="perf-heap">N/A</span></div>
+        <div>Chains/Frame: <span id="perf-chains">0</span></div>
+    </div>
+    <div id="error-log"></div>
     
     <div id="loading-overlay">
         <div>🎮 LOADING ASSETS...</div>
@@ -663,25 +663,16 @@
     
     <div id="background-loading-indicator">🔊 资源加载中... <span id="bg-load-progress">0%</span></div>
 
-
-
-
     <div id="pause-menu">
         <div class="pause-title">PAUSED</div>
         <div class="pause-hint">Press [P] to Resume</div>
     </div>
-
-
-
 
     <div id="game-over-screen">
         <h1 id="game-over-text">僵尸吃掉了你的脑子!</h1>
         <div style="font-size: 2rem; margin-bottom: 20px;">FINAL SCORE: <span id="final-score" class="text-yellow-400">0</span></div>
         <button id="restart-btn">重新开始 <span style="font-size: 0.6em">[R]</span></button>
     </div>
-
-
-
 
     <div id="ui-layer">
         <div class="hud-top">
@@ -733,9 +724,6 @@
             </div>
         </div>
 
-
-
-
         <div id="combo-container">
             <div id="combo-count">0</div>
             <div id="combo-label">COMBO</div>
@@ -743,24 +731,12 @@
             <div id="max-combo-display">MAX: 0</div>
         </div>
 
-
-
-
         <div id="wave-timer"><div id="wave-progress"></div></div>
         <div id="toast">WAVE 1</div>
 
-
-
-
         <button id="next-wave-btn">下一波<span class="key-hint">[N]</span></button>
 
-
-
-
         <div id="overflow-banner">能量豆已满，使用大招或购买道具</div>
-
-
-
 
         <div id="controls-wrapper">
             <div id="pf-wrapper">
@@ -776,18 +752,12 @@
                 </div>
             </div>
 
-
-
-
             <div class="shop-btn" id="btn-shield">
                 <div class="cost-badge">2</div>
                 <img class="btn-icon" src="./images/ui/icon_shield.png" alt="🛡️">
                 <div>护盾</div>
                 <span class="key-hint">[1]</span>
             </div>
-
-
-
 
             <div class="shop-btn" id="btn-stun">
                 <div class="cost-badge">2</div>
@@ -796,18 +766,12 @@
                 <span class="key-hint">[2]</span>
             </div>
 
-
-
-
             <div class="shop-btn" id="btn-dome">
                 <div class="cost-badge">3</div>
                 <img class="btn-icon" src="./images/ui/icon_dome.png" alt="🔮">
                 <div>穹顶</div>
                 <span class="key-hint">[3]</span>
             </div>
-
-
-
 
             <div class="shop-btn" id="btn-mower">
                 <div class="cost-badge">5</div>
@@ -819,10 +783,142 @@
     </div>
 </div>
 
-
-
-
 <script>
+/* ========== 全局错误捕获 ========== */
+const ErrorLog = {
+    errors: [],
+    maxErrors: 50,
+    
+    log(msg, source = 'unknown') {
+        const entry = {
+            time: new Date().toISOString().substr(11, 12),
+            source,
+            msg: String(msg).substring(0, 200)
+        };
+        this.errors.push(entry);
+        if (this.errors.length > this.maxErrors) this.errors.shift();
+        this.updateUI();
+        console.error(`[${source}]`, msg);
+    },
+    
+    updateUI() {
+        const el = document.getElementById('error-log');
+        if (this.errors.length > 0) {
+            el.style.display = 'block';
+            el.innerHTML = this.errors.map(e => 
+                `<div>[${e.time}] ${e.source}: ${e.msg}</div>`
+            ).join('');
+            el.scrollTop = el.scrollHeight;
+        }
+    }
+};
+
+window.onerror = (msg, src, line, col, err) => {
+    ErrorLog.log(`${msg} (${src}:${line}:${col})`, 'window.onerror');
+    return false;
+};
+
+window.onunhandledrejection = (e) => {
+    ErrorLog.log(e.reason, 'unhandledrejection');
+};
+
+/* ========== 性能监控器 ========== */
+const PerfMonitor = {
+    fps: 0,
+    frameTime: 0,
+    updateTime: 0,
+    drawTime: 0,
+    frames: 0,
+    lastFpsUpdate: 0,
+    chainCount: 0,
+    
+    enabled: false,
+    
+    init() {
+        const toggle = document.getElementById('perf-toggle');
+        const panel = document.getElementById('perf-panel');
+        
+        toggle.addEventListener('click', () => {
+            this.enabled = !this.enabled;
+            panel.classList.toggle('hidden', !this.enabled);
+        });
+        
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'F3') {
+                e.preventDefault();
+                this.enabled = !this.enabled;
+                panel.classList.toggle('hidden', !this.enabled);
+            }
+        });
+    },
+    
+    startFrame() {
+        this._frameStart = performance.now();
+    },
+    
+    startUpdate() {
+        this._updateStart = performance.now();
+    },
+    
+    endUpdate() {
+        this.updateTime = performance.now() - this._updateStart;
+    },
+    
+    startDraw() {
+        this._drawStart = performance.now();
+    },
+    
+    endDraw() {
+        this.drawTime = performance.now() - this._drawStart;
+    },
+    
+    endFrame() {
+        this.frameTime = performance.now() - this._frameStart;
+        this.frames++;
+        
+        const now = performance.now();
+        if (now - this.lastFpsUpdate > 500) {
+            this.fps = Math.round(this.frames * 1000 / (now - this.lastFpsUpdate));
+            this.frames = 0;
+            this.lastFpsUpdate = now;
+        }
+    },
+    
+    update(game) {
+        if (!this.enabled) return;
+        
+        const setClass = (id, value, warnThreshold, errorThreshold) => {
+            const el = document.getElementById(id);
+            el.textContent = typeof value === 'number' ? value.toFixed(1) : value;
+            el.className = '';
+            if (errorThreshold && value >= errorThreshold) el.className = 'error';
+            else if (warnThreshold && value >= warnThreshold) el.className = 'warn';
+        };
+        
+        setClass('perf-fps', this.fps, null, null);
+        document.getElementById('perf-fps').className = this.fps < 30 ? 'error' : (this.fps < 50 ? 'warn' : '');
+        
+        setClass('perf-frame', this.frameTime, 20, 33);
+        setClass('perf-update', this.updateTime, 10, 20);
+        setClass('perf-draw', this.drawTime, 10, 20);
+        
+        document.getElementById('perf-zombies').textContent = game.zombies?.length || 0;
+        document.getElementById('perf-projectiles').textContent = game.projectiles?.length || 0;
+        document.getElementById('perf-effects').textContent = game.effects?.length || 0;
+        document.getElementById('perf-sprites').textContent = Sprites.sprites.size;
+        document.getElementById('perf-chains').textContent = this.chainCount;
+        
+        // 内存信息 (仅Chrome)
+        if (performance.memory) {
+            const heap = (performance.memory.usedJSHeapSize / 1048576).toFixed(1);
+            const limit = (performance.memory.jsHeapSizeLimit / 1048576).toFixed(0);
+            document.getElementById('perf-heap').textContent = `${heap}/${limit}MB`;
+        }
+        
+        this.chainCount = 0; // 重置每帧计数
+    }
+};
+
 /* --- 精灵配置系统 --- */
 const SPRITE_CONFIG = {
     'player_idle_lv1': { scale: 0.8, offsetY: 120 },
@@ -858,10 +954,8 @@ const SPRITE_CONFIG = {
     'shooter_idle': { scale: 0.7, offsetY: 30 },
     'shooter_shoot': { scale: 0.7, offsetY: 30 },
     
-    'doom': { scale: 1.0, offsetY: 0 },
     'power_bean': { scale: 1.0, offsetY: 0 },
     'mower': { scale: 0.6, offsetY: 100 },
-    'meteor': { scale: 1.0, offsetY: 0 },
     'explosion': { scale: 1.0, offsetY: 0 },
     
     'bullet_normal': { scale: 0.6, offsetY: 30 },
@@ -871,24 +965,20 @@ const SPRITE_CONFIG = {
     'default': { scale: 1.0, offsetY: 0 }
 };
 
-
-
-
 function getSpriteConfig(key) {
     return SPRITE_CONFIG[key] || SPRITE_CONFIG['default'];
 }
 
-
-
-
-/* --- 精灵管理器 - 使用DOM元素渲染WebP动画 --- */
-/* --- 精灵管理器 - 修复版 --- */
+/* --- 精灵管理器 - 优化版 --- */
 class SpriteManager {
     constructor() {
         this.sprites = new Map();
         this.spriteLayer = null;
         this.canvasRect = null;
         this.scaleFactor = 1;
+        
+        // 图片缓存：同一个spriteKey共享同一个Image对象
+        this.imageCache = new Map();
     }
     
     init(spriteLayerId) {
@@ -898,6 +988,16 @@ class SpriteManager {
     updateCanvasInfo(canvasRect, scaleFactor) {
         this.canvasRect = canvasRect;
         this.scaleFactor = scaleFactor;
+    }
+    
+    // 获取或创建缓存的图片
+    getOrCreateImage(spriteKey, src) {
+        if (!this.imageCache.has(spriteKey)) {
+            const img = new Image();
+            img.src = src;
+            this.imageCache.set(spriteKey, img);
+        }
+        return this.imageCache.get(spriteKey);
     }
     
     updateSprite(entityId, spriteKey, x, y, options = {}) {
@@ -911,16 +1011,17 @@ class SpriteManager {
             visible = true
         } = options;
         
-        let sprite = this.sprites.get(entityId);
         const src = Assets.getSrc(spriteKey);
         
         if (!src) {
-            if (sprite) {
-                sprite.remove();
+            if (this.sprites.has(entityId)) {
+                this.sprites.get(entityId).remove();
                 this.sprites.delete(entityId);
             }
             return false;
         }
+        
+        let sprite = this.sprites.get(entityId);
         
         if (!sprite) {
             sprite = document.createElement('img');
@@ -930,18 +1031,13 @@ class SpriteManager {
             this.sprites.set(entityId, sprite);
         }
         
-        // 核心修复：检测 key 是否变化，如果变化则更新 src
-        // 并添加 entityId 作为查询参数，强制浏览器独立播放动画，防止所有僵尸同步
+        // 优化：只在key变化时更新src，不再添加uid参数
+        // 动画同步问题通过CSS animation-delay随机化解决
         if (sprite.dataset.spriteKey !== spriteKey) {
-            // 注意：如果你直接打开 html 文件 (file://)，查询参数可能无效或报错
-            // 建议使用 Live Server 或本地服务器运行
-            sprite.src = `${src}?uid=${entityId}`; 
+            sprite.src = src;
             sprite.dataset.spriteKey = spriteKey;
-            
-            // 强制重启动画 (对于某些浏览器)
-            sprite.style.display = 'none';
-            void sprite.offsetWidth; // 触发重绘
-            sprite.style.display = 'block';
+            // 使用随机延迟来打破同步
+            sprite.style.animationDelay = `${-Math.random() * 1000}ms`;
         }
         
         const config = getSpriteConfig(spriteKey);
@@ -950,17 +1046,23 @@ class SpriteManager {
         const screenX = x * this.scaleFactor;
         const screenY = (y + config.offsetY) * this.scaleFactor;
         
-        let transform = `translate(-50%, -100%) scale(${totalScale})`;
+        // 使用 transform3d 强制GPU加速
+        let transform = `translate3d(${screenX}px, ${screenY}px, 0) translate(-50%, -100%) scale(${totalScale})`;
         if (flipX) transform += ' scaleX(-1)';
         if (rotation !== 0) transform += ` rotate(${rotation}rad)`;
         
-        sprite.style.left = `${screenX}px`;
-        sprite.style.top = `${screenY}px`;
-        sprite.style.transform = transform;
-        sprite.style.opacity = alpha;
-        sprite.style.filter = filter;
-        sprite.style.zIndex = zIndex;
-        sprite.style.display = visible ? 'block' : 'none';
+        // 批量设置样式减少重排
+        sprite.style.cssText = `
+            position: absolute;
+            left: 0;
+            top: 0;
+            transform: ${transform};
+            opacity: ${alpha};
+            filter: ${filter};
+            z-index: ${zIndex};
+            display: ${visible ? 'block' : 'none'};
+            will-change: transform;
+        `;
         
         return true;
     }
@@ -981,15 +1083,20 @@ class SpriteManager {
     getActiveIds() {
         return new Set(this.sprites.keys());
     }
+    
+    // 清理不再使用的精灵
+    cleanup(activeIds) {
+        const toRemove = [];
+        this.sprites.forEach((sprite, id) => {
+            if (!activeIds.has(id)) {
+                toRemove.push(id);
+            }
+        });
+        toRemove.forEach(id => this.removeSprite(id));
+    }
 }
 
-
-
-
 const Sprites = new SpriteManager();
-
-
-
 
 /* --- 资源管理器 --- */
 class AssetManager {
@@ -1037,10 +1144,8 @@ class AssetManager {
             'shooter_idle': './images/zombies/shooter_idle.webp',
             'shooter_shoot': './images/zombies/shooter_shoot.webp',
             
-            'doom': './images/effects/doom.webp',
             'power_bean': './images/effects/power_bean.webp',
             'mower': './images/effects/mower.webp',
-            'meteor': './images/effects/meteor.webp',
             'explosion': './images/effects/explosion.webp',
             
             'heart_full': './images/ui/heart_full.png',
@@ -1057,16 +1162,10 @@ class AssetManager {
         };
     }
 
-
-
-
     async loadAll(onProgress) {
         const entries = Object.entries(this.imageSources);
         this.totalAssets = entries.length;
         this.loadedAssets = 0;
-
-
-
 
         for (const [key, url] of entries) {
             if (this.loadingSkipped) {
@@ -1074,23 +1173,14 @@ class AssetManager {
                 return;
             }
 
-
-
-
             await this.loadSingle(key, url);
             this.loadedAssets++;
             if (onProgress) onProgress(this.loadedAssets, this.totalAssets);
         }
 
-
-
-
         this.loadingComplete = true;
         this.loaded = true;
     }
-
-
-
 
     async loadSingle(key, url) {
         return new Promise((resolve) => {
@@ -1107,16 +1197,10 @@ class AssetManager {
         });
     }
 
-
-
-
     async loadRemainingAsync(remaining) {
         const indicator = document.getElementById('background-loading-indicator');
         const progressText = document.getElementById('bg-load-progress');
         indicator.style.display = 'block';
-
-
-
 
         for (const [key, url] of remaining) {
             await this.loadSingle(key, url);
@@ -1126,23 +1210,14 @@ class AssetManager {
             progressText.innerText = `${pct}%`;
         }
 
-
-
-
         this.loadingComplete = true;
         this.loaded = true;
         indicator.style.display = 'none';
     }
 
-
-
-
     skipLoading() {
         this.loadingSkipped = true;
     }
-
-
-
 
     get(key) {
         return this.images[key];
@@ -1152,21 +1227,12 @@ class AssetManager {
         return this.imageSources[key];
     }
 
-
-
-
     has(key) {
         return !!this.images[key];
     }
 }
 
-
-
-
 const Assets = new AssetManager();
-
-
-
 
 /* --- Web Audio API 管理器 --- */
 class WebAudioManager {
@@ -1182,9 +1248,6 @@ class WebAudioManager {
         this.loadingComplete = false;
         this.totalSounds = 0;
         this.loadedSounds = 0;
-
-
-
 
         this.sources = {
             zap1: './sounds/zap1.wav',
@@ -1233,25 +1296,16 @@ class WebAudioManager {
             countdown_4: './sounds/countdown_4.wav',
             countdown_5: './sounds/countdown_5.wav',
 
-
-
-
             button_buy: './sounds/button_buy.wav',
             
             hp_drop: './sounds/hp_drop.wav',
             hp_take: './sounds/hp_take.wav',
             doom: './sounds/doom.wav',
 
-
-
-
             deflect: './sounds/deflect.wav',
             beam: './sounds/beam.wav',
             
             levelup: './sounds/levelup.wav',
-
-
-
 
             no: './sounds/no.wav',
             
@@ -1260,32 +1314,24 @@ class WebAudioManager {
         };
     }
 
-
-
-
     initContext() {
         if (this.ctx) return;
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        this.ctx = new AudioContext({ latencyHint: 'interactive' });
-        this.masterGain = this.ctx.createGain();
-        this.masterGain.connect(this.ctx.destination);
+        try {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            this.ctx = new AudioContext({ latencyHint: 'interactive' });
+            this.masterGain = this.ctx.createGain();
+            this.masterGain.connect(this.ctx.destination);
+        } catch (e) {
+            ErrorLog.log('AudioContext init failed: ' + e.message, 'Audio');
+        }
     }
-
-
-
 
     async loadAll(onProgress) {
         this.initContext();
 
-
-
-
         const entries = Object.entries(this.sources);
         this.totalSounds = entries.length;
         this.loadedSounds = 0;
-
-
-
 
         for (const [key, url] of entries) {
             if (this.loadingSkipped) {
@@ -1293,24 +1339,16 @@ class WebAudioManager {
                 return;
             }
 
-
-
-
             await this.loadSingle(key, url);
             this.loadedSounds++;
             if (onProgress) onProgress(this.loadedSounds, this.totalSounds);
         }
 
-
-
-
         this.loadingComplete = true;
     }
 
-
-
-
     async loadSingle(key, url) {
+        if (!this.ctx) return;
         try {
             const response = await fetch(url);
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -1318,11 +1356,9 @@ class WebAudioManager {
             const audioBuffer = await this.ctx.decodeAudioData(arrayBuffer);
             this.buffers[key] = audioBuffer;
         } catch (e) {
+            // Silent fail for missing audio
         }
     }
-
-
-
 
     async loadRemainingAsync(remaining) {
         for (const [key, url] of remaining) {
@@ -1332,19 +1368,15 @@ class WebAudioManager {
         this.loadingComplete = true;
     }
 
-
-
-
     skipLoading() {
         this.loadingSkipped = true;
     }
 
-
-
-
     resumeContext() {
         if (this.ctx && this.ctx.state === 'suspended') {
-            this.ctx.resume();
+            this.ctx.resume().catch(e => {
+                ErrorLog.log('AudioContext resume failed', 'Audio');
+            });
         }
         if (!this.isInitialized) {
             this.playBGM();
@@ -1352,24 +1384,22 @@ class WebAudioManager {
         }
     }
 
-
-
-
     playBGM() {
-        if (!this.buffers.bgm) return;
-        if (this.bgmNode) this.bgmNode.stop();
-        this.bgmNode = this.ctx.createBufferSource();
-        this.bgmNode.buffer = this.buffers.bgm;
-        this.bgmNode.loop = true;
-        const gainNode = this.ctx.createGain();
-        gainNode.gain.value = 0.4; 
-        this.bgmNode.connect(gainNode);
-        gainNode.connect(this.masterGain);
-        this.bgmNode.start(0);
+        if (!this.ctx || !this.buffers.bgm) return;
+        try {
+            if (this.bgmNode) this.bgmNode.stop();
+            this.bgmNode = this.ctx.createBufferSource();
+            this.bgmNode.buffer = this.buffers.bgm;
+            this.bgmNode.loop = true;
+            const gainNode = this.ctx.createGain();
+            gainNode.gain.value = 0.4; 
+            this.bgmNode.connect(gainNode);
+            gainNode.connect(this.masterGain);
+            this.bgmNode.start(0);
+        } catch (e) {
+            ErrorLog.log('BGM play failed', 'Audio');
+        }
     }
-
-
-
 
     stopBGM() {
         if (this.bgmNode) {
@@ -1378,153 +1408,134 @@ class WebAudioManager {
         }
     }
 
-
-
-
     play(key, throttleMs = 0, fixedRate = null) {
         if (!this.ctx) return;
-        if (this.ctx.state === 'suspended') this.ctx.resume();
+        
+        try {
+            if (this.ctx.state === 'suspended') this.ctx.resume();
 
+            const now = Date.now();
+            if (throttleMs > 0) {
+                const lastTime = this.lastPlayTimes[key] || 0;
+                if (now - lastTime < throttleMs) return; 
+                this.lastPlayTimes[key] = now;
+            }
 
+            let bufferKey = key;
+            let volume = 0.6;
+            let playbackRate = fixedRate !== null ? fixedRate : 1.0;
 
+            if (key === 'zap') {
+                const rand = Math.floor(Math.random() * 3) + 1;
+                bufferKey = `zap${rand}`;
+                volume = 0.3 + Math.random() * 0.2; 
+                if (fixedRate === null) playbackRate = 0.85 + Math.random() * 0.3; 
+            } else if (key === 'hit') {
+                const rand = Math.floor(Math.random() * 3) + 1;
+                bufferKey = `hit${rand}`;
+                volume = 0.3;
+                if (fixedRate === null) playbackRate = 0.8 + Math.random() * 0.4; 
+            } else if (key === 'plastic') {
+                bufferKey = Math.random() < 0.5 ? 'plastic1' : 'plastic2';
+                volume = 0.5;
+                if (fixedRate === null) playbackRate = 0.9 + Math.random() * 0.2; 
+            } else if (key === 'metal') {
+                bufferKey = Math.random() < 0.5 ? 'metal1' : 'metal2';
+                volume = 0.5;
+                if (fixedRate === null) playbackRate = 0.9 + Math.random() * 0.2; 
+            } else if (key === 'imp_throw') {
+                bufferKey = Math.random() < 0.5 ? 'imp1' : 'imp2';
+                volume = 0.8;
+                playbackRate = 1.1;
+            } else if (key === 'plant_move') {
+                bufferKey = Math.random() < 0.5 ? 'plant1' : 'plant2';
+                volume = 0.6;
+                if (fixedRate === null) playbackRate = 0.98 + Math.random() * 0.04; 
+            } else if (key === 'button') {
+                volume = 0.8;
+            } else if (key === 'button_buy') {
+                volume = 0.9;
+            } else if (key === 'explosion') {
+                if (!this.buffers.explosion) bufferKey = 'zap1';
+                volume = 0.8;
+            } else if (key === 'meteor_fall') {
+                volume = 0.9;
+                if (fixedRate === null) playbackRate = 0.8 + Math.random() * 0.4; 
+            } else if (key === 'meteor_hit') {
+                bufferKey = Math.random() < 0.5 ? 'meteor_hit1' : 'meteor_hit2';
+                volume = 1.0;
+                if (fixedRate === null) playbackRate = 0.8 + Math.random() * 0.4; 
+            } else if (key === 'siren') {
+                volume = 0.7;
+            } else if (key === 'gun_fire') {
+                volume = 0.4;
+                if (fixedRate === null) playbackRate = 0.9 + Math.random() * 0.2; 
+            } else if (key === 'gun_hit') {
+                volume = 0.5;
+                if (fixedRate === null) playbackRate = 0.8 + Math.random() * 0.4;
+            } else if (key === 'points') {
+                volume = 0.7;
+            } else if (key === 'power_take') {
+                volume = 0.8;
+            } else if (key === 'imp_fall') {
+                volume = 0.9;
+            } else if (key === 'electric') {
+                volume = 0.6;
+                playbackRate = 1.5;
+            } else if (key === 'shield_break') {
+                volume = 1.0;
+            } else if (key === 'shield_on') {
+                volume = 0.8;
+            } else if (key === 'lightning_on') {
+                volume = 0.8;
+            } else if (key === 'mower_on') {
+                volume = 0.8;
+            } else if (key === 'mower_trigger') {
+                volume = 1.0;
+            } else if (key.startsWith('countdown_')) {
+                volume = 1.0;
+                playbackRate = 1.0;
+            } else if (key === 'hp_drop') {
+                volume = 0.9;
+            } else if (key === 'hp_take') {
+                volume = 1.0;
+            } else if (key === 'doom') {
+                volume = 1.0;
+            } else if (key === 'deflect') {
+                volume = 1.2;
+                playbackRate = 1.1;
+            } else if (key === 'beam') {
+                volume = 1.0;
+            } else if (key === 'levelup') {
+                volume = 1.0;
+            } else if (key === 'buzzer') {
+                volume = 1.0;
+            } else if (key === 'no') {
+                volume = 1.0;
+            } else if (key === 'football_tackle') {
+                volume = 1.0;
+            } else if (key === 'gargantuar_smash') {
+                volume = 1.0;
+            }
 
-        const now = Date.now();
-        if (throttleMs > 0) {
-            const lastTime = this.lastPlayTimes[key] || 0;
-            if (now - lastTime < throttleMs) return; 
-            this.lastPlayTimes[key] = now;
+            const buffer = this.buffers[bufferKey];
+            if (!buffer) return;
+
+            const source = this.ctx.createBufferSource();
+            source.buffer = buffer;
+            source.playbackRate.value = playbackRate;
+            const gainNode = this.ctx.createGain();
+            gainNode.gain.value = volume;
+            source.connect(gainNode);
+            gainNode.connect(this.masterGain);
+            source.start(0);
+        } catch (e) {
+            // Silent fail for audio playback errors
         }
-
-
-
-
-        let bufferKey = key;
-        let volume = 0.6;
-        let playbackRate = fixedRate !== null ? fixedRate : 1.0;
-
-
-
-
-        if (key === 'zap') {
-            const rand = Math.floor(Math.random() * 3) + 1;
-            bufferKey = `zap${rand}`;
-            volume = 0.3 + Math.random() * 0.2; 
-            if (fixedRate === null) playbackRate = 0.85 + Math.random() * 0.3; 
-        } else if (key === 'hit') {
-            const rand = Math.floor(Math.random() * 3) + 1;
-            bufferKey = `hit${rand}`;
-            volume = 0.3;
-            if (fixedRate === null) playbackRate = 0.8 + Math.random() * 0.4; 
-        } else if (key === 'plastic') {
-            bufferKey = Math.random() < 0.5 ? 'plastic1' : 'plastic2';
-            volume = 0.5;
-            if (fixedRate === null) playbackRate = 0.9 + Math.random() * 0.2; 
-        } else if (key === 'metal') {
-            bufferKey = Math.random() < 0.5 ? 'metal1' : 'metal2';
-            volume = 0.5;
-            if (fixedRate === null) playbackRate = 0.9 + Math.random() * 0.2; 
-        } else if (key === 'imp_throw') {
-            bufferKey = Math.random() < 0.5 ? 'imp1' : 'imp2';
-            volume = 0.8;
-            playbackRate = 1.1;
-        } else if (key === 'plant_move') {
-            bufferKey = Math.random() < 0.5 ? 'plant1' : 'plant2';
-            volume = 0.6;
-            if (fixedRate === null) playbackRate = 0.98 + Math.random() * 0.04; 
-        } else if (key === 'button') {
-            volume = 0.8;
-        } else if (key === 'button_buy') {
-            volume = 0.9;
-        } else if (key === 'explosion') {
-            if (!this.buffers.explosion) bufferKey = 'zap1';
-            volume = 0.8;
-        } else if (key === 'meteor_fall') {
-            volume = 0.9;
-            if (fixedRate === null) playbackRate = 0.8 + Math.random() * 0.4; 
-        } else if (key === 'meteor_hit') {
-            bufferKey = Math.random() < 0.5 ? 'meteor_hit1' : 'meteor_hit2';
-            volume = 1.0;
-            if (fixedRate === null) playbackRate = 0.8 + Math.random() * 0.4; 
-        } else if (key === 'siren') {
-            volume = 0.7;
-        } else if (key === 'gun_fire') {
-            volume = 0.4;
-            if (fixedRate === null) playbackRate = 0.9 + Math.random() * 0.2; 
-        } else if (key === 'gun_hit') {
-            volume = 0.5;
-            if (fixedRate === null) playbackRate = 0.8 + Math.random() * 0.4;
-        } else if (key === 'points') {
-            volume = 0.7;
-        } else if (key === 'power_take') {
-            volume = 0.8;
-        } else if (key === 'imp_fall') {
-            volume = 0.9;
-        } else if (key === 'electric') {
-            volume = 0.6;
-            playbackRate = 1.5;
-        } else if (key === 'shield_break') {
-            volume = 1.0;
-        } else if (key === 'shield_on') {
-            volume = 0.8;
-        } else if (key === 'lightning_on') {
-            volume = 0.8;
-        } else if (key === 'mower_on') {
-            volume = 0.8;
-        } else if (key === 'mower_trigger') {
-            volume = 1.0;
-        } else if (key.startsWith('countdown_')) {
-            volume = 1.0;
-            playbackRate = 1.0;
-        } else if (key === 'hp_drop') {
-            volume = 0.9;
-        } else if (key === 'hp_take') {
-            volume = 1.0;
-        } else if (key === 'doom') {
-            volume = 1.0;
-        } else if (key === 'deflect') {
-            volume = 1.2;
-            playbackRate = 1.1;
-        } else if (key === 'beam') {
-            volume = 1.0;
-        } else if (key === 'levelup') {
-            volume = 1.0;
-        } else if (key === 'buzzer') {
-            volume = 1.0;
-        } else if (key === 'no') {
-            volume = 1.0;
-        } else if (key === 'football_tackle') {
-            volume = 1.0;
-        } else if (key === 'gargantuar_smash') {
-            volume = 1.0;
-        }
-
-
-
-
-        const buffer = this.buffers[bufferKey];
-        if (!buffer) return;
-
-
-
-
-        const source = this.ctx.createBufferSource();
-        source.buffer = buffer;
-        source.playbackRate.value = playbackRate;
-        const gainNode = this.ctx.createGain();
-        gainNode.gain.value = volume;
-        source.connect(gainNode);
-        gainNode.connect(this.masterGain);
-        source.start(0);
     }
 }
 
-
-
-
 const SM = new WebAudioManager();
-
-
-
 
 /* --- 游戏常量与配置 --- */
 const BG_WIDTH = 1136;
@@ -1534,9 +1545,6 @@ const LAWN_OFFSET_Y = 163;
 const LAWN_WIDTH = 867;
 const LAWN_HEIGHT = 564;
 
-
-
-
 const GRID_COLS = 9;
 const GRID_ROWS = 5;
 const CELL_WIDTH = LAWN_WIDTH / GRID_COLS;
@@ -1544,9 +1552,6 @@ const CELL_HEIGHT = LAWN_HEIGHT / GRID_ROWS;
 const TOP_MARGIN = LAWN_OFFSET_Y;
 const LEFT_MARGIN = LAWN_OFFSET_X;
 const PARRY_WINDOW = 200;
-
-
-
 
 const CONFIG = {
     canvasW: BG_WIDTH,
@@ -1556,23 +1561,26 @@ const CONFIG = {
     passiveUltRate: 0.05, 
     bulletSpeed: 14,
     
-    // --- 修改了这里 ---
-    chainRange: 250,        // 稍微增加范围，更容易找到唯一目标
-    chainCount: 1,          // 严格限制只传导 1 个
-    chainHitCooldown: 500,  // 目标冷却：同一个僵尸 0.5秒内只能被电一次
-    chainSourceCooldown: 1000, // 源头冷却：同一个僵尸 1秒内只能发出一次闪电 (关键优化)
-    // ------------------
+    // 优化后的连锁闪电配置
+    chainRange: 200,
+    chainCount: 1,
+    chainHitCooldown: 800,
+    chainSourceCooldown: 1500,
+    chainGlobalCooldown: 80, // 全局冷却
+    chainMaxPerFrame: 2,     // 每帧最大连锁数
     
     bulletAuraRange: 180, 
     meteorStartWave: 5, 
     meteorMaxWave: 50,
     meteorMaxCount: 20,
     meteorDamage: 500,
-    ultDuration: 2500
+    ultDuration: 2500,
+    
+    // 性能限制
+    maxZombies: 60,
+    maxProjectiles: 100,
+    maxEffects: 80
 };
-
-
-
 
 /* --- 僵尸类型定义 --- */
 const ZOMBIE_TYPES = {
@@ -1619,13 +1627,35 @@ const ZOMBIE_TYPES = {
     }
 };
 
-
-
+/* --- 对象池系统 --- */
+class ObjectPool {
+    constructor(factory, reset, initialSize = 20) {
+        this.factory = factory;
+        this.reset = reset;
+        this.pool = [];
+        
+        for (let i = 0; i < initialSize; i++) {
+            this.pool.push(factory());
+        }
+    }
+    
+    acquire(...args) {
+        let obj = this.pool.pop();
+        if (!obj) {
+            obj = this.factory();
+        }
+        this.reset(obj, ...args);
+        return obj;
+    }
+    
+    release(obj) {
+        if (this.pool.length < 100) { // 限制池大小
+            this.pool.push(obj);
+        }
+    }
+}
 
 /* --- 基础实体类 --- */
-
-
-
 
 class Particle {
     constructor(x, y, color, size, speed) {
@@ -1646,9 +1676,6 @@ class Particle {
     }
 }
 
-
-
-
 class FloatText {
     constructor(text, x, y, color) {
         this.text = text; this.x = x; this.y = y; this.color = color;
@@ -1667,13 +1694,7 @@ class FloatText {
     }
 }
 
-
-
-
 let projectileIdCounter = 0;
-
-
-
 
 class Projectile {
     constructor(x, y, angleOffset, isUlt, stunMode = 0) {
@@ -1715,9 +1736,6 @@ class Projectile {
                 ctx.fillStyle = '#fef08a';
             }
 
-
-
-
             ctx.beginPath(); ctx.arc(0, 0, this.radius, 0, Math.PI*2); ctx.fill();
             ctx.strokeStyle = this.stunMode > 0 ? '#eab308' : '#3b82f6';
             ctx.lineWidth = this.isUlt ? 1 : 2;
@@ -1729,9 +1747,6 @@ class Projectile {
         Sprites.removeSprite(this.id);
     }
 }
-
-
-
 
 class HolyBeam extends Projectile {
     constructor(x, y) {
@@ -1745,9 +1760,6 @@ class HolyBeam extends Projectile {
         this.hitList = []; 
     }
 
-
-
-
     update(dt) {
         this.life -= dt;
         if (this.life <= 0) this.dead = true;
@@ -1757,9 +1769,6 @@ class HolyBeam extends Projectile {
         }
     }
 
-
-
-
     draw(ctx) {
         ctx.save();
         ctx.translate(this.x, this.y);
@@ -1768,24 +1777,15 @@ class HolyBeam extends Projectile {
         const alpha = Math.min(1, progress * 2);
         const flicker = Math.random() * 0.2 + 0.8;
 
-
-
-
         ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
         ctx.shadowBlur = 20;
         ctx.shadowColor = '#fff';
         ctx.fillRect(0, -this.height/4, this.width, this.height/2);
 
-
-
-
         ctx.fillStyle = `rgba(253, 224, 71, ${alpha * 0.6 * flicker})`; 
         ctx.shadowBlur = 40;
         ctx.shadowColor = '#facc15';
         ctx.fillRect(0, -this.height/2, this.width, this.height);
-
-
-
 
         if (Math.random() < 0.5) {
             ctx.fillStyle = '#fff';
@@ -1794,9 +1794,6 @@ class HolyBeam extends Projectile {
             ctx.fillRect(px, py, Math.random()*20 + 10, 2);
         }
 
-
-
-
         ctx.restore();
     }
     
@@ -1804,13 +1801,7 @@ class HolyBeam extends Projectile {
     }
 }
 
-
-
-
 let enemyProjIdCounter = 0;
-
-
-
 
 class EnemyProjectile {
     constructor(x, y, row) {
@@ -1844,9 +1835,6 @@ class EnemyProjectile {
         Sprites.removeSprite(this.id);
     }
 }
-
-
-
 
 class LightningBolt {
     constructor(x1, y1, x2, y2, color, width) {
@@ -1891,9 +1879,6 @@ class LightningBolt {
     }
 }
 
-
-
-
 class ScreenVignette {
     constructor(type) {
         this.type = type;
@@ -1927,9 +1912,6 @@ class ScreenVignette {
     }
 }
 
-
-
-
 class ScreenFlash {
     constructor() {
         this.life = 1.0;
@@ -1946,16 +1928,14 @@ class ScreenFlash {
     }
 }
 
-
-
-
 class AshEffect {
     constructor(x, y) {
         this.x = x;
         this.y = y;
         this.particles = [];
         this.life = 1.0;
-        for(let i=0; i<50; i++) {
+        // 减少粒子数量
+        for(let i=0; i<25; i++) {
             const size = Math.random()*5 + 2;
             this.particles.push({
                 x: (Math.random()-0.5)*30,
@@ -1993,9 +1973,6 @@ class AshEffect {
     }
 }
 
-
-
-
 class MeteorExplosion {
     constructor(x, y) {
         this.x = x;
@@ -2004,7 +1981,8 @@ class MeteorExplosion {
         this.maxLife = 1.0;
         this.particles = [];
         
-        for(let i = 0; i < 30; i++) {
+        // 减少粒子数量
+        for(let i = 0; i < 15; i++) {
             const angle = Math.random() * Math.PI * 2;
             const speed = 2 + Math.random() * 6;
             const isFlame = Math.random() < 0.6;
@@ -2070,9 +2048,6 @@ class MeteorExplosion {
     }
 }
 
-
-
-
 class Meteor {
     constructor(row, col) {
         this.row = row;
@@ -2085,18 +2060,12 @@ class Meteor {
         this.rotation = Math.random() * Math.PI * 2;
     }
 
-
-
-
     update(dt) {
         this.timer -= dt;
         if (this.timer <= 0) {
             this.hasImpacted = true;
         }
     }
-
-
-
 
     draw(ctx) {
         const progress = 1 - (this.timer / this.maxTimer);
@@ -2112,16 +2081,10 @@ class Meteor {
         ctx.arc(0, 0, 40 - progress * 10, 0, Math.PI * 2);
         ctx.stroke();
 
-
-
-
         ctx.fillStyle = `rgba(239, 68, 68, ${alpha * 0.5})`;
         ctx.beginPath();
         ctx.arc(0, 0, 30 * progress, 0, Math.PI * 2);
         ctx.fill();
-
-
-
 
         ctx.strokeStyle = `rgba(239, 68, 68, 0.8)`;
         ctx.lineWidth = 2;
@@ -2130,24 +2093,15 @@ class Meteor {
         ctx.moveTo(0, -10); ctx.lineTo(0, 10);
         ctx.stroke();
 
-
-
-
         if (this.timer <= 500 && this.timer > 0) {
             const dropProgress = 1 - (this.timer / 500);
             const startY = -600; 
             const endY = 0;
             const currentY = startY + (endY - startY) * dropProgress;
 
-
-
-
             ctx.save();
             ctx.translate(0, currentY);
             ctx.rotate(this.rotation);
-
-
-
 
             ctx.fillStyle = '#5d4037';
             ctx.beginPath();
@@ -2161,9 +2115,6 @@ class Meteor {
             ctx.beginPath();
             ctx.arc(5, 8, 6, 0, Math.PI * 2);
             ctx.fill();
-
-
-
 
             ctx.restore();
             
@@ -2186,16 +2137,10 @@ class Meteor {
             ctx.arc(0, 0, 15, Math.PI * 1.3, Math.PI * 1.7, true);
             ctx.fill();
 
-
-
-
             ctx.fillStyle = '#ffcc80';
             ctx.beginPath();
             ctx.arc(-5, -5, 8, 0, Math.PI * 2);
             ctx.fill();
-
-
-
 
             ctx.restore();
             
@@ -2208,20 +2153,11 @@ class Meteor {
             ctx.restore();
         }
 
-
-
-
         ctx.restore();
     }
 }
 
-
-
-
 let mowerIdCounter = 0;
-
-
-
 
 class LawnMower {
     constructor() {
@@ -2234,9 +2170,6 @@ class LawnMower {
         this.dead = false;
     }
 
-
-
-
     update(dt, game) {
         if (this.active) {
             this.x += this.speed * (dt/16);
@@ -2248,18 +2181,12 @@ class LawnMower {
                 }
             });
 
-
-
-
             if (this.x > CONFIG.canvasW + 100) {
                 this.dead = true;
             }
         } else {
             let minX = 99999;
             let targetRow = -1;
-
-
-
 
             game.zombies.forEach(z => {
                 if (!z.isDropping && !z.isDead) {
@@ -2269,9 +2196,6 @@ class LawnMower {
                     }
                 }
             });
-
-
-
 
             if (targetRow !== -1) {
                 this.row = targetRow;
@@ -2285,9 +2209,6 @@ class LawnMower {
                 this.y = targetY;
             }
 
-
-
-
             game.zombies.forEach(z => {
                 if (z.row === this.row && !z.isDropping && !z.isDead) {
                     if (z.x > this.x - 40 && z.x < this.x + 60) {
@@ -2299,9 +2220,6 @@ class LawnMower {
             });
         }
     }
-
-
-
 
     draw(ctx) {
         const rendered = Sprites.updateSprite(this.id, 'mower', this.x, this.y, {
@@ -2320,18 +2238,12 @@ class LawnMower {
             ctx.fillRect(-35, -60, 10, 40);
             ctx.fillRect(-45, -60, 20, 5);
 
-
-
-
             ctx.fillStyle = 'black'; 
             ctx.beginPath(); ctx.arc(-20, -10, 12, 0, Math.PI*2); ctx.fill();
             ctx.beginPath(); ctx.arc(20, -10, 12, 0, Math.PI*2); ctx.fill();
             ctx.fillStyle = '#ccc'; 
             ctx.beginPath(); ctx.arc(-20, -10, 5, 0, Math.PI*2); ctx.fill();
             ctx.beginPath(); ctx.arc(20, -10, 5, 0, Math.PI*2); ctx.fill();
-
-
-
 
             if (this.active) {
                 ctx.fillStyle = '#fbbf24';
@@ -2342,9 +2254,6 @@ class LawnMower {
                 ctx.fill();
             }
 
-
-
-
             ctx.restore();
         }
     }
@@ -2354,13 +2263,7 @@ class LawnMower {
     }
 }
 
-
-
-
 let flyingImpIdCounter = 0;
-
-
-
 
 class FlyingImp {
     constructor(startX, startY, targetX, targetY, row, onLand) {
@@ -2382,9 +2285,6 @@ class FlyingImp {
         this.rotation = 0;
     }
 
-
-
-
     update(dt) {
         this.currentTime += dt;
         this.progress = Math.min(this.currentTime / this.duration, 1);
@@ -2397,17 +2297,11 @@ class FlyingImp {
         
         this.rotation = this.currentTime * 0.01;
 
-
-
-
         if (this.progress >= 1) {
             this.dead = true;
             this.onLand(this.row, this.targetX, this.targetY);
         }
     }
-
-
-
 
     draw(ctx) {
         const rendered = Sprites.updateSprite(this.id, 'imp_walk', this.x, this.y, {
@@ -2436,9 +2330,6 @@ class FlyingImp {
     }
 }
 
-
-
-
 class PFOrb {
     constructor(x, y, targetX, targetY, onComplete) {
         this.x = x;
@@ -2450,16 +2341,10 @@ class PFOrb {
         this.trail = [];
     }
 
-
-
-
     update(dt) {
         const dx = this.targetX - this.x;
         const dy = this.targetY - this.y;
         const dist = Math.hypot(dx, dy);
-
-
-
 
         if (dist < 10) {
             this.onComplete();
@@ -2475,9 +2360,6 @@ class PFOrb {
             if(this.trail[i].life <= 0) this.trail.splice(i, 1);
         }
     }
-
-
-
 
     draw(ctx) {
         ctx.save();
@@ -2497,9 +2379,6 @@ class PFOrb {
     }
 }
 
-
-
-
 class HPOrb {
     constructor(x, y, targetX, targetY, onComplete) {
         this.x = x;
@@ -2511,16 +2390,10 @@ class HPOrb {
         this.trail = [];
     }
 
-
-
-
     update(dt) {
         const dx = this.targetX - this.x;
         const dy = this.targetY - this.y;
         const dist = Math.hypot(dx, dy);
-
-
-
 
         if (dist < 10) {
             this.onComplete();
@@ -2536,9 +2409,6 @@ class HPOrb {
             if(this.trail[i].life <= 0) this.trail.splice(i, 1);
         }
     }
-
-
-
 
     draw(ctx) {
         ctx.save();
@@ -2557,9 +2427,6 @@ class HPOrb {
     }
 }
 
-
-
-
 class DoomSeed {
     constructor(x, y, targetX, targetY, onComplete) {
         this.x = x;
@@ -2571,16 +2438,10 @@ class DoomSeed {
         this.trail = [];
     }
 
-
-
-
     update(dt) {
         const dx = this.targetX - this.x;
         const dy = this.targetY - this.y;
         const dist = Math.hypot(dx, dy);
-
-
-
 
         if (dist < 15) {
             this.onComplete();
@@ -2596,9 +2457,6 @@ class DoomSeed {
             if(this.trail[i].life <= 0) this.trail.splice(i, 1);
         }
     }
-
-
-
 
     draw(ctx) {
         ctx.save();
@@ -2617,15 +2475,9 @@ class DoomSeed {
         ctx.lineWidth = 4;
         ctx.beginPath(); ctx.arc(this.x, this.y, 25 + pulse, 0, Math.PI*2); ctx.stroke();
 
-
-
-
         ctx.restore();
     }
 }
-
-
-
 
 class LevelUpEffect {
     constructor(x, y) {
@@ -2650,9 +2502,6 @@ class LevelUpEffect {
         ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.8})`;
         ctx.fillRect(-10, -1000, 20, 1000);
 
-
-
-
         ctx.strokeStyle = `rgba(250, 204, 21, ${alpha})`;
         ctx.lineWidth = 5;
         ctx.beginPath();
@@ -2664,13 +2513,7 @@ class LevelUpEffect {
     }
 }
 
-
-
-
 /* --- 复杂实体类 --- */
-
-
-
 
 let zIdCounter = 0;
 class Zombie {
@@ -2690,9 +2533,6 @@ class Zombie {
         }
         this.hp = type.hp * hpMultiplier;
         this.maxHp = this.hp;
-
-
-
 
         this.speed = type.speed * (0.9 + Math.random() * 0.2);
         
@@ -2715,39 +2555,31 @@ class Zombie {
         this.targetY = 0;
         this.dropSpeed = 0.3; 
 
-
-
-
         this.shootTimer = 2000 + Math.random() * 2000;
         this.isShooting = false;
         this.shootAnimTimer = 0;
         this.stunTimer = 0; 
         
-        // 足球僵尸状态
         if (this.type.id === 'FOOTBALL') {
-            this.footballState = 'charging'; // 'charging', 'attacking', 'walking'
+            this.footballState = 'charging';
             this.chargeSpeed = type.chargeSpeed || 0.25;
             this.walkSpeed = type.walkSpeed || 0.08;
             this.speed = this.chargeSpeed;
             this.attackTimer = 0;
-            this.attackDuration = 1100; // 1.1秒攻击动画
+            this.attackDuration = 1100;
         }
         
-        // 巨人僵尸状态
         if (this.type.id === 'GIANT') {
-            this.giantState = 'walking'; // 'walking', 'attacking', 'throwing'
+            this.giantState = 'walking';
             this.attackTimer = 0;
-            this.attackDuration = 1500; // 0.6秒前摇 + 1秒后摇
-            this.damageDelay = 600; // 0.6秒后造成伤害
+            this.attackDuration = 1500;
+            this.damageDelay = 600;
             this.hasDealtAttackDamage = false;
             this.throwTimer = 0;
-            this.throwDuration = 1100; // 1.1秒投掷动画
-            this.attackCooldown = 0; // 新增：攻击冷却计时器
+            this.throwDuration = 1100;
+            this.attackCooldown = 0;
         }
     }
-
-
-
 
     update(dt, game) {
         if (!this.isDead) {
@@ -2755,7 +2587,6 @@ class Zombie {
                 this.stunTimer -= dt;
                 return; 
             }
-
 
             this.animTime += dt * 0.005 * (1 + this.speed * 5);
             
@@ -2767,9 +2598,6 @@ class Zombie {
                 }
             }
 
-
-
-
             if (this.isDropping) {
                 this.y += this.dropSpeed * dt;
                 if (this.y >= this.targetY) {
@@ -2778,13 +2606,11 @@ class Zombie {
                     game.addEffect(new Particle(this.x, this.y + 40, '#aaa', 20, 3)); 
                 }
             } else {
-                // 足球僵尸逻辑
                 if (this.type.id === 'FOOTBALL') {
                     this.updateFootball(dt, game);
                     return;
                 }
                 
-                // 巨人僵尸逻辑
                 if (this.type.id === 'GIANT') {
                     this.updateGiant(dt, game);
                     return;
@@ -2793,9 +2619,6 @@ class Zombie {
                 if (this.type.id !== 'GUNNER') {
                     this.x -= this.speed * dt;
                 }
-
-
-
 
                 if (this.type.id === 'GUNNER') {
                     this.shootTimer -= dt;
@@ -2814,7 +2637,6 @@ class Zombie {
     updateFootball(dt, game) {
         const heroPlant = game.heroPlant;
         
-        // 攻击状态：播放动画，不移动
         if (this.footballState === 'attacking') {
             this.attackTimer += dt;
             
@@ -2823,20 +2645,16 @@ class Zombie {
                 this.speed = this.walkSpeed;
                 this.attackTimer = 0;
             }
-            return; // 攻击期间不移动
+            return;
         }
         
-        // 移动
         this.x -= this.speed * dt;
         
-        // 冲刺状态检测攻击：同格或面前1格有植物立即造成伤害
         if (this.footballState === 'charging' && heroPlant && heroPlant.row === this.row) {
             const dist = this.x - heroPlant.x;
-            // 同格或面前1格：距离在 -0.2格 到 1.2格 之间
             if (dist > -CELL_WIDTH * 0.2 && dist < CELL_WIDTH * 1.2) {
                 this.footballState = 'attacking';
                 this.attackTimer = 0;
-                // 立即造成伤害
                 SM.play('football_tackle');
                 game.playerHit();
             }
@@ -2846,19 +2664,15 @@ class Zombie {
     updateGiant(dt, game) {
         const heroPlant = game.heroPlant;
         
-        // 更新攻击冷却
         if (this.attackCooldown > 0) {
             this.attackCooldown -= dt;
         }
         
-        // --- 状态 1: 攻击 ---
         if (this.giantState === 'attacking') {
             this.attackTimer += dt;
             
-            // 0.5秒后造成伤害
             if (!this.hasDealtAttackDamage && this.attackTimer >= this.damageDelay) {
                 this.hasDealtAttackDamage = true;
-                // 检查玩家是否还在面前1格
                 if (heroPlant && heroPlant.row === this.row) {
                     const dist = this.x - heroPlant.x;
                     if (dist > CELL_WIDTH * 0.2 && dist < CELL_WIDTH * 1.3) {
@@ -2871,32 +2685,27 @@ class Zombie {
                 game.addEffect(new Particle(this.x - 30, this.y, '#8B4513', 30, 8));
             }
             
-            // 攻击动画结束
             if (this.attackTimer >= this.attackDuration) {
-                this.giantState = 'walking'; // 强制切回行走
+                this.giantState = 'walking';
                 this.attackTimer = 0;
                 this.hasDealtAttackDamage = false;
-                this.attackCooldown = 2000; // 增加冷却时间，防止连续鬼畜攻击
+                this.attackCooldown = 2000;
             }
-            return; // 攻击期间不执行移动逻辑
+            return;
         }
         
-        // --- 状态 2: 投掷小鬼 ---
         if (this.giantState === 'throwing') {
             this.throwTimer += dt;
             if (this.throwTimer >= this.throwDuration) {
-                this.giantState = 'walking'; // 投掷结束，切回行走
+                this.giantState = 'walking';
                 this.throwTimer = 0;
-                this.attackCooldown = 1500; // 投掷后给予较长的冷却
+                this.attackCooldown = 1500;
             }
-            return; // 投掷期间不执行移动逻辑
+            return;
         }
         
-        // --- 状态 3: 行走 ---
         this.x -= this.speed * dt;
         
-        // 检测是否需要投掷小鬼（血量低于50%且还未投掷）
-        // 增加 x > thresholdX 判断，防止刚出门就扔
         const thresholdX = LEFT_MARGIN + 5 * CELL_WIDTH;
         if (!this.hasThrownImp && this.hp < this.maxHp * 0.5 && this.x > thresholdX) {
             this.hasThrownImp = true;
@@ -2906,10 +2715,8 @@ class Zombie {
             return;
         }
         
-        // 检测是否需要攻击（玩家在面前1格，且冷却结束）
         if (this.attackCooldown <= 0 && heroPlant && heroPlant.row === this.row) {
             const dist = this.x - heroPlant.x;
-            // 面前1格范围判定
             if (dist > CELL_WIDTH * 0.2 && dist < CELL_WIDTH * 1.3) {
                 this.giantState = 'attacking';
                 this.attackTimer = 0;
@@ -2920,21 +2727,13 @@ class Zombie {
         }
     }
 
-
-
     applyStun(duration) {
         if (this.isDead || this.isDropping) return;
         this.stunTimer = Math.max(this.stunTimer, duration);
     }
 
-
-
-
     takeDamage(amount, game, damageType) {
         if (this.isDead || this.isDropping) return; 
-
-
-
 
         if (this.type.id === 'PHANTOM') {
             if (damageType === 'direct') {
@@ -2944,17 +2743,11 @@ class Zombie {
             }
         }
 
-
-
-
         if (this.type.id === 'GUNNER') {
             if (damageType === 'aura' || damageType === 'chain') {
                 return;
             }
         }
-
-
-
 
         this.hp -= amount;
         
@@ -2967,9 +2760,6 @@ class Zombie {
             }
         }
 
-
-
-
         if (this.hp <= 0) {
             this.isDead = true;
             game.addScore(this.type.score);
@@ -2978,18 +2768,11 @@ class Zombie {
         }
     }
 
-
-
-
     draw(ctx) {
         if (this.isDead) return;
 
-
-
-
         const sway = Math.sin(this.animTime) * 5;
         
-        // 确定精灵key
         let spriteKey = this.type.spriteKey;
         
         if (this.type.id === 'FOOTBALL') {
@@ -3005,14 +2788,13 @@ class Zombie {
                 spriteKey = this.hasThrownImp ? 'gargantuar_attack_no_imp' : 'gargantuar_attack';
             } else if (this.giantState === 'throwing') {
                 spriteKey = 'gargantuar_throw';
-            } else { // walking
+            } else {
                 spriteKey = this.hasThrownImp ? 'gargantuar_walk_no_imp' : 'gargantuar_walk';
             }
         } else if (this.type.id === 'GUNNER') {
             spriteKey = this.isShooting ? 'shooter_shoot' : 'shooter_idle';
         }
         
-        // 构建filter
         let filter = '';
         if (this.hitFlash > 0) {
             filter = 'brightness(2)';
@@ -3033,13 +2815,9 @@ class Zombie {
         });
         
         if (!rendered) {
-            // 回退到Canvas渲染
             ctx.save();
             ctx.translate(this.x, this.y);
             ctx.scale(this.scale, this.scale); 
-
-
-
 
             if (this.isDropping) {
                 ctx.save();
@@ -3056,9 +2834,6 @@ class Zombie {
                 ctx.restore();
             }
 
-
-
-
             ctx.rotate(sway * 0.02);
             
             if (this.type.id === 'PHANTOM') {
@@ -3067,9 +2842,6 @@ class Zombie {
                 ctx.globalAlpha = 0.6; 
             }
 
-
-
-
             ctx.fillStyle = this.type.color; 
             ctx.fillRect(-15, -50, 30, 50);
             
@@ -3077,18 +2849,12 @@ class Zombie {
             if (this.hitFlash > 0) { ctx.fillStyle = 'white'; this.hitFlash--; }
             ctx.beginPath(); ctx.arc(0, -65, 20, 0, Math.PI*2); ctx.fill();
 
-
-
-
             ctx.fillStyle = 'white';
             ctx.beginPath(); ctx.arc(-6, -70, 6, 0, Math.PI*2); ctx.fill();
             ctx.beginPath(); ctx.arc(8, -70, 6, 0, Math.PI*2); ctx.fill();
             ctx.fillStyle = 'black';
             ctx.beginPath(); ctx.arc(-6, -70, 2, 0, Math.PI*2); ctx.fill();
             ctx.beginPath(); ctx.arc(8, -70, 2, 0, Math.PI*2); ctx.fill();
-
-
-
 
             if (this.type.accessory === 'cone') {
                 if (this.hp > this.maxHp * 0.3) {
@@ -3113,13 +2879,9 @@ class Zombie {
                 ctx.fillRect(-25, -45, 20, 8); 
             }
 
-
-
-
             ctx.restore();
         }
         
-        // 绘制眩晕效果和血条 (始终用Canvas)
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.scale(this.scale, this.scale);
@@ -3138,15 +2900,9 @@ class Zombie {
             ctx.restore();
         }
 
-
-
-
         const pct = Math.max(0, this.hp / this.maxHp);
         ctx.fillStyle = 'red'; ctx.fillRect(-20, -90, 40, 5);
         ctx.fillStyle = '#22c55e'; ctx.fillRect(-20, -90, 40*pct, 5);
-
-
-
 
         ctx.restore();
     }
@@ -3155,9 +2911,6 @@ class Zombie {
         Sprites.removeSprite(this.id);
     }
 }
-
-
-
 
 class Plant {
     constructor(row, col, x, y) {
@@ -3194,9 +2947,6 @@ class Plant {
         this.fireAnimTimer = 0;
     }
 
-
-
-
     update(dt, hasEnemy, game) {
         if (this.recoil > 0) this.recoil -= dt * 0.1;
         if (this.invincibleTimer > 0) this.invincibleTimer -= dt;
@@ -3213,18 +2963,12 @@ class Plant {
         if (this.stunBuffTimer > 0) {
             this.stunBuffTimer -= dt;
 
-
-
-
             const currentSec = Math.ceil(this.stunBuffTimer / 1000);
             
             if (currentSec < this.lastBuffSec && currentSec >= 1) {
                 SM.play(`countdown_${currentSec}`);
                 this.lastBuffSec = currentSec;
             }
-
-
-
 
             if (this.stunBuffTimer <= 0) {
                 this.stunBuffTimer = 0;
@@ -3237,18 +2981,12 @@ class Plant {
         if (this.domeTimer > 0) {
             this.domeTimer -= dt;
 
-
-
-
             const currentSec = Math.ceil(this.domeTimer / 1000);
             
             if (currentSec < this.domeLastSec && currentSec >= 1) {
                 SM.play(`countdown_${currentSec}`);
                 this.domeLastSec = currentSec;
             }
-
-
-
 
             if (this.domeTimer <= 0) {
                 this.domeTimer = 0;
@@ -3257,9 +2995,6 @@ class Plant {
         } else {
             this.domeLastSec = 0;
         }
-
-
-
 
         if (this.isUltimating) {
             this.ultTimer += dt;
@@ -3276,7 +3011,10 @@ class Plant {
                 const hasBuff = this.stunBuffTimer > 0;
                 const stunMode = (isMaxLevel || hasBuff) ? 2 : 0; 
                 
-                game.projectiles.push(new Projectile(this.x + 40, this.y - 20, angle, true, stunMode));
+                // 限制子弹数量
+                if (game.projectiles.length < CONFIG.maxProjectiles) {
+                    game.projectiles.push(new Projectile(this.x + 40, this.y - 20, angle, true, stunMode));
+                }
             }
             if (this.ultTimer > CONFIG.ultDuration) { 
                 this.isUltimating = false;
@@ -3291,22 +3029,13 @@ class Plant {
             return;
         }
 
-
-
-
         this.cooldown += dt; 
-
-
-
 
         if (hasEnemy) {
             while (this.cooldown >= this.interval) {
                 this.cooldown -= this.interval; 
                 
                 const currentPassiveRate = CONFIG.passiveUltRate + (this.level * 0.01);
-
-
-
 
                 if (Math.random() < currentPassiveRate) {
                     this.startUlt(game);
@@ -3318,9 +3047,6 @@ class Plant {
                     this.burstQueue += (this.baseShots + this.level);
                 }
             }
-
-
-
 
             if (this.burstQueue > 0) {
                 this.burstTimer += dt;
@@ -3336,9 +3062,6 @@ class Plant {
         }
     }
 
-
-
-
     startUlt(game) {
         this.isUltimating = true;
         this.ultTimer = 0;
@@ -3348,16 +3071,10 @@ class Plant {
         this.ultUseCount++;
         const oldLevel = this.level;
 
-
-
-
         let newLevel = 1;
         if (this.ultUseCount >= 20) newLevel = 4;
         else if (this.ultUseCount >= 10) newLevel = 3;
         else if (this.ultUseCount >= 3) newLevel = 2;
-
-
-
 
         if (newLevel > oldLevel) {
             this.level = newLevel;
@@ -3372,9 +3089,6 @@ class Plant {
         }
     }
 
-
-
-
     shoot(game) {
         this.recoil = 8;
         this.isFiring = true;
@@ -3384,23 +3098,18 @@ class Plant {
         if (this.stunBuffTimer > 0) stunMode = 2;
         else if (this.level >= 4) stunMode = 1;
 
-
-
-
-        game.projectiles.push(new Projectile(this.x + 40, this.y - 20, 0, false, stunMode));
+        if (game.projectiles.length < CONFIG.maxProjectiles) {
+            game.projectiles.push(new Projectile(this.x + 40, this.y - 20, 0, false, stunMode));
+        }
     }
     
     takeDamage() {
         this.damageTimer = 300;
     }
 
-
-
-
     draw(ctx) {
         const drawX = this.x - this.recoil;
         
-        // 确定精灵状态
         let spriteState = 'idle';
         if (this.damageTimer > 0) {
             spriteState = 'damage';
@@ -3412,18 +3121,13 @@ class Plant {
         
         const spriteKey = `player_${spriteState}_lv${this.level}`;
         
-        // 使用DOM精灵渲染
         const rendered = Sprites.updateSprite(this.id, spriteKey, drawX, this.y + 20, {
             scale: 1.0,
             zIndex: Math.floor(this.y) + 10
         });
         
-        // 绘制Canvas特效（等级标记、buff光环、大招进度条等）
         ctx.save();
         ctx.translate(drawX, this.y);
-
-
-
 
         if (this.level > 1) {
             ctx.lineWidth = 3;
@@ -3431,15 +3135,9 @@ class Plant {
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
 
-
-
-
             const rankCount = this.level - 1;
             const startY = -55; 
             const gap = 6;
-
-
-
 
             for (let i = 0; i < rankCount; i++) {
                 const y = startY - (i * gap);
@@ -3451,9 +3149,6 @@ class Plant {
             }
         }
 
-
-
-
         if (this.stunBuffTimer > 0) {
             const t = Date.now() * 0.01;
             ctx.strokeStyle = `rgba(250, 204, 21, ${0.5 + Math.sin(t)*0.3})`;
@@ -3462,9 +3157,6 @@ class Plant {
             ctx.arc(0, -20, 35, 0, Math.PI*2);
             ctx.stroke();
         }
-
-
-
 
         if (this.isUltimating) {
             const remaining = Math.max(0, 1 - (this.ultTimer / CONFIG.ultDuration));
@@ -3496,7 +3188,6 @@ class Plant {
             ctx.lineWidth = 1;
             ctx.strokeRect(barX - 1, barY - 1, barWidth + 2, barHeight + 2);
             
-            // 大招光环
             const pulse = (Math.sin(this.ultTimer * 0.01) + 1) / 2; 
             const auraSize = 55 + pulse * 15;
             const alpha = 0.2 + pulse * 0.3;
@@ -3507,15 +3198,11 @@ class Plant {
             ctx.beginPath(); ctx.arc(0, -20, auraSize, 0, Math.PI*2); ctx.fill();
         }
         
-        // 如果DOM精灵渲染失败，回退到Canvas
         if (!rendered) {
             ctx.fillStyle = 'rgba(0,0,0,0.3)';
             if (!this.isUltimating) { 
                 ctx.beginPath(); ctx.ellipse(0, 20, 25, 8, 0, 0, Math.PI*2); ctx.fill();
             }
-
-
-
 
             ctx.fillStyle = this.isUltimating ? '#3b82f6' : '#16a34a'; 
             ctx.beginPath(); ctx.arc(0, -20, 25, 0, Math.PI*2); ctx.fill();
@@ -3555,15 +3242,9 @@ class Plant {
             }
         }
 
-
-
-
         ctx.restore();
     }
 }
-
-
-
 
 /* --- 核心游戏类 --- */
 class Game {
@@ -3574,15 +3255,18 @@ class Game {
         this.canvas.height = CONFIG.canvasH;
         
         Sprites.init('sprite-layer');
+        PerfMonitor.init();
         
         this.fitScreen();
         window.addEventListener('resize', () => this.fitScreen());
 
-
-
-
         this.heroPlant = null;
-        this.pendingGiantAttacks = []; // 用于追踪巨人攻击的闪避判定
+        this.pendingGiantAttacks = [];
+        
+        // 连锁闪电状态
+        this.chainsCalculatedThisFrame = 0;
+        this.lastGlobalChainTime = 0;
+        
         this.initGame();
         this.bindInputs();
         
@@ -3590,11 +3274,7 @@ class Game {
         requestAnimationFrame(this.loop);
     }
 
-
-
-
     initGame() {
-        // 清除所有精灵
         Sprites.clearAll();
         
         this.state = {
@@ -3608,13 +3288,7 @@ class Game {
             hasShownOverflowBanner: false
         };
 
-
-
-
         this.paused = false;
-
-
-
 
         this.score = 0;
         this.combo = 0;
@@ -3628,9 +3302,6 @@ class Game {
             this.highScore = 0;
             this.maxCombo = 0;
         }
-
-
-
 
         this.grid = []; 
         for(let r=0; r<GRID_ROWS; r++) {
@@ -3651,14 +3322,8 @@ class Game {
         this.shakeTimer = 0;
         this.shakeOffset = {x: 0, y: 0};
 
-
-
-
         this.lastTime = performance.now();
         this.waveTotalMaxHp = 0; 
-
-
-
 
         this.heroPlant = null; 
         this.moveHeroTo(2, 2, true); 
@@ -3671,9 +3336,6 @@ class Game {
         document.getElementById('overflow-banner').style.display = 'none';
     }
 
-
-
-
     reset() {
         const goScreen = document.getElementById('game-over-screen');
         goScreen.style.display = 'none';
@@ -3684,9 +3346,6 @@ class Game {
         SM.playBGM(); 
         this.initGame();
     }
-
-
-
 
     togglePause() {
         if (this.state.gameOver) return;
@@ -3700,9 +3359,6 @@ class Game {
             this.pauseStartTime = Date.now();
         }
     }
-
-
-
 
     fitScreen() {
         const aspect = CONFIG.canvasW / CONFIG.canvasH;
@@ -3718,7 +3374,6 @@ class Game {
         this.canvas.style.height = `${CONFIG.canvasH * scale}px`;
         this.scaleFactor = scale;
         
-        // 更新精灵层尺寸
         const spriteLayer = document.getElementById('sprite-layer');
         if (spriteLayer) {
             spriteLayer.style.width = `${CONFIG.canvasW * scale}px`;
@@ -3727,12 +3382,8 @@ class Game {
             spriteLayer.style.top = this.canvas.offsetTop + 'px';
         }
         
-        // 更新SpriteManager的缩放信息
         Sprites.updateCanvasInfo(this.canvas.getBoundingClientRect(), scale);
     }
-
-
-
 
     bindInputs() {
         const unlockAudio = () => {
@@ -3743,17 +3394,11 @@ class Game {
         window.addEventListener('click', unlockAudio);
         window.addEventListener('keydown', unlockAudio);
 
-
-
-
         this.canvas.addEventListener('mousedown', (e) => {
             if (this.state.gameOver || this.paused) return;
             const rect = this.canvas.getBoundingClientRect();
             const x = (e.clientX - rect.left) / this.scaleFactor;
             const y = (e.clientY - rect.top) / this.scaleFactor;
-
-
-
 
             if (x > LEFT_MARGIN && y > TOP_MARGIN) {
                 const c = Math.floor((x - LEFT_MARGIN) / CELL_WIDTH);
@@ -3765,15 +3410,9 @@ class Game {
             }
         });
 
-
-
-
         document.getElementById('next-wave-btn').addEventListener('click', () => {
             if (!this.paused) this.startNextWave("BUTTON");
         });
-
-
-
 
         document.getElementById('restart-btn').addEventListener('click', () => {
             SM.play('button'); 
@@ -3787,16 +3426,10 @@ class Game {
             });
         });
 
-
-
-
         document.getElementById('btn-shield').addEventListener('click', () => { if(!this.paused) this.buyShield(); });
         document.getElementById('btn-stun').addEventListener('click', () => { if(!this.paused) this.buyStun(); });
         document.getElementById('btn-dome').addEventListener('click', () => { if(!this.paused) this.buyDome(); });
         document.getElementById('btn-mower').addEventListener('click', () => { if(!this.paused) this.buyMower(); });
-
-
-
 
         window.addEventListener('keydown', (e) => {
             if (e.code === 'KeyR') {
@@ -3808,13 +3441,7 @@ class Game {
                 return;
             }
 
-
-
-
             if (this.state.gameOver || this.paused) return;
-
-
-
 
             if (this.heroPlant) {
                 let r = this.heroPlant.row;
@@ -3833,9 +3460,6 @@ class Game {
                 }
             }
 
-
-
-
             if (e.code === 'Space') this.tryUsePlantFood();
             else if (e.code === 'KeyN') {
                 if (document.getElementById('next-wave-btn').style.display === 'flex') {
@@ -3848,9 +3472,6 @@ class Game {
             else if (e.code === 'Digit4') this.buyMower(); 
         });
     }
-
-
-
 
     tryUsePlantFood() {
         if (this.state.gameOver || !this.heroPlant) return;
@@ -3871,9 +3492,6 @@ class Game {
         this.usePlantFood(this.heroPlant);
     }
 
-
-
-
     usePlantFood(plant) {
         if (plant.isUltimating) return;
         SM.play('use_power');
@@ -3882,9 +3500,6 @@ class Game {
         plant.startUlt(this);
         this.addEffect(new FloatText("POWER UP!", plant.x, plant.y - 40, "#4ade80"));
     }
-
-
-
 
     recoverLife() {
         SM.play('hp_drop');
@@ -3896,24 +3511,15 @@ class Game {
         const targetEl = document.getElementById(targetId);
         if (!targetEl) return;
 
-
-
-
         const rect = targetEl.getBoundingClientRect();
         const canvasRect = this.canvas.getBoundingClientRect();
         const targetX = (rect.left - canvasRect.left + rect.width/2) / this.scaleFactor;
         const targetY = (rect.top - canvasRect.top + rect.height/2) / this.scaleFactor;
 
-
-
-
         this.addEffect(new HPOrb(this.heroPlant.x, this.heroPlant.y, targetX, targetY, () => {
             this.onHPOrbArrive();
         }));
     }
-
-
-
 
     onHPOrbArrive() {
         if (this.state.lives < 3) {
@@ -3926,15 +3532,9 @@ class Game {
         }
     }
 
-
-
-
     triggerDoomSequence() {
         const hearts = document.querySelectorAll('.heart');
         hearts.forEach(h => h.classList.add('glowing'));
-
-
-
 
         const startEl = document.getElementById('lives-container');
         const rect = startEl.getBoundingClientRect();
@@ -3942,23 +3542,14 @@ class Game {
         const startX = (rect.left - canvasRect.left + rect.width/2) / this.scaleFactor;
         const startY = (rect.top - canvasRect.top + rect.height/2) / this.scaleFactor;
 
-
-
-
         const centerX = CONFIG.canvasW / 2;
         const centerY = CONFIG.canvasH / 2;
-
-
-
 
         this.addEffect(new DoomSeed(startX, startY, centerX, centerY, () => {
             hearts.forEach(h => h.classList.remove('glowing'));
             this.triggerScreenClear();
         }));
     }
-
-
-
 
     triggerScreenClear() {
         SM.play('doom'); 
@@ -3968,9 +3559,6 @@ class Game {
         this.addEffect(new ScreenFlash());
         this.addEffect(new FloatText("DOOM!", CONFIG.canvasW/2, CONFIG.canvasH/2, "#fff"));
 
-
-
-
         this.zombies.forEach(z => {
             if (!z.isDead) {
                 z.takeDamage(99999, this, 'direct');
@@ -3978,9 +3566,6 @@ class Game {
             }
         });
     }
-
-
-
 
     buyShield() {
         if (this.state.pfCount >= 2 && !this.hasShield && !this.state.gameOver) {
@@ -3995,9 +3580,6 @@ class Game {
         }
     }
 
-
-
-
     buyMower() {
         if (this.state.pfCount >= 5 && !this.lawnMower && !this.state.gameOver) {
             this.state.pfCount -= 5;
@@ -4010,9 +3592,6 @@ class Game {
             SM.play('buzzer');
         }
     }
-
-
-
 
     buyStun() {
         if (this.state.pfCount >= 2 && !this.state.gameOver && this.heroPlant) {
@@ -4028,9 +3607,6 @@ class Game {
         }
     }
 
-
-
-
     buyDome() {
         if (this.state.pfCount >= 3 && !this.state.gameOver && this.heroPlant) {
             this.state.pfCount -= 3;
@@ -4045,10 +3621,6 @@ class Game {
         }
     }
 
-
-
-
-    // 注册巨人攻击用于闪避判定
     registerGiantAttack(giant) {
         this.pendingGiantAttacks.push({
             zombie: giant,
@@ -4058,27 +3630,17 @@ class Game {
         });
     }
 
-
-
-
     moveHeroTo(r, c, silent = false) {
         if (this.heroPlant && this.heroPlant.row === r && this.heroPlant.col === c) {
             return;
         }
 
-
-
-
         if (!silent) {
             SM.play('plant_move');
         }
 
-
-
-
         let isPerfectDodge = false;
         if (this.heroPlant) {
-            // 检查陨石闪避
             const threateningMeteor = this.meteors.find(m => 
                 m.row === this.heroPlant.row && 
                 m.col === this.heroPlant.col && 
@@ -4086,14 +3648,10 @@ class Game {
                 m.timer > 0
             );
 
-
-
-
             if (threateningMeteor) {
                 isPerfectDodge = true;
             }
             
-            // 检查巨人攻击闪避
             const threateningGiant = this.pendingGiantAttacks.find(atk => {
                 if (atk.zombie.isDead) return false;
                 const elapsed = Date.now() - atk.startTime;
@@ -4107,9 +3665,6 @@ class Game {
                 isPerfectDodge = true;
             }
         }
-
-
-
 
         if (this.heroPlant) {
             const oldRow = this.heroPlant.row;
@@ -4132,16 +3687,10 @@ class Game {
         }
         this.grid[r][c] = this.heroPlant;
 
-
-
-
         if (isPerfectDodge) {
             this.triggerPerfectDodge();
         }
     }
-
-
-
 
     triggerPerfectDodge() {
         SM.play('deflect');
@@ -4151,21 +3700,12 @@ class Game {
         this.addEffect(new FloatText("完美闪避!", this.heroPlant.x, this.heroPlant.y - 80, "#fef08a"));
         this.shakeTimer = 400;
 
-
-
-
         if(this.heroPlant) {
             this.heroPlant.invincibleTimer = 300;
         }
 
-
-
-
         this.projectiles.push(new HolyBeam(this.heroPlant.x + 40, this.heroPlant.y));
     }
-
-
-
 
     startWave() {
         this.state.lastWaveTime = Date.now();
@@ -4174,9 +3714,6 @@ class Game {
         
         SM.play('huge_wave');
         SM.play('siren'); 
-
-
-
 
         let themeZombie = null;
         let themeText = "";
@@ -4189,17 +3726,11 @@ class Game {
             if (this.state.wave >= 15) possibleThemes.push(ZOMBIE_TYPES.GUNNER);
             if (this.state.wave >= 15) possibleThemes.push(ZOMBIE_TYPES.GIANT);
 
-
-
-
             if (possibleThemes.length > 0) {
                 themeZombie = possibleThemes[Math.floor(Math.random() * possibleThemes.length)];
                 themeText = `\n${themeZombie.name} RUSH`;
             }
         }
-
-
-
 
         if (this.state.wave === CONFIG.meteorStartWave) {
             this.showToast("METEOR INCOMING!");
@@ -4233,18 +3764,12 @@ class Game {
             }
         }
 
-
-
-
         let rawDifficulty = 10 + this.state.wave * 8 + Math.pow(this.state.wave, 1.65);
         const maxDifficulty = 800; 
         const waveDifficulty = Math.min(rawDifficulty, maxDifficulty);
         
         let currentDifficulty = 0;
         const spawnList = [];
-
-
-
 
         const pool = [];
         pool.push({ type: ZOMBIE_TYPES.BASIC, weight: 50 });
@@ -4255,9 +3780,6 @@ class Game {
         if (this.state.wave >= 3) pool.push({ type: ZOMBIE_TYPES.PHANTOM, weight: 30 });
         if (this.state.wave >= 15) pool.push({ type: ZOMBIE_TYPES.GUNNER, weight: 15 });
 
-
-
-
         if (themeZombie) {
             pool.forEach(item => {
                 if (item.type.id === themeZombie.id) {
@@ -4266,26 +3788,19 @@ class Game {
             });
         }
 
-
-
-
         const pickZombie = () => {
-            const totalWeight = pool.reduce((a, b) => a + b.weight, 0);
-            let r = Math.random() * totalWeight;
-            for (let item of pool) {
-                if (r < item.weight) return item.type;
-                r -= item.weight;
-            }
-            return ZOMBIE_TYPES.BASIC;
+            // const totalWeight = pool.reduce((a, b) => a + b.weight, 0);
+            // let r = Math.random() * totalWeight;
+            // for (let item of pool) {
+            //     if (r < item.weight) return item.type;
+            //     r -= item.weight;
+            // }
+            // return ZOMBIE_TYPES.BASIC;
+
+            return ZOMBIE_TYPES.GIANT;
         };
 
-
-
-
-        const MAX_ZOMBIES_PER_WAVE = 50;
-
-
-
+        const MAX_ZOMBIES_PER_WAVE = CONFIG.maxZombies;
 
         while (currentDifficulty < waveDifficulty && spawnList.length < MAX_ZOMBIES_PER_WAVE) {
             const type = pickZombie();
@@ -4294,9 +3809,6 @@ class Game {
         }
         
         spawnList.sort(() => Math.random() - 0.5);
-
-
-
 
         let gunnerCount = 0;
         for (let i = 0; i < spawnList.length; i++) {
@@ -4308,13 +3820,7 @@ class Game {
             }
         }
 
-
-
-
         this.waveTotalMaxHp = 0;
-
-
-
 
         spawnList.forEach(type => {
             const r = Math.floor(Math.random() * GRID_ROWS);
@@ -4334,14 +3840,8 @@ class Game {
             this.zombies.push(z);
         });
 
-
-
-
         this.updateUI();
     }
-
-
-
 
     startNextWave(reason) {
         if (this.state.gameOver) return;
@@ -4349,9 +3849,6 @@ class Game {
         this.startWave();
         this.addEffect(new FloatText(reason === "BUTTON" ? "RUSH!" : "NEXT!", CONFIG.canvasW/2, CONFIG.canvasH/2, "#facc15"));
     }
-
-
-
 
     addScore(amount) {
         const multiplier = 1 + Math.min(this.combo, 50) * 0.01;
@@ -4377,9 +3874,6 @@ class Game {
             }
         }
 
-
-
-
         const comboCountEl = document.getElementById('combo-count');
         if (comboCountEl) {
             comboCountEl.classList.remove('combo-pop');
@@ -4387,14 +3881,8 @@ class Game {
             comboCountEl.classList.add('combo-pop');
         }
 
-
-
-
         this.updateUI();
     }
-
-
-
 
     triggerGameOver(reason) {
         if (this.state.gameOver) return;
@@ -4415,9 +3903,6 @@ class Game {
         }
         finalScoreEl.innerText = this.score;
 
-
-
-
         goScreen.style.display = 'flex';
         goScreen.style.opacity = '1';
         
@@ -4428,9 +3913,6 @@ class Game {
             });
         });
     }
-
-
-
 
     triggerImpThrow(giant) {
         const targetCol = 3; 
@@ -4448,14 +3930,8 @@ class Game {
         }));
     }
 
-
-
-
     updateMeteors(dt) {
         if (this.state.wave < CONFIG.meteorStartWave) return;
-
-
-
 
         const progress = Math.min(1, (this.state.wave - CONFIG.meteorStartWave) / (CONFIG.meteorMaxWave - CONFIG.meteorStartWave));
         
@@ -4463,15 +3939,9 @@ class Game {
         
         const maxMeteors = Math.floor(5 + progress * 15);
 
-
-
-
         if (this.meteors.length < maxMeteors && Math.random() < spawnRate) {
             this.spawnMeteor();
         }
-
-
-
 
         for (let i = this.meteors.length - 1; i >= 0; i--) {
             const m = this.meteors[i];
@@ -4508,16 +3978,10 @@ class Game {
         }
     }
 
-
-
-
     spawnMeteor() {
         let r, c;
         let valid = false;
         let attempts = 0;
-
-
-
 
         const rand = Math.random();
         let targetMode = 'random';
@@ -4527,22 +3991,13 @@ class Game {
             isOnTile = this.energyTiles.some(t => t.row === this.heroPlant.row && t.col === this.heroPlant.col);
         }
 
-
-
-
         let playerTargetChance = isOnTile ? 0.05 : 0.3;
-
-
-
 
         if (rand < playerTargetChance && this.heroPlant) {
             targetMode = 'player'; 
         } else if (rand < 0.8) {
             targetMode = 'left_side'; 
         }
-
-
-
 
         while (attempts < 15 && !valid) {
             if (targetMode === 'player' && this.heroPlant) {
@@ -4560,9 +4015,6 @@ class Game {
                 c = Math.floor(Math.random() * GRID_COLS);
             }
 
-
-
-
             const occupied = this.meteors.some(m => m.row === r && m.col === c);
             if (!occupied) {
                 valid = true;
@@ -4572,37 +4024,22 @@ class Game {
             }
         }
 
-
-
-
         if (valid) {
             this.meteors.push(new Meteor(r, c));
         }
     }
 
-
-
-
     playerHit() {
         if (this.state.gameOver) return;
-
-
-
 
         if (this.heroPlant && this.heroPlant.invincibleTimer > 0) {
             return;
         }
 
-
-
-
         if (this.heroPlant && this.heroPlant.isUltimating) {
             this.addEffect(new FloatText("无敌!", this.heroPlant.x, this.heroPlant.y - 60, "#fff"));
             return;
         }
-
-
-
 
         if (this.hasShield) {
             this.hasShield = false;
@@ -4611,9 +4048,6 @@ class Game {
             this.addEffect(new FloatText("抵挡!", this.heroPlant.x, this.heroPlant.y - 60, "#60a5fa"));
             return;
         }
-
-
-
 
         this.state.lives--;
         this.updateLivesUI();
@@ -4631,9 +4065,6 @@ class Game {
             this.triggerGameOver('DEATH');
         }
     }
-
-
-
 
     updateLivesUI(gained = false) {
         for (let i = 1; i <= 3; i++) {
@@ -4653,30 +4084,35 @@ class Game {
         }
     }
 
-
-
-
     loop(timestamp) {
+        PerfMonitor.startFrame();
+        
         if (!this.lastTime) this.lastTime = timestamp;
         let dt = timestamp - this.lastTime;
         this.lastTime = timestamp;
         
         if (dt > 100) dt = 100; 
 
-
-
-
         if (!this.paused && !this.state.gameOver) {
+            PerfMonitor.startUpdate();
             this.update(dt, Date.now());
+            PerfMonitor.endUpdate();
         }
+        
+        PerfMonitor.startDraw();
         this.draw();
+        PerfMonitor.endDraw();
+        
+        PerfMonitor.endFrame();
+        PerfMonitor.update(this);
+        
         requestAnimationFrame(this.loop);
     }
 
-
-
-
     update(dt, now) {
+        // 重置每帧计数器
+        this.chainsCalculatedThisFrame = 0;
+        
         if (this.shakeTimer > 0) {
             this.shakeTimer -= dt;
             const intensity = 15 * (this.shakeTimer / 600);
@@ -4686,9 +4122,6 @@ class Game {
             this.shakeOffset = {x: 0, y: 0};
         }
 
-
-
-
         if (this.combo > 0) {
             this.comboTimer -= dt;
             if (this.comboTimer <= 0) {
@@ -4697,15 +4130,9 @@ class Game {
             }
         }
 
-
-
-
         const timePassed = now - this.state.lastWaveTime;
         const progress = Math.min(timePassed / CONFIG.waveTimeout, 1);
         document.getElementById('wave-progress').style.width = `${progress*100}%`;
-
-
-
 
         if (this.zombies.length === 0 && timePassed > 1000) {
             this.startNextWave("CLEAR");
@@ -4713,9 +4140,6 @@ class Game {
         else if (timePassed > CONFIG.waveTimeout) {
             this.startNextWave("TIMEOUT");
         }
-
-
-
 
         const currentLivingHp = this.zombies.reduce((sum, z) => sum + z.hp, 0);
         const canRush = (this.waveTotalMaxHp > 0) && (currentLivingHp < (this.waveTotalMaxHp * 0.5));
@@ -4727,20 +4151,13 @@ class Game {
             btn.style.display = 'none';
         }
 
-
-
-
         this.updateMeteors(dt);
         
-        // 清理已完成的巨人攻击
         this.pendingGiantAttacks = this.pendingGiantAttacks.filter(atk => {
             if (atk.zombie.isDead) return false;
             const elapsed = now - atk.startTime;
             return elapsed < (atk.zombie.attackDuration || 1500);
         });
-
-
-
 
         if (this.lawnMower) {
             this.lawnMower.update(dt, this);
@@ -4750,18 +4167,12 @@ class Game {
             }
         }
 
-
-
-
         for (let i = this.energyTiles.length - 1; i >= 0; i--) {
             const tile = this.energyTiles[i];
             let hasPlant = false;
             if (this.heroPlant && this.heroPlant.row === tile.row && this.heroPlant.col === tile.col) {
                 hasPlant = true;
             }
-
-
-
 
             if (hasPlant) {
                 if (tile.progress < tile.maxProgress) {
@@ -4783,16 +4194,10 @@ class Game {
             }
         }
 
-
-
-
         if (this.heroPlant) {
             const hasEnemy = this.zombies.some(z => z.row === this.heroPlant.row && z.x > this.heroPlant.x && !z.isDropping);
             this.heroPlant.update(dt, hasEnemy, this);
         }
-
-
-
 
         for (let i = this.projectiles.length - 1; i >= 0; i--) {
             const p = this.projectiles[i];
@@ -4804,14 +4209,8 @@ class Game {
                 continue;
             }
 
-
-
-
             for (let z of this.zombies) {
                 if (z.isDropping) continue;
-
-
-
 
                 if (p instanceof HolyBeam) {
                     if (z.y > p.y - p.height/2 && z.y < p.y + p.height/2 && z.x > p.x) {
@@ -4825,9 +4224,6 @@ class Game {
                     continue;
                 }
 
-
-
-
                 const hitRadius = (30 + p.radius) * z.scale; 
                 
                 const dist = Math.hypot(z.x - p.x, z.y - p.y);
@@ -4835,9 +4231,6 @@ class Game {
                 const isAuraHit = dist < CONFIG.bulletAuraRange;
                 
                 let dealtDamage = false;
-
-
-
 
                 if (isDirectHit) {
                     if (!p.hitList.includes(z.id)) {
@@ -4849,17 +4242,11 @@ class Game {
                         if (p.stunMode === 2) shouldStun = true; 
                         else if (p.stunMode === 1 && Math.random() < 0.1) shouldStun = true; 
 
-
-
-
                         if (shouldStun) {
                             const duration = p.isUlt ? 500 : (p.stunMode === 2 ? 200 : 300);
                             z.applyStun(duration);
                             this.addEffect(new Particle(z.x, z.y - 60, '#facc15', 10, 2));
                         }
-
-
-
 
                         this.addEffect(new Particle(z.x, z.y - 40*z.scale, '#60a5fa', 8, 3));
                         SM.play('hit', 50);
@@ -4876,16 +4263,10 @@ class Game {
                             z.applyStun(500);
                         }
 
-
-
-
                         this.addEffect(new LightningBolt(p.x, p.y, z.x, z.y - 40*z.scale, '#93c5fd', 2));
                         dealtDamage = true;
                     }
                 }
-
-
-
 
                 if (dealtDamage) {
                     if (z.type.id !== 'PHANTOM') {
@@ -4894,9 +4275,6 @@ class Game {
                 }
             }
         }
-
-
-
 
         for (let i = this.enemyProjectiles.length - 1; i >= 0; i--) {
             const ep = this.enemyProjectiles[i];
@@ -4907,9 +4285,6 @@ class Game {
                 this.enemyProjectiles.splice(i, 1);
                 continue;
             }
-
-
-
 
             if (this.heroPlant && this.heroPlant.row === ep.row) {
                 const dist = Math.abs(this.heroPlant.x - ep.x);
@@ -4923,9 +4298,6 @@ class Game {
             }
         }
 
-
-
-
         for (let i = this.zombies.length - 1; i >= 0; i--) {
             const z = this.zombies[i];
             z.update(dt, this); 
@@ -4933,9 +4305,6 @@ class Game {
             if (z.x < LEFT_MARGIN - 20) {
                  this.triggerGameOver('ZOMBIE');
             }
-
-
-
 
             if (z.isDead) {
                 SM.play('zap');
@@ -4946,8 +4315,11 @@ class Game {
             }
         }
 
-
-
+        // 限制特效数量
+        while (this.effects.length > CONFIG.maxEffects) {
+            const oldest = this.effects.shift();
+            if (oldest && oldest.cleanup) oldest.cleanup();
+        }
 
         for(let i=this.effects.length-1; i>=0; i--) {
             const e = this.effects[i];
@@ -4958,47 +4330,33 @@ class Game {
             }
         }
 
-
-
-
         this.updateUI();
     }
 
-
-
-
-    // --- 彻底重写的连锁闪电逻辑 ---
     triggerChainLightning(sourceZombie, damage, game) {
-        // [锁1：帧预算] 如果这一帧已经计算超过 3 次连锁，直接放弃
-        // 这能防止几十发子弹同时击中时导致的瞬间卡顿
-        if (this.chainsCalculatedThisFrame > 3) return;
+        // 帧预算检查
+        if (this.chainsCalculatedThisFrame >= CONFIG.chainMaxPerFrame) return;
 
         const now = Date.now();
 
-        // [锁2：全局冷却] 全场每 50ms 最多触发一次连锁 (人眼看不出区别，但极大节省CPU)
-        if (this.lastGlobalChainTime && now - this.lastGlobalChainTime < 50) return;
+        // 全局冷却
+        if (this.lastGlobalChainTime && now - this.lastGlobalChainTime < CONFIG.chainGlobalCooldown) return;
 
-        // [锁3：源头冷却] 这个僵尸最近 1 秒内刚发过电，跳过
+        // 源头冷却
         if (sourceZombie.lastChainSourceTime && now - sourceZombie.lastChainSourceTime < CONFIG.chainSourceCooldown) return;
 
-        // --- 开始计算 ---
-        this.chainsCalculatedThisFrame++; // 消耗预算
-        this.lastGlobalChainTime = now;   // 更新全局冷却
+        this.chainsCalculatedThisFrame++;
+        this.lastGlobalChainTime = now;
+        PerfMonitor.chainCount++;
 
         let closestZombie = null;
-        let minDistSq = CONFIG.chainRange * CONFIG.chainRange; // 使用平方比较避免开根号
+        let minDistSq = CONFIG.chainRange * CONFIG.chainRange;
 
-        // 倒序遍历寻找最近的一个目标
         for (let i = game.zombies.length - 1; i >= 0; i--) {
             const z = game.zombies[i];
             
-            // 基础过滤：跳过自己、死亡的、未落地的
             if (z.id === sourceZombie.id || z.isDead || z.isDropping) continue;
-            
-            // 粗筛：X轴距离过大直接跳过 (性能优化)
             if (Math.abs(z.x - sourceZombie.x) > CONFIG.chainRange) continue;
-
-            // 目标冷却检查
             if (now - z.lastChainHitTime < CONFIG.chainHitCooldown) continue;
 
             const dx = z.x - sourceZombie.x;
@@ -5011,19 +4369,14 @@ class Game {
             }
         }
 
-        // 找到了目标
         if (closestZombie) {
-            // 更新时间戳
             sourceZombie.lastChainSourceTime = now;
             closestZombie.lastChainHitTime = now;
 
-            // 播放音效 (限制频率)
             if (Math.random() < 0.2) SM.play('chain', 100);
 
-            // 造成伤害
             closestZombie.takeDamage(damage * 0.5, game, 'chain'); 
             
-            // 生成闪电特效
             game.addEffect(new LightningBolt(
                 sourceZombie.x, 
                 sourceZombie.y - 40 * sourceZombie.scale, 
@@ -5034,9 +4387,6 @@ class Game {
             ));
         }
     }
-
-
-
 
     spawnPFOrb(startX, startY) {
         SM.play('power_drop'); 
@@ -5052,9 +4402,6 @@ class Game {
             }));
         }
     }
-
-
-
 
     actualGainPF() {
         if (this.state.pfCount < 5) {
@@ -5107,13 +4454,11 @@ class Game {
         }, 3000);
     }
 
-
-
-
-    addEffect(e) { this.effects.push(e); }
-
-
-
+    addEffect(e) { 
+        if (this.effects.length < CONFIG.maxEffects) {
+            this.effects.push(e); 
+        }
+    }
 
     showToast(text) {
         const t = document.getElementById('toast');
@@ -5122,9 +4467,6 @@ class Game {
         void t.offsetWidth; 
         t.classList.add('slam-text');
     }
-
-
-
 
     updateUI() {
         document.getElementById('wave-num').innerText = this.state.wave;
@@ -5136,16 +4478,10 @@ class Game {
         document.getElementById('score-display').innerText = this.score;
         document.getElementById('highscore-display').innerText = `HI: ${this.highScore}`;
 
-
-
-
         const comboContainer = document.getElementById('combo-container');
         const comboCountEl = document.getElementById('combo-count');
         const comboMultEl = document.getElementById('combo-multiplier');
         const maxComboEl = document.getElementById('max-combo-display');
-
-
-
 
         if (this.combo > 0) {
             comboContainer.style.display = 'flex';
@@ -5154,40 +4490,25 @@ class Game {
             const saturation = Math.min(100, (this.comboTimer / 500) * 100);
             comboContainer.style.filter = `saturate(${saturation}%)`;
 
-
-
-
             comboCountEl.className = '';
             if (this.combo < 10) comboCountEl.classList.add('combo-green');
             else if (this.combo < 25) comboCountEl.classList.add('combo-yellow');
             else if (this.combo < 50) comboCountEl.classList.add('combo-orange');
             else comboCountEl.classList.add('combo-red');
 
-
-
-
             const mult = 1 + Math.min(this.combo, 50) * 0.01;
             comboMultEl.innerText = `${mult.toFixed(2)}x`;
-
-
-
 
         } else {
             comboContainer.style.display = 'none';
         }
         maxComboEl.innerText = `MAX: ${this.maxCombo}`;
 
-
-
-
         const slots = document.querySelectorAll('.plant-food-slot');
         slots.forEach((s, i) => {
             if (i < this.state.pfCount) s.classList.add('filled');
             else s.classList.remove('filled');
         });
-
-
-
 
         if (this.heroPlant) {
             document.getElementById('stat-level').innerText = this.heroPlant.level >= 4 ? "4 (MAX)" : this.heroPlant.level;
@@ -5208,9 +4529,6 @@ class Game {
             }
             document.getElementById('stat-xp').innerText = nextGoal;
 
-
-
-
             const buffRow = document.getElementById('buff-row');
             const buffText = document.getElementById('stat-buff');
             if (this.heroPlant.stunBuffTimer > 0) {
@@ -5230,16 +4548,10 @@ class Game {
             }
         }
 
-
-
-
         const btnShield = document.getElementById('btn-shield');
         const btnMower = document.getElementById('btn-mower');
         const btnStun = document.getElementById('btn-stun');
         const btnDome = document.getElementById('btn-dome');
-
-
-
 
         const updateBtn = (btn, cost, condition) => {
             if (this.state.pfCount >= cost && condition) {
@@ -5252,17 +4564,11 @@ class Game {
             }
         };
 
-
-
-
         updateBtn(btnShield, 2, !this.hasShield);
         updateBtn(btnMower, 5, !this.lawnMower);
         updateBtn(btnStun, 2, true); 
         updateBtn(btnDome, 3, true);
     }
-
-
-
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -5275,20 +4581,13 @@ class Game {
             this.ctx.fillRect(0, 0, CONFIG.canvasW, CONFIG.canvasH);
         }
 
-
-
-
         this.ctx.save();
         this.ctx.translate(this.shakeOffset.x, this.shakeOffset.y);
         
-        // 更新精灵层的震动偏移
         const spriteLayer = document.getElementById('sprite-layer');
         if (spriteLayer) {
             spriteLayer.style.transform = `translate(${this.shakeOffset.x}px, ${this.shakeOffset.y}px)`;
         }
-
-
-
 
         this.ctx.strokeStyle = 'rgba(0,0,0,0.08)';
         this.ctx.lineWidth = 1;
@@ -5310,15 +4609,9 @@ class Game {
             this.ctx.lineWidth = 2;
             this.ctx.strokeRect(x + 5, y + 5, CELL_WIDTH - 10, CELL_HEIGHT - 10);
 
-
-
-
             this.ctx.fillStyle = 'rgba(0, 255, 234, 0.6)';
             this.ctx.font = '20px Arial';
             this.ctx.fillText('⚡', x + CELL_WIDTH/2 - 10, y + CELL_HEIGHT/2);
-
-
-
 
             if (tile.progress > 0) {
                 const pct = tile.progress / tile.maxProgress;
@@ -5327,21 +4620,12 @@ class Game {
             }
         });
 
-
-
-
         const dangerX = LEFT_MARGIN + 3 * CELL_WIDTH;
         this.ctx.fillStyle = 'rgba(255, 255, 0, 0.03)';
         this.ctx.fillRect(dangerX, TOP_MARGIN, CELL_WIDTH, LAWN_HEIGHT);
 
-
-
-
         this.ctx.fillStyle = 'rgba(255, 0, 0, 0.1)';
         this.ctx.fillRect(0, TOP_MARGIN, LEFT_MARGIN, LAWN_HEIGHT);
-
-
-
 
         if (this.heroPlant && this.heroPlant.stunBuffTimer > 0) {
             const ctx = this.ctx;
@@ -5354,34 +4638,19 @@ class Game {
             const centerY = gridY + gridH / 2;
             const radius = Math.hypot(gridW/2, gridH/2) + 20; 
 
-
-
-
             const maxTime = 3000;
             const progress = this.heroPlant.stunBuffTimer / maxTime;
 
-
-
-
             ctx.save();
-
-
-
 
             ctx.strokeStyle = 'rgba(250, 204, 21, 0.8)'; 
             ctx.lineWidth = 5;
             ctx.strokeRect(gridX, gridY, gridW, gridH);
 
-
-
-
             if (progress > 0) {
                 ctx.beginPath();
                 ctx.rect(gridX, gridY, gridW, gridH);
                 ctx.clip();
-
-
-
 
                 ctx.beginPath();
                 ctx.moveTo(centerX, centerY);
@@ -5391,9 +4660,6 @@ class Game {
                 ctx.fillStyle = 'rgba(250, 204, 21, 0.15)'; 
                 ctx.fill();
             }
-
-
-
 
             ctx.restore();
         }
@@ -5409,34 +4675,19 @@ class Game {
             const centerY = gridY + gridH / 2;
             const radius = Math.hypot(gridW/2, gridH/2) + 20; 
 
-
-
-
             const maxTime = 5000;
             const progress = this.heroPlant.domeTimer / maxTime;
 
-
-
-
             ctx.save();
-
-
-
 
             ctx.strokeStyle = 'rgba(56, 189, 248, 0.8)';
             ctx.lineWidth = 5;
             ctx.strokeRect(gridX, gridY, gridW, gridH);
 
-
-
-
             if (progress > 0) {
                 ctx.beginPath();
                 ctx.rect(gridX, gridY, gridW, gridH);
                 ctx.clip();
-
-
-
 
                 ctx.beginPath();
                 ctx.moveTo(centerX, centerY);
@@ -5447,19 +4698,10 @@ class Game {
                 ctx.fill();
             }
 
-
-
-
             ctx.restore();
         }
 
-
-
-
         this.meteors.forEach(m => m.draw(this.ctx));
-
-
-
 
         let parryOpportunity = false;
         if (this.heroPlant) {
@@ -5471,7 +4713,6 @@ class Game {
             );
             if (threateningMeteor) parryOpportunity = true;
             
-            // 检查巨人攻击的完美闪避时机
             const threateningGiant = this.pendingGiantAttacks.some(atk => {
                 if (atk.zombie.isDead) return false;
                 const elapsed = Date.now() - atk.startTime;
@@ -5483,16 +4724,10 @@ class Game {
             if (threateningGiant) parryOpportunity = true;
         }
 
-
-
-
         if (parryOpportunity) {
             this.ctx.fillStyle = `rgba(255, 255, 255, 0.1)`;
             this.ctx.fillRect(0, 0, CONFIG.canvasW, CONFIG.canvasH);
         }
-
-
-
 
         if(this.heroPlant) {
             this.heroPlant.draw(this.ctx);
@@ -5510,9 +4745,6 @@ class Game {
                 this.ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
                 this.ctx.fill();
 
-
-
-
                 this.ctx.fillStyle = '#fff';
                 this.ctx.font = 'bold 24px Arial';
                 this.ctx.shadowColor = 'black';
@@ -5522,9 +4754,6 @@ class Game {
                 
                 this.ctx.restore();
             }
-
-
-
 
             if (this.hasShield) {
                 this.ctx.save();
@@ -5542,9 +4771,6 @@ class Game {
                 this.ctx.restore();
             }
         }
-
-
-
 
         if (this.lawnMower) {
             this.lawnMower.draw(this.ctx);
