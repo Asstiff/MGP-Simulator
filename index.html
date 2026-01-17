@@ -3789,15 +3789,13 @@ class Game {
         }
 
         const pickZombie = () => {
-            // const totalWeight = pool.reduce((a, b) => a + b.weight, 0);
-            // let r = Math.random() * totalWeight;
-            // for (let item of pool) {
-            //     if (r < item.weight) return item.type;
-            //     r -= item.weight;
-            // }
-            // return ZOMBIE_TYPES.BASIC;
-
-            return ZOMBIE_TYPES.GIANT;
+            const totalWeight = pool.reduce((a, b) => a + b.weight, 0);
+            let r = Math.random() * totalWeight;
+            for (let item of pool) {
+                if (r < item.weight) return item.type;
+                r -= item.weight;
+            }
+            return ZOMBIE_TYPES.BASIC;
         };
 
         const MAX_ZOMBIES_PER_WAVE = CONFIG.maxZombies;
