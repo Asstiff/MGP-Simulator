@@ -84,9 +84,6 @@
             to { filter: drop-shadow(0 0 30px #ef4444) drop-shadow(0 0 50px red); transform: scale(1.3); }
         }
 
-
-
-
         #stats-panel {
             font-size: 1rem;
             background: rgba(0,0,0,0.5);
@@ -97,10 +94,8 @@
         }
         .stat-row { display: flex; justify-content: space-between; margin-bottom: 4px; }
         .buff-active { color: #facc15; animation: pulse 1s infinite; }
+        .buff-execute { color: #ef4444; animation: pulse 1s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-
-
-
 
         #score-area {
             display: flex;
@@ -148,22 +143,13 @@
             text-shadow: 1px 1px 0 #000;
         }
 
-
-
-
         .combo-green { color: #4ade80; text-shadow: 2px 2px 0 #000, 0 0 10px #22c55e; }
         .combo-yellow { color: #facc15; text-shadow: 2px 2px 0 #000, 0 0 15px #eab308; }
         .combo-orange { color: #fb923c; text-shadow: 2px 2px 0 #000, 0 0 20px #ea580c; }
         .combo-red { color: #ef4444; text-shadow: 2px 2px 0 #000, 0 0 25px #dc2626; }
 
-
-
-
         .combo-pop { animation: combo-scale 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         @keyframes combo-scale { 0% { transform: scale(1); } 50% { transform: scale(1.4); } 100% { transform: scale(1); } }
-
-
-
 
         .new-record-anim {
             animation: record-flash 1s ease-out;
@@ -174,9 +160,6 @@
             100% { transform: scale(1); }
         }
 
-
-
-
         #controls-wrapper {
             position: absolute;
             bottom: 30px;
@@ -186,9 +169,6 @@
             align-items: flex-end;
             gap: 20px;
         }
-
-
-
 
         #pf-wrapper {
             display: flex;
@@ -230,9 +210,6 @@
             object-fit: contain;
         }
         .plant-food-slot.filled .plant-food-img { display: block; }
-
-
-
 
         .shop-btn {
             width: 70px;
@@ -278,26 +255,31 @@
         
         #btn-stun.affordable { background: #ca8a04; border-color: #facc15; }
         #btn-stun.affordable:hover { background: #a16207; }
-
-
-
+        
+        #btn-stun.execute-mode.affordable { background: #dc2626; border-color: #ef4444; }
+        #btn-stun.execute-mode.affordable:hover { background: #b91c1c; }
 
         .cost-badge {
             position: absolute;
             top: -10px;
             right: -10px;
-            background: #22c55e;
+            background: linear-gradient(180deg, #4ade80 0%, #22c55e 100%);
             color: white;
-            border-radius: 50%;
-            width: 24px;
+            border-radius: 12px;
             height: 24px;
+            padding: 0 10px 0 4px;
             display: flex;
-            justify-content: center;
             align-items: center;
+            gap: 2px;
             font-weight: bold;
             font-size: 0.9rem;
             border: 2px solid white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .cost-badge img {
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
         }
         .btn-icon { 
             width: 32px; 
@@ -305,9 +287,6 @@
             object-fit: contain;
             margin-bottom: 2px; 
         }
-
-
-
 
         #next-wave-btn {
             position: absolute;
@@ -336,13 +315,7 @@
         #next-wave-btn:hover { filter: brightness(1.1); transform: translateY(-50%) scale(1.05); }
         #next-wave-btn:active { transform: translateY(-50%) scale(0.95); }
 
-
-
-
         @keyframes pop-in { from { transform: translateY(-50%) scale(0); } to { transform: translateY(-50%) scale(1); } }
-
-
-
 
         #wave-timer {
             position: absolute;
@@ -386,9 +359,6 @@
             text-align: center;
         }
 
-
-
-
         .slam-text {
             animation-name: slam-scale, slam-opacity, fade-out;
             animation-duration: 0.6s, 0.6s, 0.5s;
@@ -397,18 +367,12 @@
             animation-fill-mode: forwards;
         }
 
-
-
-
         @keyframes slam-scale {
             0% { transform: translate(-50%, -50%) scale(3); }
             100% { transform: translate(-50%, -50%) scale(1); }
         }
         @keyframes slam-opacity { 0% { opacity: 0; } 100% { opacity: 1; } }
         @keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
-
-
-
 
         #game-over-screen {
             position: absolute;
@@ -437,15 +401,9 @@
             transform: scale(0);
         }
 
-
-
-
         .game-over-anim {
             animation: go-shake 0.5s linear forwards;
         }
-
-
-
 
         @keyframes go-shake {
             0% { transform: scale(0); }
@@ -458,9 +416,6 @@
             90% { transform: scale(1) translate(10px, 0); }
             100% { transform: scale(1) translate(0, 0); }
         }
-
-
-
 
         #restart-btn {
             background: #22c55e;
@@ -478,15 +433,9 @@
         }
         @keyframes fade-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-
-
-
         #restart-btn:hover {
             background: #4ade80;
         }
-
-
-
 
         .key-hint {
             font-size: 0.7rem;
@@ -572,9 +521,6 @@
             50% { opacity: 1; }
         }
 
-
-
-
         #pause-menu {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -589,9 +535,6 @@
         }
         .pause-title { font-size: 4rem; font-weight: bold; margin-bottom: 30px; letter-spacing: 5px; }
         .pause-hint { font-size: 1.5rem; color: #ccc; }
-
-
-
 
         #overflow-banner {
             position: absolute;
@@ -612,9 +555,6 @@
             transition: opacity 0.5s;
         }
 
-
-
-
         #sprite-layer {
             position: absolute;
             top: 0;
@@ -633,46 +573,33 @@
             will-change: transform, left, top;
         }
 
-
-
-
-        /* 升级提示面板样式 */
-#levelup-panel {
-    position: absolute;
-    bottom: 180px;
-    left: 30px;
-    background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(30,30,30,0.95) 100%);
-    border: 3px solid #facc15;
-    border-radius: 15px;
-    padding: 20px 30px;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    z-index: 120;
-    box-shadow: 0 0 30px rgba(250, 204, 21, 0.5), inset 0 0 20px rgba(250, 204, 21, 0.1);
-    min-width: 200px;
-    pointer-events: none;
-}
-
-
-
+        #levelup-panel {
+            position: absolute;
+            bottom: 180px;
+            left: 30px;
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(30,30,30,0.95) 100%);
+            border: 3px solid #facc15;
+            border-radius: 15px;
+            padding: 20px 30px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            z-index: 120;
+            box-shadow: 0 0 30px rgba(250, 204, 21, 0.5), inset 0 0 20px rgba(250, 204, 21, 0.1);
+            min-width: 200px;
+            pointer-events: none;
+        }
 
 #levelup-panel.show {
     display: flex !important;
     animation: levelup-appear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-
-
-
 #levelup-panel.hide {
     display: flex !important;
     animation: levelup-disappear 0.8s ease-out forwards;
 }
-
-
-
 
 @keyframes levelup-appear {
     0% {
@@ -689,9 +616,6 @@
     }
 }
 
-
-
-
 @keyframes levelup-disappear {
     0% {
         opacity: 1;
@@ -703,9 +627,6 @@
     }
 }
 
-
-
-
 #levelup-icon {
     width: 80px;
     height: 80px;
@@ -714,16 +635,10 @@
     animation: levelup-icon-pulse 1s ease-in-out infinite alternate;
 }
 
-
-
-
 @keyframes levelup-icon-pulse {
     0% { transform: scale(1); filter: drop-shadow(0 0 15px #facc15); }
     100% { transform: scale(1.1); filter: drop-shadow(0 0 25px #fff); }
 }
-
-
-
 
 #levelup-text {
     font-size: 1.5rem;
@@ -733,18 +648,12 @@
     letter-spacing: 2px;
 }
 
-
-
-
 #levelup-effects {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
 }
-
-
-
 
 .levelup-effect-item {
     display: flex;
@@ -757,17 +666,17 @@
     border: 1px solid rgba(255,255,255,0.2);
 }
 
-
-
+.levelup-effect-item.skill-change {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.3) 0%, rgba(220, 38, 38, 0.4) 100%);
+    border: 2px solid #ef4444;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+}
 
 .levelup-effect-icon {
     width: 40px;
     height: 40px;
     object-fit: contain;
 }
-
-
-
 
 .levelup-effect-label {
     font-size: 0.75rem;
@@ -776,8 +685,9 @@
     white-space: nowrap;
 }
 
-
-
+.levelup-effect-item.skill-change .levelup-effect-label {
+    color: #fca5a5;
+}
 
 #levelup-bonus {
     display: flex;
@@ -785,9 +695,6 @@
     justify-content: center;
     margin-top: 5px;
 }
-
-
-
 
 .levelup-bonus-item {
     display: flex;
@@ -801,17 +708,11 @@
     box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
 }
 
-
-
-
 .levelup-bonus-item.heal {
     background: linear-gradient(135deg, rgba(74, 222, 128, 0.3) 0%, rgba(34, 197, 94, 0.4) 100%);
     border-color: #4ade80;
     box-shadow: 0 0 15px rgba(74, 222, 128, 0.4);
 }
-
-
-
 
 .levelup-bonus-item.doom {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(250, 204, 21, 0.4) 100%);
@@ -820,25 +721,16 @@
     animation: doom-pulse 0.5s ease-in-out infinite alternate;
 }
 
-
-
-
 @keyframes doom-pulse {
     0% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
     100% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.9), 0 0 60px rgba(250, 204, 21, 0.5); }
 }
-
-
-
 
 .levelup-bonus-icon {
     width: 36px;
     height: 36px;
     object-fit: contain;
 }
-
-
-
 
 .levelup-bonus-label {
     font-size: 0.8rem;
@@ -849,9 +741,6 @@
     </style>
 </head>
 <body>
-
-
-
 
 <div id="game-container">
     <canvas id="gameCanvas"></canvas>
@@ -869,25 +758,16 @@
     
     <div id="background-loading-indicator">🔊 资源加载中... <span id="bg-load-progress">0%</span></div>
 
-
-
-
     <div id="pause-menu">
         <div class="pause-title">PAUSED</div>
         <div class="pause-hint">Press [P] to Resume</div>
     </div>
-
-
-
 
     <div id="game-over-screen">
         <h1 id="game-over-text">僵尸吃掉了你的脑子!</h1>
         <div style="font-size: 2rem; margin-bottom: 20px;">FINAL SCORE: <span id="final-score" class="text-yellow-400">0</span></div>
         <button id="restart-btn">重新开始 <span style="font-size: 0.6em">[R]</span></button>
     </div>
-
-
-
 
     <!-- 升级提示面板 -->
     <div id="levelup-panel">
@@ -896,9 +776,6 @@
         <div id="levelup-effects"></div>
         <div id="levelup-bonus"></div>
     </div>
-
-
-
 
     <div id="ui-layer">
         <div class="hud-top">
@@ -946,9 +823,6 @@
             </div>
         </div>
 
-
-
-
         <div id="combo-container">
             <div id="combo-count">0</div>
             <div id="combo-label">COMBO</div>
@@ -956,27 +830,15 @@
             <div id="max-combo-display">MAX: 0</div>
         </div>
 
-
-
-
         <div id="wave-timer"><div id="wave-progress"></div></div>
         <div id="toast">WAVE 1</div>
-
-
-
 
         <button id="next-wave-btn">
             <img class="btn-icon" src="./images/ui/next_wave.png" alt="下一波" style="width:240px; height:240px;">
             <span class="key-hint">[N]</span>
         </button>
 
-
-
-
         <div id="overflow-banner">能量豆已满，使用大招或购买道具</div>
-
-
-
 
         <div id="controls-wrapper">
             <div id="pf-wrapper">
@@ -992,31 +854,22 @@
                 </div>
             </div>
 
-
-
-
             <div class="shop-btn" id="btn-shield">
-                <div class="cost-badge">2</div>
+                <div class="cost-badge"><img src="./images/effects/power_bean.webp" alt=""><span>2</span></div>
                 <img class="btn-icon" src="./images/ui/icon_shield.png" alt="🛡️">
                 <div>护盾</div>
                 <span class="key-hint">[1]</span>
             </div>
 
-
-
-
             <div class="shop-btn" id="btn-stun">
-                <div class="cost-badge">2</div>
-                <img class="btn-icon" src="./images/ui/icon_stun.png" alt="⚡">
-                <div>电击</div>
-                <span class="key-hint">[2]</span>
-            </div>
-
-
-
+    <div class="cost-badge" id="btn-stun-cost"><img src="./images/effects/power_bean.webp" alt=""><span id="btn-stun-cost-num">2</span></div>
+    <img class="btn-icon" id="btn-stun-icon" src="./images/ui/icon_stun.png" alt="⚡">
+    <div id="btn-stun-label">电击</div>
+    <span class="key-hint">[2]</span>
+</div>
 
             <div class="shop-btn" id="btn-mower">
-                <div class="cost-badge">5</div>
+                <div class="cost-badge"><img src="./images/effects/power_bean.webp" alt=""><span>5</span></div>
                 <img class="btn-icon" src="./images/ui/icon_mower.png" alt="🚜">
                 <div>小推车</div>
                 <span class="key-hint">[3]</span>
@@ -1025,11 +878,7 @@
     </div>
 </div>
 
-
-
-
 <script>
-/* --- 精灵配置系统 --- */
 /* --- 精灵配置系统 --- */
 const SPRITE_CONFIG = {
     'player_idle_lv1': { scale: 0.8, offsetY: 120 },
@@ -1080,20 +929,15 @@ const SPRITE_CONFIG = {
     
     'bullet_normal': { scale: 0.6, offsetY: 30 },
     'bullet_stun': { scale: 0.6, offsetY: 30 },
-    'bullet_enemy': { scale: 2.0, offsetY: 40 },
+    'bullet_execute': { scale: 0.6, offsetY: 30 },
+    'bullet_enemy': { scale: 2.0, offsetY: 180 },
     
     'default': { scale: 1.0, offsetY: 0 }
 };
 
-
-
-
 function getSpriteConfig(key) {
     return SPRITE_CONFIG[key] || SPRITE_CONFIG['default'];
 }
-
-
-
 
 /* --- 精灵管理器 --- */
 class SpriteManager {
@@ -1213,15 +1057,8 @@ class SpriteManager {
     }
 }
 
-
-
-
 const Sprites = new SpriteManager();
 
-
-
-
-/* --- 资源管理器 --- */
 /* --- 资源管理器 --- */
 class AssetManager {
     constructor() {
@@ -1285,11 +1122,13 @@ class AssetManager {
             'heart_empty': './images/ui/heart_empty.png',
             'icon_shield': './images/ui/icon_shield.png',
             'icon_stun': './images/ui/icon_stun.png',
+            'icon_execute': './images/ui/icon_execute.png',
             'icon_mower': './images/ui/icon_mower.png',
             'next_wave': './images/ui/next_wave.png',
             
             'bullet_normal': './images/effects/bullet_normal.webp',
             'bullet_stun': './images/effects/bullet_stun.webp',
+            'bullet_execute': './images/effects/bullet_execute.webp',
             'bullet_enemy': './images/effects/bullet_enemy.webp',
             
             'lv1_icon': './images/ui/lv1_icon.png',
@@ -1299,21 +1138,16 @@ class AssetManager {
             'bullet_plus_icon': './images/ui/bullet_plus_icon.png',
             'passive_ult_icon': './images/ui/passive_ult_icon.png',
             'stun_bullet_icon': './images/ui/stun_bullet_icon.png',
+            'execute_skill_icon': './images/ui/execute_skill_icon.png',
             'heal_icon': './images/ui/heal_icon.png',
             'doom_icon': './images/ui/doom_icon.png'
         };
     }
 
-
-
-
     async loadAll(onProgress) {
         const entries = Object.entries(this.imageSources);
         this.totalAssets = entries.length;
         this.loadedAssets = 0;
-
-
-
 
         for (const [key, url] of entries) {
             if (this.loadingSkipped) {
@@ -1321,23 +1155,14 @@ class AssetManager {
                 return;
             }
 
-
-
-
             await this.loadSingle(key, url);
             this.loadedAssets++;
             if (onProgress) onProgress(this.loadedAssets, this.totalAssets);
         }
 
-
-
-
         this.loadingComplete = true;
         this.loaded = true;
     }
-
-
-
 
     async loadSingle(key, url) {
         return new Promise((resolve) => {
@@ -1354,16 +1179,10 @@ class AssetManager {
         });
     }
 
-
-
-
     async loadRemainingAsync(remaining) {
         const indicator = document.getElementById('background-loading-indicator');
         const progressText = document.getElementById('bg-load-progress');
         indicator.style.display = 'block';
-
-
-
 
         for (const [key, url] of remaining) {
             await this.loadSingle(key, url);
@@ -1373,23 +1192,14 @@ class AssetManager {
             progressText.innerText = `${pct}%`;
         }
 
-
-
-
         this.loadingComplete = true;
         this.loaded = true;
         indicator.style.display = 'none';
     }
 
-
-
-
     skipLoading() {
         this.loadingSkipped = true;
     }
-
-
-
 
     get(key) {
         return this.images[key];
@@ -1399,21 +1209,12 @@ class AssetManager {
         return this.imageSources[key];
     }
 
-
-
-
     has(key) {
         return !!this.images[key];
     }
 }
 
-
-
-
 const Assets = new AssetManager();
-
-
-
 
 /* --- Web Audio API 管理器 --- */
 class WebAudioManager {
@@ -1429,9 +1230,6 @@ class WebAudioManager {
         this.loadingComplete = false;
         this.totalSounds = 0;
         this.loadedSounds = 0;
-
-
-
 
         this.sources = {
             zap1: './sounds/zap1.wav',
@@ -1470,6 +1268,7 @@ class WebAudioManager {
             shield_break: './sounds/shield_break.wav',
             shield_on: './sounds/shield_on.wav',
             lightning_on: './sounds/lightning_on.wav',
+            execute_on: './sounds/execute_on.wav',
             mower_on: './sounds/mower_on.wav',
             mower_trigger: './sounds/mower_trigger.wav',
             
@@ -1480,25 +1279,16 @@ class WebAudioManager {
             countdown_4: './sounds/countdown_4.wav',
             countdown_5: './sounds/countdown_5.wav',
 
-
-
-
             button_buy: './sounds/button_buy.wav',
             
             hp_drop: './sounds/hp_drop.wav',
             hp_take: './sounds/hp_take.wav',
             doom: './sounds/doom.wav',
 
-
-
-
             deflect: './sounds/deflect.wav',
             beam: './sounds/beam.wav',
             
             levelup: './sounds/levelup.wav',
-
-
-
 
             no: './sounds/no.wav',
             
@@ -1506,9 +1296,6 @@ class WebAudioManager {
             gargantuar_smash: './sounds/gargantuar_smash.wav'
         };
     }
-
-
-
 
     initContext() {
         if (this.ctx) return;
@@ -1522,21 +1309,12 @@ class WebAudioManager {
         }
     }
 
-
-
-
     async loadAll(onProgress) {
         this.initContext();
-
-
-
 
         const entries = Object.entries(this.sources);
         this.totalSounds = entries.length;
         this.loadedSounds = 0;
-
-
-
 
         for (const [key, url] of entries) {
             if (this.loadingSkipped) {
@@ -1544,22 +1322,13 @@ class WebAudioManager {
                 return;
             }
 
-
-
-
             await this.loadSingle(key, url);
             this.loadedSounds++;
             if (onProgress) onProgress(this.loadedSounds, this.totalSounds);
         }
 
-
-
-
         this.loadingComplete = true;
     }
-
-
-
 
     async loadSingle(key, url) {
         if (!this.ctx) return;
@@ -1570,12 +1339,8 @@ class WebAudioManager {
             const audioBuffer = await this.ctx.decodeAudioData(arrayBuffer);
             this.buffers[key] = audioBuffer;
         } catch (e) {
-            // Silent fail for missing audio
         }
     }
-
-
-
 
     async loadRemainingAsync(remaining) {
         for (const [key, url] of remaining) {
@@ -1585,15 +1350,9 @@ class WebAudioManager {
         this.loadingComplete = true;
     }
 
-
-
-
     skipLoading() {
         this.loadingSkipped = true;
     }
-
-
-
 
     resumeContext() {
         if (this.ctx && this.ctx.state === 'suspended') {
@@ -1604,9 +1363,6 @@ class WebAudioManager {
             this.isInitialized = true;
         }
     }
-
-
-
 
     playBGM() {
         if (!this.ctx || !this.buffers.bgm) return;
@@ -1623,9 +1379,6 @@ class WebAudioManager {
         } catch (e) {}
     }
 
-
-
-
     stopBGM() {
         if (this.bgmNode) {
             try { this.bgmNode.stop(); } catch(e){}
@@ -1633,17 +1386,11 @@ class WebAudioManager {
         }
     }
 
-
-
-
     play(key, throttleMs = 0, fixedRate = null) {
         if (!this.ctx) return;
         
         try {
             if (this.ctx.state === 'suspended') this.ctx.resume();
-
-
-
 
             const now = Date.now();
             if (throttleMs > 0) {
@@ -1652,15 +1399,9 @@ class WebAudioManager {
                 this.lastPlayTimes[key] = now;
             }
 
-
-
-
             let bufferKey = key;
             let volume = 0.6;
             let playbackRate = fixedRate !== null ? fixedRate : 1.0;
-
-
-
 
             if (key === 'zap') {
                 const rand = Math.floor(Math.random() * 3) + 1;
@@ -1725,6 +1466,8 @@ class WebAudioManager {
                 volume = 0.8;
             } else if (key === 'lightning_on') {
                 volume = 0.8;
+            } else if (key === 'execute_on') {
+                volume = 0.9;
             } else if (key === 'mower_on') {
                 volume = 0.8;
             } else if (key === 'mower_trigger') {
@@ -1755,14 +1498,8 @@ class WebAudioManager {
                 volume = 1.0;
             }
 
-
-
-
             const buffer = this.buffers[bufferKey];
             if (!buffer) return;
-
-
-
 
             const source = this.ctx.createBufferSource();
             source.buffer = buffer;
@@ -1773,18 +1510,11 @@ class WebAudioManager {
             gainNode.connect(this.masterGain);
             source.start(0);
         } catch (e) {
-            // Silent fail for audio playback errors
         }
     }
 }
 
-
-
-
 const SM = new WebAudioManager();
-
-
-
 
 /* --- 游戏常量与配置 --- */
 const BG_WIDTH = 1136;
@@ -1794,9 +1524,6 @@ const LAWN_OFFSET_Y = 163;
 const LAWN_WIDTH = 867;
 const LAWN_HEIGHT = 564;
 
-
-
-
 const GRID_COLS = 9;
 const GRID_ROWS = 5;
 const CELL_WIDTH = LAWN_WIDTH / GRID_COLS;
@@ -1804,9 +1531,6 @@ const CELL_HEIGHT = LAWN_HEIGHT / GRID_ROWS;
 const TOP_MARGIN = LAWN_OFFSET_Y;
 const LEFT_MARGIN = LAWN_OFFSET_X;
 const PARRY_WINDOW = 200;
-
-
-
 
 const CONFIG = {
     canvasW: BG_WIDTH,
@@ -1830,13 +1554,12 @@ const CONFIG = {
     meteorDamage: 500,
     ultDuration: 2500,
     
+    executePercent: 0.10,
+    
     maxZombies: 100,
     maxProjectiles: 140,
     maxEffects: 80
 };
-
-
-
 
 /* --- 升级效果配置 --- */
 const LEVELUP_EFFECTS = {
@@ -1851,12 +1574,10 @@ const LEVELUP_EFFECTS = {
     4: [
         { icon: 'bullet_plus_icon', label: '子弹+1' },
         { icon: 'stun_bullet_icon', label: '眩晕子弹' },
-        { icon: 'passive_ult_icon', label: '被动概率↑' }
+        { icon: 'passive_ult_icon', label: '被动概率↑' },
+        { icon: 'execute_skill_icon', label: '斩杀', isSkillChange: true }
     ]
 };
-
-
-
 
 /* --- 僵尸类型定义 --- */
 const ZOMBIE_TYPES = {
@@ -1903,13 +1624,7 @@ const ZOMBIE_TYPES = {
     }
 };
 
-
-
-
 /* --- 基础实体类 --- */
-
-
-
 
 class Particle {
     constructor(x, y, color, size, speed) {
@@ -1930,9 +1645,6 @@ class Particle {
     }
 }
 
-
-
-
 class FloatText {
     constructor(text, x, y, color) {
         this.text = text; this.x = x; this.y = y; this.color = color;
@@ -1951,16 +1663,10 @@ class FloatText {
     }
 }
 
-
-
-
 let projectileIdCounter = 0;
 
-
-
-
 class Projectile {
-    constructor(x, y, angleOffset, isUlt, stunMode = 0) {
+    constructor(x, y, angleOffset, isUlt, stunMode = 0, executeMode = false) {
         this.id = `proj_${projectileIdCounter++}`;
         this.x = x;
         this.y = y;
@@ -1973,6 +1679,7 @@ class Projectile {
         this.auraList = []; 
         this.hitCount = 0;
         this.stunMode = stunMode; 
+        this.executeMode = executeMode;
         this.rotation = angleOffset;
     }
     update(dt) {
@@ -1980,7 +1687,13 @@ class Projectile {
         this.y += this.vy * (dt/16);
     }
     draw(ctx) {
-        const spriteKey = this.stunMode > 0 ? 'bullet_stun' : 'bullet_normal';
+        let spriteKey = 'bullet_normal';
+        if (this.executeMode) {
+            spriteKey = 'bullet_execute';
+        } else if (this.stunMode > 0) {
+            spriteKey = 'bullet_stun';
+        }
+        
         const rendered = Sprites.updateSprite(this.id, spriteKey, this.x, this.y, {
             scale: this.isUlt ? 0.5 : 0.8,
             rotation: this.rotation,
@@ -1991,19 +1704,27 @@ class Projectile {
             ctx.save();
             ctx.translate(this.x, this.y);
             ctx.shadowBlur = this.isUlt ? 5 : 10;
-            ctx.shadowColor = '#60a5fa';
-            ctx.fillStyle = '#dbeafe';
             
-            if (this.stunMode > 0) {
+            if (this.executeMode) {
+                ctx.shadowColor = '#ef4444';
+                ctx.fillStyle = '#fca5a5';
+            } else if (this.stunMode > 0) {
                 ctx.shadowColor = '#facc15';
                 ctx.fillStyle = '#fef08a';
+            } else {
+                ctx.shadowColor = '#60a5fa';
+                ctx.fillStyle = '#dbeafe';
             }
 
-
-
-
             ctx.beginPath(); ctx.arc(0, 0, this.radius, 0, Math.PI*2); ctx.fill();
-            ctx.strokeStyle = this.stunMode > 0 ? '#eab308' : '#3b82f6';
+            
+            if (this.executeMode) {
+                ctx.strokeStyle = '#dc2626';
+            } else if (this.stunMode > 0) {
+                ctx.strokeStyle = '#eab308';
+            } else {
+                ctx.strokeStyle = '#3b82f6';
+            }
             ctx.lineWidth = this.isUlt ? 1 : 2;
             ctx.beginPath(); ctx.arc(0,0, this.radius + 2, 0, Math.PI*2); ctx.stroke();
             ctx.restore();
@@ -2014,12 +1735,9 @@ class Projectile {
     }
 }
 
-
-
-
 class HolyBeam extends Projectile {
     constructor(x, y) {
-        super(x, y, 0, true, 0);
+        super(x, y, 0, true, 0, false);
         this.width = 0;
         this.targetWidth = CONFIG.canvasW - x + 50;
         this.height = 100; 
@@ -2028,9 +1746,6 @@ class HolyBeam extends Projectile {
         this.damage = 3000;
         this.hitList = []; 
     }
-
-
-
 
     update(dt) {
         this.life -= dt;
@@ -2041,9 +1756,6 @@ class HolyBeam extends Projectile {
         }
     }
 
-
-
-
     draw(ctx) {
         ctx.save();
         ctx.translate(this.x, this.y);
@@ -2052,24 +1764,15 @@ class HolyBeam extends Projectile {
         const alpha = Math.min(1, progress * 2);
         const flicker = Math.random() * 0.2 + 0.8;
 
-
-
-
         ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
         ctx.shadowBlur = 20;
         ctx.shadowColor = '#fff';
         ctx.fillRect(0, -this.height/4, this.width, this.height/2);
 
-
-
-
         ctx.fillStyle = `rgba(253, 224, 71, ${alpha * 0.6 * flicker})`; 
         ctx.shadowBlur = 40;
         ctx.shadowColor = '#facc15';
         ctx.fillRect(0, -this.height/2, this.width, this.height);
-
-
-
 
         if (Math.random() < 0.5) {
             ctx.fillStyle = '#fff';
@@ -2078,9 +1781,6 @@ class HolyBeam extends Projectile {
             ctx.fillRect(px, py, Math.random()*20 + 10, 2);
         }
 
-
-
-
         ctx.restore();
     }
     
@@ -2088,13 +1788,7 @@ class HolyBeam extends Projectile {
     }
 }
 
-
-
-
 let enemyProjIdCounter = 0;
-
-
-
 
 class EnemyProjectile {
     constructor(x, y, row) {
@@ -2128,9 +1822,6 @@ class EnemyProjectile {
         Sprites.removeSprite(this.id);
     }
 }
-
-
-
 
 class LightningBolt {
     constructor(x1, y1, x2, y2, color, width) {
@@ -2175,9 +1866,6 @@ class LightningBolt {
     }
 }
 
-
-
-
 class ScreenVignette {
     constructor(type) {
         this.type = type;
@@ -2211,9 +1899,6 @@ class ScreenVignette {
     }
 }
 
-
-
-
 class ScreenFlash {
     constructor() {
         this.life = 1.0;
@@ -2229,9 +1914,6 @@ class ScreenFlash {
         ctx.restore();
     }
 }
-
-
-
 
 class AshEffect {
     constructor(x, y) {
@@ -2276,9 +1958,6 @@ class AshEffect {
         ctx.restore();
     }
 }
-
-
-
 
 class MeteorExplosion {
     constructor(x, y) {
@@ -2354,9 +2033,6 @@ class MeteorExplosion {
     }
 }
 
-
-
-
 class Meteor {
     constructor(row, col) {
         this.row = row;
@@ -2369,18 +2045,12 @@ class Meteor {
         this.rotation = Math.random() * Math.PI * 2;
     }
 
-
-
-
     update(dt) {
         this.timer -= dt;
         if (this.timer <= 0) {
             this.hasImpacted = true;
         }
     }
-
-
-
 
     draw(ctx) {
         const progress = 1 - (this.timer / this.maxTimer);
@@ -2396,16 +2066,10 @@ class Meteor {
         ctx.arc(0, 0, 40 - progress * 10, 0, Math.PI * 2);
         ctx.stroke();
 
-
-
-
         ctx.fillStyle = `rgba(239, 68, 68, ${alpha * 0.5})`;
         ctx.beginPath();
         ctx.arc(0, 0, 30 * progress, 0, Math.PI * 2);
         ctx.fill();
-
-
-
 
         ctx.strokeStyle = `rgba(239, 68, 68, 0.8)`;
         ctx.lineWidth = 2;
@@ -2414,24 +2078,15 @@ class Meteor {
         ctx.moveTo(0, -10); ctx.lineTo(0, 10);
         ctx.stroke();
 
-
-
-
         if (this.timer <= 500 && this.timer > 0) {
             const dropProgress = 1 - (this.timer / 500);
             const startY = -600; 
             const endY = 0;
             const currentY = startY + (endY - startY) * dropProgress;
 
-
-
-
             ctx.save();
             ctx.translate(0, currentY);
             ctx.rotate(this.rotation);
-
-
-
 
             ctx.fillStyle = '#5d4037';
             ctx.beginPath();
@@ -2445,9 +2100,6 @@ class Meteor {
             ctx.beginPath();
             ctx.arc(5, 8, 6, 0, Math.PI * 2);
             ctx.fill();
-
-
-
 
             ctx.restore();
             
@@ -2470,16 +2122,10 @@ class Meteor {
             ctx.arc(0, 0, 15, Math.PI * 1.3, Math.PI * 1.7, true);
             ctx.fill();
 
-
-
-
             ctx.fillStyle = '#ffcc80';
             ctx.beginPath();
             ctx.arc(-5, -5, 8, 0, Math.PI * 2);
             ctx.fill();
-
-
-
 
             ctx.restore();
             
@@ -2492,20 +2138,11 @@ class Meteor {
             ctx.restore();
         }
 
-
-
-
         ctx.restore();
     }
 }
 
-
-
-
 let mowerIdCounter = 0;
-
-
-
 
 class LawnMower {
     constructor() {
@@ -2518,9 +2155,6 @@ class LawnMower {
         this.dead = false;
     }
 
-
-
-
     update(dt, game) {
         if (this.active) {
             this.x += this.speed * (dt/16);
@@ -2532,18 +2166,12 @@ class LawnMower {
                 }
             });
 
-
-
-
             if (this.x > CONFIG.canvasW + 100) {
                 this.dead = true;
             }
         } else {
             let minX = 99999;
             let targetRow = -1;
-
-
-
 
             game.zombies.forEach(z => {
                 if (!z.isDropping && !z.isDead) {
@@ -2553,9 +2181,6 @@ class LawnMower {
                     }
                 }
             });
-
-
-
 
             if (targetRow !== -1) {
                 this.row = targetRow;
@@ -2569,9 +2194,6 @@ class LawnMower {
                 this.y = targetY;
             }
 
-
-
-
             game.zombies.forEach(z => {
                 if (z.row === this.row && !z.isDropping && !z.isDead) {
                     if (z.x > this.x - 40 && z.x < this.x + 60) {
@@ -2583,9 +2205,6 @@ class LawnMower {
             });
         }
     }
-
-
-
 
     draw(ctx) {
         const rendered = Sprites.updateSprite(this.id, 'mower', this.x, this.y, {
@@ -2604,18 +2223,12 @@ class LawnMower {
             ctx.fillRect(-35, -60, 10, 40);
             ctx.fillRect(-45, -60, 20, 5);
 
-
-
-
             ctx.fillStyle = 'black'; 
             ctx.beginPath(); ctx.arc(-20, -10, 12, 0, Math.PI*2); ctx.fill();
             ctx.beginPath(); ctx.arc(20, -10, 12, 0, Math.PI*2); ctx.fill();
             ctx.fillStyle = '#ccc'; 
             ctx.beginPath(); ctx.arc(-20, -10, 5, 0, Math.PI*2); ctx.fill();
             ctx.beginPath(); ctx.arc(20, -10, 5, 0, Math.PI*2); ctx.fill();
-
-
-
 
             if (this.active) {
                 ctx.fillStyle = '#fbbf24';
@@ -2626,9 +2239,6 @@ class LawnMower {
                 ctx.fill();
             }
 
-
-
-
             ctx.restore();
         }
     }
@@ -2638,13 +2248,7 @@ class LawnMower {
     }
 }
 
-
-
-
 let flyingImpIdCounter = 0;
-
-
-
 
 class FlyingImp {
     constructor(startX, startY, targetX, targetY, row, onLand) {
@@ -2666,9 +2270,6 @@ class FlyingImp {
         this.rotation = 0;
     }
 
-
-
-
     update(dt) {
         this.currentTime += dt;
         this.progress = Math.min(this.currentTime / this.duration, 1);
@@ -2681,17 +2282,11 @@ class FlyingImp {
         
         this.rotation = this.currentTime * 0.01;
 
-
-
-
         if (this.progress >= 1) {
             this.dead = true;
             this.onLand(this.row, this.targetX, this.targetY);
         }
     }
-
-
-
 
     draw(ctx) {
         const rendered = Sprites.updateSprite(this.id, 'imp_walk', this.x, this.y, {
@@ -2720,9 +2315,6 @@ class FlyingImp {
     }
 }
 
-
-
-
 class PFOrb {
     constructor(x, y, targetX, targetY, onComplete) {
         this.x = x;
@@ -2735,16 +2327,10 @@ class PFOrb {
         this.isImportant = true;
     }
 
-
-
-
     update(dt) {
         const dx = this.targetX - this.x;
         const dy = this.targetY - this.y;
         const dist = Math.hypot(dx, dy);
-
-
-
 
         if (dist < 10) {
             this.onComplete();
@@ -2760,9 +2346,6 @@ class PFOrb {
             if(this.trail[i].life <= 0) this.trail.splice(i, 1);
         }
     }
-
-
-
 
     draw(ctx) {
         ctx.save();
@@ -2782,9 +2365,6 @@ class PFOrb {
     }
 }
 
-
-
-
 class HPOrb {
     constructor(x, y, targetX, targetY, onComplete) {
         this.x = x;
@@ -2797,16 +2377,10 @@ class HPOrb {
         this.isImportant = true;
     }
 
-
-
-
     update(dt) {
         const dx = this.targetX - this.x;
         const dy = this.targetY - this.y;
         const dist = Math.hypot(dx, dy);
-
-
-
 
         if (dist < 10) {
             this.onComplete();
@@ -2822,9 +2396,6 @@ class HPOrb {
             if(this.trail[i].life <= 0) this.trail.splice(i, 1);
         }
     }
-
-
-
 
     draw(ctx) {
         ctx.save();
@@ -2843,9 +2414,6 @@ class HPOrb {
     }
 }
 
-
-
-
 class DoomSeed {
     constructor(x, y, targetX, targetY, onComplete) {
         this.x = x;
@@ -2858,16 +2426,10 @@ class DoomSeed {
         this.isImportant = true;
     }
 
-
-
-
     update(dt) {
         const dx = this.targetX - this.x;
         const dy = this.targetY - this.y;
         const dist = Math.hypot(dx, dy);
-
-
-
 
         if (dist < 15) {
             this.onComplete();
@@ -2883,9 +2445,6 @@ class DoomSeed {
             if(this.trail[i].life <= 0) this.trail.splice(i, 1);
         }
     }
-
-
-
 
     draw(ctx) {
         ctx.save();
@@ -2904,15 +2463,9 @@ class DoomSeed {
         ctx.lineWidth = 4;
         ctx.beginPath(); ctx.arc(this.x, this.y, 25 + pulse, 0, Math.PI*2); ctx.stroke();
 
-
-
-
         ctx.restore();
     }
 }
-
-
-
 
 class LevelUpEffect {
     constructor(x, y) {
@@ -2937,9 +2490,6 @@ class LevelUpEffect {
         ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.8})`;
         ctx.fillRect(-10, -1000, 20, 1000);
 
-
-
-
         ctx.strokeStyle = `rgba(250, 204, 21, ${alpha})`;
         ctx.lineWidth = 5;
         ctx.beginPath();
@@ -2951,13 +2501,7 @@ class LevelUpEffect {
     }
 }
 
-
-
-
 /* --- 复杂实体类 --- */
-
-
-
 
 let zIdCounter = 0;
 class Zombie {
@@ -2977,9 +2521,6 @@ class Zombie {
         }
         this.hp = type.hp * hpMultiplier;
         this.maxHp = this.hp;
-
-
-
 
         this.speed = type.speed * (0.9 + Math.random() * 0.2);
         
@@ -3001,9 +2542,6 @@ class Zombie {
         this.isDropping = false;
         this.targetY = 0;
         this.dropSpeed = 0.3;
-
-
-
 
         this.shootTimer = 2000 + Math.random() * 2000;
         this.isShooting = false;
@@ -3031,18 +2569,12 @@ class Zombie {
         }
     }
 
-
-
-
     update(dt, game) {
         if (!this.isDead) {
             if (this.stunTimer > 0) {
                 this.stunTimer -= dt;
                 return;
             }
-
-
-
 
             this.animTime += dt * 0.005 * (1 + this.speed * 5);
             
@@ -3053,9 +2585,6 @@ class Zombie {
                     this.shootAnimTimer = 0;
                 }
             }
-
-
-
 
             if (this.isDropping) {
                 this.y += this.dropSpeed * dt;
@@ -3078,9 +2607,6 @@ class Zombie {
                 if (this.type.id !== 'GUNNER') {
                     this.x -= this.speed * dt;
                 }
-
-
-
 
                 if (this.type.id === 'GUNNER') {
                     this.shootTimer -= dt;
@@ -3189,22 +2715,13 @@ class Zombie {
         }
     }
 
-
-
-
     applyStun(duration) {
         if (this.isDead || this.isDropping) return;
         this.stunTimer = Math.max(this.stunTimer, duration);
     }
 
-
-
-
     takeDamage(amount, game, damageType) {
         if (this.isDead || this.isDropping) return;
-
-
-
 
         if (this.type.id === 'PHANTOM') {
             if (damageType === 'direct') {
@@ -3214,17 +2731,11 @@ class Zombie {
             }
         }
 
-
-
-
         if (this.type.id === 'GUNNER') {
             if (damageType === 'aura' || damageType === 'chain') {
                 return;
             }
         }
-
-
-
 
         this.hp -= amount;
         
@@ -3237,9 +2748,6 @@ class Zombie {
             }
         }
 
-
-
-
         if (this.hp <= 0) {
             this.isDead = true;
             game.addScore(this.type.score);
@@ -3248,20 +2756,13 @@ class Zombie {
         }
     }
 
-
-
-
     draw(ctx) {
         if (this.isDead) return;
-
-
-
 
         const sway = Math.sin(this.animTime) * 5;
         
         let spriteKey = this.type.spriteKey;
         
-        // 优先检查眩晕状态
         if (this.stunTimer > 0) {
             switch (this.type.id) {
                 case 'BASIC':
@@ -3290,7 +2791,6 @@ class Zombie {
                     break;
             }
         } else {
-            // 正常状态的动画选择逻辑
             if (this.type.id === 'FOOTBALL') {
                 if (this.footballState === 'attacking') {
                     spriteKey = 'football_attack';
@@ -3337,9 +2837,6 @@ class Zombie {
             ctx.translate(this.x, this.y);
             ctx.scale(this.scale, this.scale);
 
-
-
-
             if (this.isDropping) {
                 ctx.save();
                 ctx.translate(0, -100);
@@ -3355,9 +2852,6 @@ class Zombie {
                 ctx.restore();
             }
 
-
-
-
             ctx.rotate(this.stunTimer > 0 ? 0 : sway * 0.02);
             
             if (this.type.id === 'PHANTOM') {
@@ -3366,9 +2860,6 @@ class Zombie {
                 ctx.globalAlpha = 0.6;
             }
 
-
-
-
             ctx.fillStyle = this.type.color;
             ctx.fillRect(-15, -50, 30, 50);
             
@@ -3376,18 +2867,12 @@ class Zombie {
             if (this.hitFlash > 0) { ctx.fillStyle = 'white'; this.hitFlash--; }
             ctx.beginPath(); ctx.arc(0, -65, 20, 0, Math.PI*2); ctx.fill();
 
-
-
-
             ctx.fillStyle = 'white';
             ctx.beginPath(); ctx.arc(-6, -70, 6, 0, Math.PI*2); ctx.fill();
             ctx.beginPath(); ctx.arc(8, -70, 6, 0, Math.PI*2); ctx.fill();
             ctx.fillStyle = 'black';
             ctx.beginPath(); ctx.arc(-6, -70, 2, 0, Math.PI*2); ctx.fill();
             ctx.beginPath(); ctx.arc(8, -70, 2, 0, Math.PI*2); ctx.fill();
-
-
-
 
             if (this.type.accessory === 'cone') {
                 if (this.hp > this.maxHp * 0.3) {
@@ -3412,9 +2897,6 @@ class Zombie {
                 ctx.fillRect(-25, -45, 20, 8);
             }
 
-
-
-
             ctx.restore();
         }
         
@@ -3436,15 +2918,9 @@ class Zombie {
             ctx.restore();
         }
 
-
-
-
         const pct = Math.max(0, this.hp / this.maxHp);
         ctx.fillStyle = 'red'; ctx.fillRect(-20, -90, 40, 5);
         ctx.fillStyle = '#22c55e'; ctx.fillRect(-20, -90, 40*pct, 5);
-
-
-
 
         ctx.restore();
     }
@@ -3453,9 +2929,6 @@ class Zombie {
         Sprites.removeSprite(this.id);
     }
 }
-
-
-
 
 class Plant {
     constructor(row, col, x, y) {
@@ -3477,6 +2950,7 @@ class Plant {
         this.recoil = 0;
         
         this.stunBuffTimer = 0; 
+        this.executeBuffTimer = 0;
         this.lastBuffSec = 0; 
         
         this.ultStartTime = 0; 
@@ -3488,9 +2962,6 @@ class Plant {
         this.isFiring = false;
         this.fireAnimTimer = 0;
     }
-
-
-
 
     update(dt, hasEnemy, game) {
         if (this.recoil > 0) this.recoil -= dt * 0.1;
@@ -3505,32 +2976,32 @@ class Plant {
             }
         }
         
-        if (this.stunBuffTimer > 0) {
-            this.stunBuffTimer -= dt;
+        const activeBuffTimer = this.stunBuffTimer > 0 ? 'stun' : (this.executeBuffTimer > 0 ? 'execute' : null);
+        const currentBuffTime = activeBuffTimer === 'stun' ? this.stunBuffTimer : (activeBuffTimer === 'execute' ? this.executeBuffTimer : 0);
+        
+        if (currentBuffTime > 0) {
+            if (activeBuffTimer === 'stun') {
+                this.stunBuffTimer -= dt;
+            } else {
+                this.executeBuffTimer -= dt;
+            }
 
-
-
-
-            const currentSec = Math.ceil(this.stunBuffTimer / 1000);
+            const currentSec = Math.ceil(currentBuffTime / 1000);
             
             if (currentSec < this.lastBuffSec && currentSec >= 1) {
                 SM.play(`countdown_${currentSec}`);
                 this.lastBuffSec = currentSec;
             }
 
-
-
-
-            if (this.stunBuffTimer <= 0) {
+            if ((activeBuffTimer === 'stun' && this.stunBuffTimer <= 0) || 
+                (activeBuffTimer === 'execute' && this.executeBuffTimer <= 0)) {
                 this.stunBuffTimer = 0;
+                this.executeBuffTimer = 0;
                 SM.play('countdown_0');
             }
         } else {
             this.lastBuffSec = 0;
         }
-
-
-
 
         if (this.isUltimating) {
             this.ultTimer += dt;
@@ -3545,10 +3016,12 @@ class Plant {
                 const angle = (Math.random() - 0.5) * spread;
                 const isMaxLevel = this.level >= 4;
                 const hasBuff = this.stunBuffTimer > 0;
-                const stunMode = (isMaxLevel || hasBuff) ? 2 : 0; 
+                const hasExecuteBuff = this.executeBuffTimer > 0;
+                let stunMode = (isMaxLevel || hasBuff) ? 2 : 0;
+                let executeMode = hasExecuteBuff;
                 
                 if (game.projectiles.length < CONFIG.maxProjectiles) {
-                    game.projectiles.push(new Projectile(this.x + 40, this.y - 20, angle, true, stunMode));
+                    game.projectiles.push(new Projectile(this.x + 40, this.y - 20, angle, true, executeMode ? 0 : stunMode, executeMode));
                 }
             }
             if (this.ultTimer > CONFIG.ultDuration) { 
@@ -3564,22 +3037,13 @@ class Plant {
             return;
         }
 
-
-
-
         this.cooldown += dt; 
-
-
-
 
         if (hasEnemy) {
             while (this.cooldown >= this.interval) {
                 this.cooldown -= this.interval; 
                 
                 const currentPassiveRate = CONFIG.passiveUltRate + (this.level * 0.01);
-
-
-
 
                 if (Math.random() < currentPassiveRate) {
                     this.startUlt(game);
@@ -3591,9 +3055,6 @@ class Plant {
                     this.burstQueue += (this.baseShots + this.level);
                 }
             }
-
-
-
 
             if (this.burstQueue > 0) {
                 this.burstTimer += dt;
@@ -3609,59 +3070,43 @@ class Plant {
         }
     }
 
-
-
-
     startUlt(game) {
-    this.isUltimating = true;
-    this.ultTimer = 0;
-    this.ultStartTime = Date.now(); 
-    this.preInputUlt = false;
-    
-    this.ultUseCount++;
-    const oldLevel = this.level;
-
-
-
-
-    let newLevel = 1;
-    if (this.ultUseCount >= 20) newLevel = 4;
-    else if (this.ultUseCount >= 10) newLevel = 3;
-    else if (this.ultUseCount >= 3) newLevel = 2;
-
-
-
-
-    if (newLevel > oldLevel) {
-        this.level = newLevel;
-        SM.play('levelup'); 
-        game.addEffect(new LevelUpEffect(this.x, this.y));
-        game.addEffect(new FloatText("LEVEL UP!", this.x, this.y - 80, "#facc15"));
-        game.shakeTimer = 300;
+        this.isUltimating = true;
+        this.ultTimer = 0;
+        this.ultStartTime = Date.now(); 
+        this.preInputUlt = false;
         
-        // 先判断附加效果类型，再调用 recoverLife
-        const willDoom = game.state.lives >= 3;
-        const bonusType = willDoom ? 'doom' : 'heal';
-        
-        // 显示升级面板（在 recoverLife 之前，避免被覆盖）
-        game.showLevelUpPanel(newLevel, bonusType);
-        
-        game.recoverLife();
-    } 
-    else if (this.level === 4 && this.ultUseCount > 20 && (this.ultUseCount % 10 === 0)) {
-        // 先判断附加效果类型
-        const willDoom = game.state.lives >= 3;
-        const bonusType = willDoom ? 'doom' : 'heal';
-        
-        // MAX等级，只显示附加效果
-        game.showLevelUpPanel(4, bonusType, true);
-        
-        game.recoverLife();
+        this.ultUseCount++;
+        const oldLevel = this.level;
+
+        let newLevel = 1;
+        if (this.ultUseCount >= 20) newLevel = 4;
+        else if (this.ultUseCount >= 10) newLevel = 3;
+        else if (this.ultUseCount >= 3) newLevel = 2;
+
+        if (newLevel > oldLevel) {
+            this.level = newLevel;
+            SM.play('levelup'); 
+            game.addEffect(new LevelUpEffect(this.x, this.y));
+            game.addEffect(new FloatText("LEVEL UP!", this.x, this.y - 80, "#facc15"));
+            game.shakeTimer = 300;
+            
+            const willDoom = game.state.lives >= 3;
+            const bonusType = willDoom ? 'doom' : 'heal';
+            
+            game.showLevelUpPanel(newLevel, bonusType);
+            
+            game.recoverLife();
+        } 
+        else if (this.level === 4 && this.ultUseCount > 20 && (this.ultUseCount % 10 === 0)) {
+            const willDoom = game.state.lives >= 3;
+            const bonusType = willDoom ? 'doom' : 'heal';
+            
+            game.showLevelUpPanel(4, bonusType, true);
+            
+            game.recoverLife();
+        }
     }
-}
-
-
-
 
     shoot(game) {
         this.recoil = 8;
@@ -3669,23 +3114,24 @@ class Plant {
         this.fireAnimTimer = 0;
         
         let stunMode = 0;
-        if (this.stunBuffTimer > 0) stunMode = 2;
-        else if (this.level >= 4) stunMode = 1;
-
-
-
+        let executeMode = false;
+        
+        if (this.executeBuffTimer > 0) {
+            executeMode = true;
+        } else if (this.stunBuffTimer > 0) {
+            stunMode = 2;
+        } else if (this.level >= 4) {
+            stunMode = 1;
+        }
 
         if (game.projectiles.length < CONFIG.maxProjectiles) {
-            game.projectiles.push(new Projectile(this.x + 40, this.y - 20, 0, false, stunMode));
+            game.projectiles.push(new Projectile(this.x + 40, this.y - 20, 0, false, executeMode ? 0 : stunMode, executeMode));
         }
     }
     
     takeDamage() {
         this.damageTimer = 300;
     }
-
-
-
 
     draw(ctx) {
         const drawX = this.x - this.recoil;
@@ -3709,24 +3155,15 @@ class Plant {
         ctx.save();
         ctx.translate(drawX, this.y);
 
-
-
-
         if (this.level > 1) {
             ctx.lineWidth = 3;
             ctx.strokeStyle = '#facc15'; 
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
 
-
-
-
             const rankCount = this.level - 1;
             const startY = -55; 
             const gap = 6;
-
-
-
 
             for (let i = 0; i < rankCount; i++) {
                 const y = startY - (i * gap);
@@ -3738,20 +3175,18 @@ class Plant {
             }
         }
 
-
-
-
-        if (this.stunBuffTimer > 0) {
+        const hasActiveBuff = this.stunBuffTimer > 0 || this.executeBuffTimer > 0;
+        const isExecuteBuff = this.executeBuffTimer > 0;
+        
+        if (hasActiveBuff) {
             const t = Date.now() * 0.01;
-            ctx.strokeStyle = `rgba(250, 204, 21, ${0.5 + Math.sin(t)*0.3})`;
+            const color = isExecuteBuff ? 'rgba(239, 68, 68,' : 'rgba(250, 204, 21,';
+            ctx.strokeStyle = `${color}${0.5 + Math.sin(t)*0.3})`;
             ctx.lineWidth = 3;
             ctx.beginPath();
             ctx.arc(0, -20, 35, 0, Math.PI*2);
             ctx.stroke();
         }
-
-
-
 
         if (this.isUltimating) {
             const remaining = Math.max(0, 1 - (this.ultTimer / CONFIG.ultDuration));
@@ -3799,9 +3234,6 @@ class Plant {
                 ctx.beginPath(); ctx.ellipse(0, 20, 25, 8, 0, 0, Math.PI*2); ctx.fill();
             }
 
-
-
-
             ctx.fillStyle = this.isUltimating ? '#3b82f6' : '#16a34a'; 
             ctx.beginPath(); ctx.arc(0, -20, 25, 0, Math.PI*2); ctx.fill();
             
@@ -3840,15 +3272,9 @@ class Plant {
             }
         }
 
-
-
-
         ctx.restore();
     }
 }
-
-
-
 
 /* --- 核心游戏类 --- */
 class Game {
@@ -3862,9 +3288,6 @@ class Game {
         
         this.fitScreen();
         window.addEventListener('resize', () => this.fitScreen());
-
-
-
 
         this.heroPlant = null;
         this.pendingGiantAttacks = [];
@@ -3881,9 +3304,6 @@ class Game {
         requestAnimationFrame(this.loop);
     }
 
-
-
-
     initGame() {
         Sprites.clearAll();
         
@@ -3898,13 +3318,7 @@ class Game {
             hasShownOverflowBanner: false
         };
 
-
-
-
         this.paused = false;
-
-
-
 
         this.score = 0;
         this.combo = 0;
@@ -3918,9 +3332,6 @@ class Game {
             this.highScore = 0;
             this.maxCombo = 0;
         }
-
-
-
 
         this.grid = []; 
         for(let r=0; r<GRID_ROWS; r++) {
@@ -3941,14 +3352,8 @@ class Game {
         this.shakeTimer = 0;
         this.shakeOffset = {x: 0, y: 0};
 
-
-
-
         this.lastTime = performance.now();
         this.waveTotalMaxHp = 0; 
-
-
-
 
         this.heroPlant = null; 
         this.moveHeroTo(2, 2, true); 
@@ -3960,12 +3365,8 @@ class Game {
         document.getElementById('pause-menu').style.display = 'none';
         document.getElementById('overflow-banner').style.display = 'none';
         
-        // 隐藏升级面板
         this.hideLevelUpPanel();
     }
-
-
-
 
     reset() {
         const goScreen = document.getElementById('game-over-screen');
@@ -3977,9 +3378,6 @@ class Game {
         SM.playBGM(); 
         this.initGame();
     }
-
-
-
 
     togglePause() {
         if (this.state.gameOver) return;
@@ -3993,9 +3391,6 @@ class Game {
             this.pauseStartTime = Date.now();
         }
     }
-
-
-
 
     fitScreen() {
         const aspect = CONFIG.canvasW / CONFIG.canvasH;
@@ -4022,9 +3417,6 @@ class Game {
         Sprites.updateCanvasInfo(this.canvas.getBoundingClientRect(), scale);
     }
 
-
-
-
     bindInputs() {
         const unlockAudio = () => {
             SM.resumeContext();
@@ -4034,17 +3426,11 @@ class Game {
         window.addEventListener('click', unlockAudio);
         window.addEventListener('keydown', unlockAudio);
 
-
-
-
         this.canvas.addEventListener('mousedown', (e) => {
             if (this.state.gameOver || this.paused) return;
             const rect = this.canvas.getBoundingClientRect();
             const x = (e.clientX - rect.left) / this.scaleFactor;
             const y = (e.clientY - rect.top) / this.scaleFactor;
-
-
-
 
             if (x > LEFT_MARGIN && y > TOP_MARGIN) {
                 const c = Math.floor((x - LEFT_MARGIN) / CELL_WIDTH);
@@ -4056,15 +3442,9 @@ class Game {
             }
         });
 
-
-
-
         document.getElementById('next-wave-btn').addEventListener('click', () => {
             if (!this.paused) this.startNextWave("BUTTON");
         });
-
-
-
 
         document.getElementById('restart-btn').addEventListener('click', () => {
             SM.play('button'); 
@@ -4078,15 +3458,9 @@ class Game {
             });
         });
 
-
-
-
         document.getElementById('btn-shield').addEventListener('click', () => { if(!this.paused) this.buyShield(); });
-        document.getElementById('btn-stun').addEventListener('click', () => { if(!this.paused) this.buyStun(); });
+        document.getElementById('btn-stun').addEventListener('click', () => { if(!this.paused) this.buyStunOrExecute(); });
         document.getElementById('btn-mower').addEventListener('click', () => { if(!this.paused) this.buyMower(); });
-
-
-
 
         window.addEventListener('keydown', (e) => {
             if (e.code === 'KeyR') {
@@ -4098,13 +3472,7 @@ class Game {
                 return;
             }
 
-
-
-
             if (this.state.gameOver || this.paused) return;
-
-
-
 
             if (this.heroPlant) {
                 let r = this.heroPlant.row;
@@ -4123,9 +3491,6 @@ class Game {
                 }
             }
 
-
-
-
             if (e.code === 'Space') this.tryUsePlantFood();
             else if (e.code === 'KeyN') {
                 if (document.getElementById('next-wave-btn').style.display === 'flex') {
@@ -4133,13 +3498,10 @@ class Game {
                 }
             }
             else if (e.code === 'Digit1') this.buyShield();
-            else if (e.code === 'Digit2') this.buyStun(); 
+            else if (e.code === 'Digit2') this.buyStunOrExecute(); 
             else if (e.code === 'Digit3') this.buyMower(); 
         });
     }
-
-
-
 
     tryUsePlantFood() {
         if (this.state.gameOver || !this.heroPlant) return;
@@ -4160,9 +3522,6 @@ class Game {
         this.usePlantFood(this.heroPlant);
     }
 
-
-
-
     usePlantFood(plant) {
         if (plant.isUltimating) return;
         SM.play('use_power');
@@ -4171,9 +3530,6 @@ class Game {
         plant.startUlt(this);
         this.addEffect(new FloatText("POWER UP!", plant.x, plant.y - 40, "#4ade80"));
     }
-
-
-
 
     recoverLife() {
         SM.play('hp_drop');
@@ -4185,24 +3541,15 @@ class Game {
         const targetEl = document.getElementById(targetId);
         if (!targetEl) return;
 
-
-
-
         const rect = targetEl.getBoundingClientRect();
         const canvasRect = this.canvas.getBoundingClientRect();
         const targetX = (rect.left - canvasRect.left + rect.width/2) / this.scaleFactor;
         const targetY = (rect.top - canvasRect.top + rect.height/2) / this.scaleFactor;
 
-
-
-
         this.addImportantEffect(new HPOrb(this.heroPlant.x, this.heroPlant.y, targetX, targetY, () => {
             this.onHPOrbArrive();
         }));
     }
-
-
-
 
     onHPOrbArrive() {
         if (this.state.lives < 3) {
@@ -4215,39 +3562,24 @@ class Game {
         }
     }
 
-
-
-
     triggerDoomSequence() {
-    const hearts = document.querySelectorAll('.heart');
-    hearts.forEach(h => h.classList.add('glowing'));
+        const hearts = document.querySelectorAll('.heart');
+        hearts.forEach(h => h.classList.add('glowing'));
 
+        const startEl = document.getElementById('lives-container');
+        const rect = startEl.getBoundingClientRect();
+        const canvasRect = this.canvas.getBoundingClientRect();
+        const startX = (rect.left - canvasRect.left + rect.width/2) / this.scaleFactor;
+        const startY = (rect.top - canvasRect.top + rect.height/2) / this.scaleFactor;
 
+        const centerX = CONFIG.canvasW / 2;
+        const centerY = CONFIG.canvasH / 2;
 
-
-    const startEl = document.getElementById('lives-container');
-    const rect = startEl.getBoundingClientRect();
-    const canvasRect = this.canvas.getBoundingClientRect();
-    const startX = (rect.left - canvasRect.left + rect.width/2) / this.scaleFactor;
-    const startY = (rect.top - canvasRect.top + rect.height/2) / this.scaleFactor;
-
-
-
-
-    const centerX = CONFIG.canvasW / 2;
-    const centerY = CONFIG.canvasH / 2;
-
-
-
-
-    this.addImportantEffect(new DoomSeed(startX, startY, centerX, centerY, () => {
-        hearts.forEach(h => h.classList.remove('glowing'));
-        this.triggerScreenClear();
-    }));
-}
-
-
-
+        this.addImportantEffect(new DoomSeed(startX, startY, centerX, centerY, () => {
+            hearts.forEach(h => h.classList.remove('glowing'));
+            this.triggerScreenClear();
+        }));
+    }
 
     triggerScreenClear() {
         SM.play('doom'); 
@@ -4257,9 +3589,6 @@ class Game {
         this.addEffect(new ScreenFlash());
         this.addEffect(new FloatText("DOOM!", CONFIG.canvasW/2, CONFIG.canvasH/2, "#fff"));
 
-
-
-
         this.zombies.forEach(z => {
             if (!z.isDead) {
                 z.takeDamage(99999, this, 'direct');
@@ -4268,104 +3597,91 @@ class Game {
         });
     }
 
-
-
-
-    // 显示升级面板
-showLevelUpPanel(level, bonusType, onlyBonus = false) {
-    const panel = document.getElementById('levelup-panel');
-    const iconEl = document.getElementById('levelup-icon');
-    const textEl = document.getElementById('levelup-text');
-    const effectsEl = document.getElementById('levelup-effects');
-    const bonusEl = document.getElementById('levelup-bonus');
-    
-    // 清除之前的定时器
-    if (this.levelUpPanelTimer) {
-        clearTimeout(this.levelUpPanelTimer);
-    }
-    
-    // 设置等级图标
-    iconEl.src = `./images/ui/lv${level}_icon.png`;
-    
-    if (onlyBonus) {
-        // MAX等级只显示附加效果
-        iconEl.style.display = 'none';
-        textEl.style.display = 'none';
-        effectsEl.innerHTML = '';
-    } else {
-        iconEl.style.display = 'block';
-        textEl.style.display = 'block';
-        textEl.innerText = `已升至 ${level} 级`;
+    showLevelUpPanel(level, bonusType, onlyBonus = false) {
+        const panel = document.getElementById('levelup-panel');
+        const iconEl = document.getElementById('levelup-icon');
+        const textEl = document.getElementById('levelup-text');
+        const effectsEl = document.getElementById('levelup-effects');
+        const bonusEl = document.getElementById('levelup-bonus');
         
-        // 构建升级效果列表
-        effectsEl.innerHTML = '';
-        const effects = LEVELUP_EFFECTS[level] || [];
-        effects.forEach(effect => {
+        if (this.levelUpPanelTimer) {
+            clearTimeout(this.levelUpPanelTimer);
+        }
+        
+        iconEl.src = `./images/ui/lv${level}_icon.png`;
+        
+        if (onlyBonus) {
+            iconEl.style.display = 'none';
+            textEl.style.display = 'none';
+            effectsEl.innerHTML = '';
+        } else {
+            iconEl.style.display = 'block';
+            textEl.style.display = 'block';
+            textEl.innerText = `已升至 ${level} 级`;
+            
+            effectsEl.innerHTML = '';
+            const effects = LEVELUP_EFFECTS[level] || [];
+            effects.forEach(effect => {
+                const item = document.createElement('div');
+                item.className = 'levelup-effect-item';
+                if (effect.isSkillChange) {
+                    item.classList.add('skill-change');
+                }
+                item.innerHTML = `
+                    <img class="levelup-effect-icon" src="./images/ui/${effect.icon}.png" alt="">
+                    <span class="levelup-effect-label">${effect.label}</span>
+                `;
+                effectsEl.appendChild(item);
+            });
+        }
+        
+        bonusEl.innerHTML = '';
+        if (bonusType === 'heal') {
             const item = document.createElement('div');
-            item.className = 'levelup-effect-item';
+            item.className = 'levelup-bonus-item heal';
             item.innerHTML = `
-                <img class="levelup-effect-icon" src="./images/ui/${effect.icon}.png" alt="">
-                <span class="levelup-effect-label">${effect.label}</span>
+                <img class="levelup-bonus-icon" src="./images/ui/heal_icon.png" alt="">
+                <span class="levelup-bonus-label">+1 生命</span>
             `;
-            effectsEl.appendChild(item);
-        });
-    }
-    
-    // 构建附加效果
-    bonusEl.innerHTML = '';
-    if (bonusType === 'heal') {
-        const item = document.createElement('div');
-        item.className = 'levelup-bonus-item heal';
-        item.innerHTML = `
-            <img class="levelup-bonus-icon" src="./images/ui/heal_icon.png" alt="">
-            <span class="levelup-bonus-label">+1 生命</span>
-        `;
-        bonusEl.appendChild(item);
-    } else if (bonusType === 'doom') {
-        const item = document.createElement('div');
-        item.className = 'levelup-bonus-item doom';
-        item.innerHTML = `
-            <img class="levelup-bonus-icon" src="./images/ui/doom_icon.png" alt="">
-            <span class="levelup-bonus-label">DOOM!</span>
-        `;
-        bonusEl.appendChild(item);
-    }
-    
-    // 关键修复：先清除内联样式，让CSS类生效
-    panel.style.display = '';
-    
-    // 显示面板
-    panel.classList.remove('hide');
-    void panel.offsetWidth; // 强制重排，确保动画生效
-    panel.classList.add('show');
-    
-    // 设置淡出定时器
-    this.levelUpPanelTimer = setTimeout(() => {
-        panel.classList.remove('show');
-        panel.classList.add('hide');
+            bonusEl.appendChild(item);
+        } else if (bonusType === 'doom') {
+            const item = document.createElement('div');
+            item.className = 'levelup-bonus-item doom';
+            item.innerHTML = `
+                <img class="levelup-bonus-icon" src="./images/ui/doom_icon.png" alt="">
+                <span class="levelup-bonus-label">DOOM!</span>
+            `;
+            bonusEl.appendChild(item);
+        }
         
-        // 动画结束后隐藏
-        setTimeout(() => {
-            if (panel.classList.contains('hide')) {
-                panel.style.display = 'none';
-                panel.classList.remove('hide');
-            }
-        }, 800);
-    }, 2500);
-}
-    
-hideLevelUpPanel() {
-    const panel = document.getElementById('levelup-panel');
-    panel.classList.remove('show', 'hide');
-    panel.style.display = 'none';
-    if (this.levelUpPanelTimer) {
-        clearTimeout(this.levelUpPanelTimer);
-        this.levelUpPanelTimer = null;
+        panel.style.display = '';
+        
+        panel.classList.remove('hide');
+        void panel.offsetWidth;
+        panel.classList.add('show');
+        
+        this.levelUpPanelTimer = setTimeout(() => {
+            panel.classList.remove('show');
+            panel.classList.add('hide');
+            
+            setTimeout(() => {
+                if (panel.classList.contains('hide')) {
+                    panel.style.display = 'none';
+                    panel.classList.remove('hide');
+                }
+            }, 800);
+        }, 2500);
     }
-}
-
-
-
+    
+    hideLevelUpPanel() {
+        const panel = document.getElementById('levelup-panel');
+        panel.classList.remove('show', 'hide');
+        panel.style.display = 'none';
+        if (this.levelUpPanelTimer) {
+            clearTimeout(this.levelUpPanelTimer);
+            this.levelUpPanelTimer = null;
+        }
+    }
 
     buyShield() {
         if (this.state.pfCount >= 2 && !this.hasShield && !this.state.gameOver) {
@@ -4380,9 +3696,6 @@ hideLevelUpPanel() {
         }
     }
 
-
-
-
     buyMower() {
         if (this.state.pfCount >= 5 && !this.lawnMower && !this.state.gameOver) {
             this.state.pfCount -= 5;
@@ -4396,25 +3709,34 @@ hideLevelUpPanel() {
         }
     }
 
-
-
-
-    buyStun() {
-        if (this.state.pfCount >= 2 && !this.state.gameOver && this.heroPlant) {
-            this.state.pfCount -= 2;
-            this.heroPlant.stunBuffTimer = 3000; 
-            this.heroPlant.lastBuffSec = 4; 
-            SM.play('button_buy'); 
-            SM.play('lightning_on'); 
+    buyStunOrExecute() {
+    const isExecuteMode = this.heroPlant && this.heroPlant.level >= 4;
+    const cost = isExecuteMode ? 3 : 2;
+    
+    if (this.state.pfCount >= cost && !this.state.gameOver && this.heroPlant) {
+        this.state.pfCount -= cost;
+        
+        if (isExecuteMode) {
+            this.heroPlant.executeBuffTimer = 3000;
+            this.heroPlant.stunBuffTimer = 0;
+            this.heroPlant.lastBuffSec = 4;
+            SM.play('button_buy');
+            SM.play('execute_on');
+            this.updateUI();
+            this.addEffect(new FloatText("斩杀!", this.heroPlant.x, this.heroPlant.y - 60, "#ef4444"));
+        } else {
+            this.heroPlant.stunBuffTimer = 3000;
+            this.heroPlant.executeBuffTimer = 0;
+            this.heroPlant.lastBuffSec = 4;
+            SM.play('button_buy');
+            SM.play('lightning_on');
             this.updateUI();
             this.addEffect(new FloatText("ELECTRIC!", this.heroPlant.x, this.heroPlant.y - 60, "#facc15"));
-        } else if (this.state.pfCount < 2) {
-            SM.play('buzzer');
         }
+    } else if (this.state.pfCount < cost) {
+        SM.play('buzzer');
     }
-
-
-
+}
 
     registerGiantAttack(giant) {
         this.pendingGiantAttacks.push({
@@ -4425,23 +3747,14 @@ hideLevelUpPanel() {
         });
     }
 
-
-
-
     moveHeroTo(r, c, silent = false) {
         if (this.heroPlant && this.heroPlant.row === r && this.heroPlant.col === c) {
             return;
         }
 
-
-
-
         if (!silent) {
             SM.play('plant_move');
         }
-
-
-
 
         let isPerfectDodge = false;
         if (this.heroPlant) {
@@ -4451,9 +3764,6 @@ hideLevelUpPanel() {
                 m.timer <= PARRY_WINDOW && 
                 m.timer > 0
             );
-
-
-
 
             if (threateningMeteor) {
                 isPerfectDodge = true;
@@ -4472,9 +3782,6 @@ hideLevelUpPanel() {
                 isPerfectDodge = true;
             }
         }
-
-
-
 
         if (this.heroPlant) {
             const oldRow = this.heroPlant.row;
@@ -4497,16 +3804,10 @@ hideLevelUpPanel() {
         }
         this.grid[r][c] = this.heroPlant;
 
-
-
-
         if (isPerfectDodge) {
             this.triggerPerfectDodge();
         }
     }
-
-
-
 
     triggerPerfectDodge() {
         SM.play('deflect');
@@ -4516,21 +3817,12 @@ hideLevelUpPanel() {
         this.addEffect(new FloatText("完美闪避!", this.heroPlant.x, this.heroPlant.y - 80, "#fef08a"));
         this.shakeTimer = 400;
 
-
-
-
         if(this.heroPlant) {
             this.heroPlant.invincibleTimer = 300;
         }
 
-
-
-
         this.projectiles.push(new HolyBeam(this.heroPlant.x + 40, this.heroPlant.y));
     }
-
-
-
 
     startWave() {
         this.state.lastWaveTime = Date.now();
@@ -4539,9 +3831,6 @@ hideLevelUpPanel() {
         
         SM.play('huge_wave');
         SM.play('siren'); 
-
-
-
 
         let themeZombie = null;
         let themeText = "";
@@ -4554,17 +3843,11 @@ hideLevelUpPanel() {
             if (this.state.wave >= 15) possibleThemes.push(ZOMBIE_TYPES.GUNNER);
             if (this.state.wave >= 15) possibleThemes.push(ZOMBIE_TYPES.GIANT);
 
-
-
-
             if (possibleThemes.length > 0) {
                 themeZombie = possibleThemes[Math.floor(Math.random() * possibleThemes.length)];
                 themeText = `\n${themeZombie.name}来袭!`;
             }
         }
-
-
-
 
         if (this.state.wave === CONFIG.meteorStartWave) {
             this.showToast("陨石来袭!");
@@ -4598,18 +3881,12 @@ hideLevelUpPanel() {
             }
         }
 
-
-
-
         let rawDifficulty = 10 + this.state.wave * 8 + Math.pow(this.state.wave, 1.65);
         const maxDifficulty = 800; 
         const waveDifficulty = Math.min(rawDifficulty, maxDifficulty);
         
         let currentDifficulty = 0;
         const spawnList = [];
-
-
-
 
         const pool = [];
         pool.push({ type: ZOMBIE_TYPES.BASIC, weight: 50 });
@@ -4620,9 +3897,6 @@ hideLevelUpPanel() {
         if (this.state.wave >= 3) pool.push({ type: ZOMBIE_TYPES.PHANTOM, weight: 30 });
         if (this.state.wave >= 15) pool.push({ type: ZOMBIE_TYPES.GUNNER, weight: 15 });
 
-
-
-
         if (themeZombie) {
             pool.forEach(item => {
                 if (item.type.id === themeZombie.id) {
@@ -4630,9 +3904,6 @@ hideLevelUpPanel() {
                 }
             });
         }
-
-
-
 
         const pickZombie = () => {
             const totalWeight = pool.reduce((a, b) => a + b.weight, 0);
@@ -4644,13 +3915,7 @@ hideLevelUpPanel() {
             return ZOMBIE_TYPES.BASIC;
         };
 
-
-
-
         const MAX_ZOMBIES_PER_WAVE = CONFIG.maxZombies;
-
-
-
 
         while (currentDifficulty < waveDifficulty && spawnList.length < MAX_ZOMBIES_PER_WAVE) {
             const type = pickZombie();
@@ -4659,9 +3924,6 @@ hideLevelUpPanel() {
         }
         
         spawnList.sort(() => Math.random() - 0.5);
-
-
-
 
         let gunnerCount = 0;
         for (let i = 0; i < spawnList.length; i++) {
@@ -4673,13 +3935,7 @@ hideLevelUpPanel() {
             }
         }
 
-
-
-
         this.waveTotalMaxHp = 0;
-
-
-
 
         spawnList.forEach(type => {
             const r = Math.floor(Math.random() * GRID_ROWS);
@@ -4699,23 +3955,14 @@ hideLevelUpPanel() {
             this.zombies.push(z);
         });
 
-
-
-
         this.updateUI();
     }
-
-
-
 
     startNextWave(reason) {
         if (this.state.gameOver) return;
         this.state.wave++;
         this.startWave();
     }
-
-
-
 
     addScore(amount) {
         const multiplier = 1 + Math.min(this.combo, 50) * 0.01;
@@ -4741,9 +3988,6 @@ hideLevelUpPanel() {
             }
         }
 
-
-
-
         const comboCountEl = document.getElementById('combo-count');
         if (comboCountEl) {
             comboCountEl.classList.remove('combo-pop');
@@ -4751,14 +3995,8 @@ hideLevelUpPanel() {
             comboCountEl.classList.add('combo-pop');
         }
 
-
-
-
         this.updateUI();
     }
-
-
-
 
     triggerGameOver(reason) {
         if (this.state.gameOver) return;
@@ -4779,9 +4017,6 @@ hideLevelUpPanel() {
         }
         finalScoreEl.innerText = this.score;
 
-
-
-
         goScreen.style.display = 'flex';
         goScreen.style.opacity = '1';
         
@@ -4792,9 +4027,6 @@ hideLevelUpPanel() {
             });
         });
     }
-
-
-
 
     triggerImpThrow(giant) {
         const targetCol = 3; 
@@ -4812,14 +4044,8 @@ hideLevelUpPanel() {
         }));
     }
 
-
-
-
     updateMeteors(dt) {
         if (this.state.wave < CONFIG.meteorStartWave) return;
-
-
-
 
         const progress = Math.min(1, (this.state.wave - CONFIG.meteorStartWave) / (CONFIG.meteorMaxWave - CONFIG.meteorStartWave));
         
@@ -4827,15 +4053,9 @@ hideLevelUpPanel() {
         
         const maxMeteors = Math.floor(5 + progress * 15);
 
-
-
-
         if (this.meteors.length < maxMeteors && Math.random() < spawnRate) {
             this.spawnMeteor();
         }
-
-
-
 
         for (let i = this.meteors.length - 1; i >= 0; i--) {
             const m = this.meteors[i];
@@ -4866,16 +4086,10 @@ hideLevelUpPanel() {
         }
     }
 
-
-
-
     spawnMeteor() {
         let r, c;
         let valid = false;
         let attempts = 0;
-
-
-
 
         const rand = Math.random();
         let targetMode = 'random';
@@ -4885,22 +4099,13 @@ hideLevelUpPanel() {
             isOnTile = this.energyTiles.some(t => t.row === this.heroPlant.row && t.col === this.heroPlant.col);
         }
 
-
-
-
         let playerTargetChance = isOnTile ? 0.05 : 0.3;
-
-
-
 
         if (rand < playerTargetChance && this.heroPlant) {
             targetMode = 'player'; 
         } else if (rand < 0.8) {
             targetMode = 'left_side'; 
         }
-
-
-
 
         while (attempts < 15 && !valid) {
             if (targetMode === 'player' && this.heroPlant) {
@@ -4918,9 +4123,6 @@ hideLevelUpPanel() {
                 c = Math.floor(Math.random() * GRID_COLS);
             }
 
-
-
-
             const occupied = this.meteors.some(m => m.row === r && m.col === c);
             if (!occupied) {
                 valid = true;
@@ -4930,37 +4132,22 @@ hideLevelUpPanel() {
             }
         }
 
-
-
-
         if (valid) {
             this.meteors.push(new Meteor(r, c));
         }
     }
 
-
-
-
     playerHit() {
         if (this.state.gameOver) return;
-
-
-
 
         if (this.heroPlant && this.heroPlant.invincibleTimer > 0) {
             return;
         }
 
-
-
-
         if (this.heroPlant && this.heroPlant.isUltimating) {
             this.addEffect(new FloatText("无敌!", this.heroPlant.x, this.heroPlant.y - 60, "#fff"));
             return;
         }
-
-
-
 
         if (this.hasShield) {
             this.hasShield = false;
@@ -4969,9 +4156,6 @@ hideLevelUpPanel() {
             this.addEffect(new FloatText("抵挡!", this.heroPlant.x, this.heroPlant.y - 60, "#60a5fa"));
             return;
         }
-
-
-
 
         this.state.lives--;
         this.updateLivesUI();
@@ -4989,9 +4173,6 @@ hideLevelUpPanel() {
             this.triggerGameOver('DEATH');
         }
     }
-
-
-
 
     updateLivesUI(gained = false) {
         for (let i = 1; i <= 3; i++) {
@@ -5011,18 +4192,12 @@ hideLevelUpPanel() {
         }
     }
 
-
-
-
     loop(timestamp) {
         if (!this.lastTime) this.lastTime = timestamp;
         let dt = timestamp - this.lastTime;
         this.lastTime = timestamp;
         
         if (dt > 100) dt = 100; 
-
-
-
 
         if (!this.paused && !this.state.gameOver) {
             this.update(dt, Date.now());
@@ -5032,9 +4207,6 @@ hideLevelUpPanel() {
         
         requestAnimationFrame(this.loop);
     }
-
-
-
 
     update(dt, now) {
         this.chainsCalculatedThisFrame = 0;
@@ -5048,9 +4220,6 @@ hideLevelUpPanel() {
             this.shakeOffset = {x: 0, y: 0};
         }
 
-
-
-
         if (this.combo > 0) {
             this.comboTimer -= dt;
             if (this.comboTimer <= 0) {
@@ -5059,15 +4228,9 @@ hideLevelUpPanel() {
             }
         }
 
-
-
-
         const timePassed = now - this.state.lastWaveTime;
         const progress = Math.min(timePassed / CONFIG.waveTimeout, 1);
         document.getElementById('wave-progress').style.width = `${progress*100}%`;
-
-
-
 
         if (this.zombies.length === 0 && timePassed > 1000) {
             this.startNextWave("CLEAR");
@@ -5075,9 +4238,6 @@ hideLevelUpPanel() {
         else if (timePassed > CONFIG.waveTimeout) {
             this.startNextWave("TIMEOUT");
         }
-
-
-
 
         const currentLivingHp = this.zombies.reduce((sum, z) => sum + z.hp, 0);
         const canRush = (this.waveTotalMaxHp > 0) && (currentLivingHp < (this.waveTotalMaxHp * 0.5));
@@ -5089,9 +4249,6 @@ hideLevelUpPanel() {
             btn.style.display = 'none';
         }
 
-
-
-
         this.updateMeteors(dt);
         
         this.pendingGiantAttacks = this.pendingGiantAttacks.filter(atk => {
@@ -5099,9 +4256,6 @@ hideLevelUpPanel() {
             const elapsed = now - atk.startTime;
             return elapsed < (atk.zombie.attackDuration || 1500);
         });
-
-
-
 
         if (this.lawnMower) {
             this.lawnMower.update(dt, this);
@@ -5111,18 +4265,12 @@ hideLevelUpPanel() {
             }
         }
 
-
-
-
         for (let i = this.energyTiles.length - 1; i >= 0; i--) {
             const tile = this.energyTiles[i];
             let hasPlant = false;
             if (this.heroPlant && this.heroPlant.row === tile.row && this.heroPlant.col === tile.col) {
                 hasPlant = true;
             }
-
-
-
 
             if (hasPlant) {
                 if (tile.progress < tile.maxProgress) {
@@ -5144,16 +4292,10 @@ hideLevelUpPanel() {
             }
         }
 
-
-
-
         if (this.heroPlant) {
             const hasEnemy = this.zombies.some(z => z.row === this.heroPlant.row && z.x > this.heroPlant.x && !z.isDropping);
             this.heroPlant.update(dt, hasEnemy, this);
         }
-
-
-
 
         for (let i = this.projectiles.length - 1; i >= 0; i--) {
             const p = this.projectiles[i];
@@ -5165,14 +4307,8 @@ hideLevelUpPanel() {
                 continue;
             }
 
-
-
-
             for (let z of this.zombies) {
                 if (z.isDropping) continue;
-
-
-
 
                 if (p instanceof HolyBeam) {
                     if (z.y > p.y - p.height/2 && z.y < p.y + p.height/2 && z.x > p.x) {
@@ -5186,9 +4322,6 @@ hideLevelUpPanel() {
                     continue;
                 }
 
-
-
-
                 const hitRadius = (30 + p.radius) * z.scale; 
                 
                 const dist = Math.hypot(z.x - p.x, z.y - p.y);
@@ -5197,32 +4330,32 @@ hideLevelUpPanel() {
                 
                 let dealtDamage = false;
 
-
-
-
                 if (isDirectHit) {
                     if (!p.hitList.includes(z.id)) {
                         p.hitList.push(z.id); 
-                        const dmgType = p.isUlt ? 'ultimate' : 'direct';
-                        z.takeDamage(p.damage, this, dmgType);
                         
-                        let shouldStun = false;
-                        if (p.stunMode === 2) shouldStun = true; 
-                        else if (p.stunMode === 1 && Math.random() < 0.1) shouldStun = true; 
+                        let actualDamage = p.damage;
+                        if (p.executeMode) {
+                            actualDamage = z.maxHp * CONFIG.executePercent;
+                        }
+                        
+                        const dmgType = p.isUlt ? 'ultimate' : 'direct';
+                        z.takeDamage(actualDamage, this, dmgType);
+                        
+                        if (!p.executeMode) {
+                            let shouldStun = false;
+                            if (p.stunMode === 2) shouldStun = true; 
+                            else if (p.stunMode === 1 && Math.random() < 0.1) shouldStun = true; 
 
-
-
-
-                        if (shouldStun) {
-                            const duration = p.isUlt ? 500 : (p.stunMode === 2 ? 200 : 300);
-                            z.applyStun(duration);
-                            this.addEffect(new Particle(z.x, z.y - 60, '#facc15', 10, 2));
+                            if (shouldStun) {
+                                const duration = p.isUlt ? 500 : (p.stunMode === 2 ? 200 : 300);
+                                z.applyStun(duration);
+                                this.addEffect(new Particle(z.x, z.y - 60, '#facc15', 10, 2));
+                            }
                         }
 
-
-
-
-                        this.addEffect(new Particle(z.x, z.y - 40*z.scale, '#60a5fa', 8, 3));
+                        const particleColor = p.executeMode ? '#ef4444' : '#60a5fa';
+                        this.addEffect(new Particle(z.x, z.y - 40*z.scale, particleColor, 8, 3));
                         SM.play('hit', 50);
                         dealtDamage = true;
                     }
@@ -5231,33 +4364,31 @@ hideLevelUpPanel() {
                 if (isAuraHit && !isDirectHit) {
                     if (!p.auraList.includes(z.id)) {
                         p.auraList.push(z.id);
-                        z.takeDamage(p.damage * 0.5, this, 'aura');
                         
-                        if (p.isUlt && p.stunMode === 2) {
+                        let auraDamage = p.damage * 0.5;
+                        if (p.executeMode) {
+                            auraDamage = z.maxHp * CONFIG.executePercent * 0.5;
+                        }
+                        
+                        z.takeDamage(auraDamage, this, 'aura');
+                        
+                        if (p.isUlt && p.stunMode === 2 && !p.executeMode) {
                             z.applyStun(500);
                         }
 
-
-
-
-                        this.addEffect(new LightningBolt(p.x, p.y, z.x, z.y - 40*z.scale, '#93c5fd', 2));
+                        const boltColor = p.executeMode ? '#ef4444' : '#93c5fd';
+                        this.addEffect(new LightningBolt(p.x, p.y, z.x, z.y - 40*z.scale, boltColor, 2));
                         dealtDamage = true;
                     }
                 }
 
-
-
-
                 if (dealtDamage) {
                     if (z.type.id !== 'PHANTOM') {
-                        this.triggerChainLightning(z, p.damage, this);
+                        this.triggerChainLightning(z, p.executeMode ? z.maxHp * CONFIG.executePercent : p.damage, this);
                     }
                 }
             }
         }
-
-
-
 
         for (let i = this.enemyProjectiles.length - 1; i >= 0; i--) {
             const ep = this.enemyProjectiles[i];
@@ -5268,9 +4399,6 @@ hideLevelUpPanel() {
                 this.enemyProjectiles.splice(i, 1);
                 continue;
             }
-
-
-
 
             if (this.heroPlant && this.heroPlant.row === ep.row) {
                 const dist = Math.abs(this.heroPlant.x - ep.x);
@@ -5284,9 +4412,6 @@ hideLevelUpPanel() {
             }
         }
 
-
-
-
         for (let i = this.zombies.length - 1; i >= 0; i--) {
             const z = this.zombies[i];
             z.update(dt, this); 
@@ -5294,9 +4419,6 @@ hideLevelUpPanel() {
             if (z.x < LEFT_MARGIN - 120) {
                  this.triggerGameOver('ZOMBIE');
             }
-
-
-
 
             if (z.isDead) {
                 SM.play('zap');
@@ -5306,9 +4428,6 @@ hideLevelUpPanel() {
                 this.zombies.splice(i, 1);
             }
         }
-
-
-
 
         const normalEffects = this.effects.filter(e => !e.isImportant);
         const importantEffects = this.effects.filter(e => e.isImportant);
@@ -5320,9 +4439,6 @@ hideLevelUpPanel() {
         
         this.effects = [...importantEffects, ...normalEffects];
 
-
-
-
         for(let i=this.effects.length-1; i>=0; i--) {
             const e = this.effects[i];
             e.update(dt);
@@ -5332,47 +4448,23 @@ hideLevelUpPanel() {
             }
         }
 
-
-
-
         this.updateUI();
     }
-
-
-
 
     triggerChainLightning(sourceZombie, damage, game) {
         if (this.chainsCalculatedThisFrame >= CONFIG.chainMaxPerFrame) return;
 
-
-
-
         const now = Date.now();
-
-
-
 
         if (this.lastGlobalChainTime && now - this.lastGlobalChainTime < CONFIG.chainGlobalCooldown) return;
 
-
-
-
         if (sourceZombie.lastChainSourceTime && now - sourceZombie.lastChainSourceTime < CONFIG.chainSourceCooldown) return;
-
-
-
 
         this.chainsCalculatedThisFrame++;
         this.lastGlobalChainTime = now;
 
-
-
-
         let closestZombie = null;
         let minDistSq = CONFIG.chainRange * CONFIG.chainRange;
-
-
-
 
         for (let i = game.zombies.length - 1; i >= 0; i--) {
             const z = game.zombies[i];
@@ -5381,15 +4473,9 @@ hideLevelUpPanel() {
             if (Math.abs(z.x - sourceZombie.x) > CONFIG.chainRange) continue;
             if (now - z.lastChainHitTime < CONFIG.chainHitCooldown) continue;
 
-
-
-
             const dx = z.x - sourceZombie.x;
             const dy = z.y - sourceZombie.y;
             const distSq = dx * dx + dy * dy;
-
-
-
 
             if (distSq < minDistSq) {
                 minDistSq = distSq;
@@ -5397,20 +4483,11 @@ hideLevelUpPanel() {
             }
         }
 
-
-
-
         if (closestZombie) {
             sourceZombie.lastChainSourceTime = now;
             closestZombie.lastChainHitTime = now;
 
-
-
-
             if (Math.random() < 0.2) SM.play('chain', 100);
-
-
-
 
             closestZombie.takeDamage(damage * 0.5, game, 'chain'); 
             
@@ -5424,9 +4501,6 @@ hideLevelUpPanel() {
             ));
         }
     }
-
-
-
 
     spawnPFOrb(startX, startY) {
         const normalEffectsCount = this.effects.filter(e => !e.isImportant).length;
@@ -5452,9 +4526,6 @@ hideLevelUpPanel() {
             this.actualGainPF();
         }
     }
-
-
-
 
     actualGainPF() {
         if (this.state.pfCount < 5) {
@@ -5507,9 +4578,6 @@ hideLevelUpPanel() {
         }, 3000);
     }
 
-
-
-
     addEffect(e) { 
         if (this.effects.length < CONFIG.maxEffects) {
             this.effects.push(e); 
@@ -5521,9 +4589,6 @@ hideLevelUpPanel() {
         this.effects.push(e);
     }
 
-
-
-
     showToast(text) {
         const t = document.getElementById('toast');
         t.innerText = text;
@@ -5531,9 +4596,6 @@ hideLevelUpPanel() {
         void t.offsetWidth; 
         t.classList.add('slam-text');
     }
-
-
-
 
     updateUI() {
         document.getElementById('wave-num').innerText = this.state.wave;
@@ -5545,16 +4607,10 @@ hideLevelUpPanel() {
         document.getElementById('score-display').innerText = this.score;
         document.getElementById('highscore-display').innerText = `HI: ${this.highScore}`;
 
-
-
-
         const comboContainer = document.getElementById('combo-container');
         const comboCountEl = document.getElementById('combo-count');
         const comboMultEl = document.getElementById('combo-multiplier');
         const maxComboEl = document.getElementById('max-combo-display');
-
-
-
 
         if (this.combo > 0) {
             comboContainer.style.display = 'flex';
@@ -5563,31 +4619,19 @@ hideLevelUpPanel() {
             const saturation = Math.min(100, (this.comboTimer / 500) * 100);
             comboContainer.style.filter = `saturate(${saturation}%)`;
 
-
-
-
             comboCountEl.className = '';
             if (this.combo < 10) comboCountEl.classList.add('combo-green');
             else if (this.combo < 25) comboCountEl.classList.add('combo-yellow');
             else if (this.combo < 50) comboCountEl.classList.add('combo-orange');
             else comboCountEl.classList.add('combo-red');
 
-
-
-
             const mult = 1 + Math.min(this.combo, 50) * 0.01;
             comboMultEl.innerText = `${mult.toFixed(2)}x`;
-
-
-
 
         } else {
             comboContainer.style.display = 'none';
         }
         maxComboEl.innerText = `MAX: ${this.maxCombo}`;
-
-
-
 
         const slots = document.querySelectorAll('.plant-food-slot');
         slots.forEach((s, i) => {
@@ -5595,72 +4639,82 @@ hideLevelUpPanel() {
             else s.classList.remove('filled');
         });
 
+        // 在 updateUI() 函数的末尾部分，替换为：
 
-
-
-        if (this.heroPlant) {
-            document.getElementById('stat-level').innerText = this.heroPlant.level >= 4 ? "4 (MAX)" : this.heroPlant.level;
-            
-            const thresholds = [3, 10, 20];
-            let nextGoal = "MAX";
-            if (this.heroPlant.level < 4) {
-                for(let t of thresholds) {
-                    if (this.heroPlant.ultUseCount < t) {
-                        nextGoal = `${this.heroPlant.ultUseCount}/${t}`;
-                        break;
-                    }
-                }
-            } else {
-                const count = this.heroPlant.ultUseCount;
-                const remainder = count % 10;
-                nextGoal = `${remainder}/10 (HEAL)`;
-            }
-            document.getElementById('stat-xp').innerText = nextGoal;
-
-
-
-
-            const buffRow = document.getElementById('buff-row');
-            const buffText = document.getElementById('stat-buff');
-            if (this.heroPlant.stunBuffTimer > 0) {
-                buffRow.style.display = 'flex';
-                buffText.innerText = `STUN ${(this.heroPlant.stunBuffTimer/1000).toFixed(1)}s`;
-            } else {
-                buffRow.style.display = 'none';
+if (this.heroPlant) {
+    document.getElementById('stat-level').innerText = this.heroPlant.level >= 4 ? "4 (MAX)" : this.heroPlant.level;
+    
+    const thresholds = [3, 10, 20];
+    let nextGoal = "MAX";
+    if (this.heroPlant.level < 4) {
+        for(let t of thresholds) {
+            if (this.heroPlant.ultUseCount < t) {
+                nextGoal = `${this.heroPlant.ultUseCount}/${t}`;
+                break;
             }
         }
-
-
-
-
-        const btnShield = document.getElementById('btn-shield');
-        const btnMower = document.getElementById('btn-mower');
-        const btnStun = document.getElementById('btn-stun');
-
-
-
-
-        const updateBtn = (btn, cost, condition) => {
-            if (this.state.pfCount >= cost && condition) {
-                btn.classList.add('affordable');
-                btn.classList.remove('disabled');
-            } else {
-                btn.classList.remove('affordable');
-                if (!condition) btn.classList.add('disabled');
-                else if (this.state.pfCount < cost) btn.classList.add('disabled');
-            }
-        };
-
-
-
-
-        updateBtn(btnShield, 2, !this.hasShield);
-        updateBtn(btnMower, 5, !this.lawnMower);
-        updateBtn(btnStun, 2, true); 
+    } else {
+        const count = this.heroPlant.ultUseCount;
+        const remainder = count % 10;
+        nextGoal = `${remainder}/10 (HEAL)`;
     }
+    document.getElementById('stat-xp').innerText = nextGoal;
 
+    const buffRow = document.getElementById('buff-row');
+    const buffText = document.getElementById('stat-buff');
+    if (this.heroPlant.stunBuffTimer > 0) {
+        buffRow.style.display = 'flex';
+        buffText.className = 'buff-active';
+        buffText.innerText = `STUN ${(this.heroPlant.stunBuffTimer/1000).toFixed(1)}s`;
+    } else if (this.heroPlant.executeBuffTimer > 0) {
+        buffRow.style.display = 'flex';
+        buffText.className = 'buff-execute';
+        buffText.innerText = `斩杀 ${(this.heroPlant.executeBuffTimer/1000).toFixed(1)}s`;
+    } else {
+        buffRow.style.display = 'none';
+    }
+    
+    // 更新斩杀/电击按钮外观和价格
+    const btnStun = document.getElementById('btn-stun');
+    const btnStunIcon = document.getElementById('btn-stun-icon');
+    const btnStunLabel = document.getElementById('btn-stun-label');
+    const btnStunCostNum = document.getElementById('btn-stun-cost-num');
+    
+    if (this.heroPlant.level >= 4) {
+        btnStun.classList.add('execute-mode');
+        btnStunIcon.src = './images/ui/icon_execute.png';
+        btnStunLabel.innerText = '斩杀';
+        btnStunCostNum.innerText = '3';
+    } else {
+        btnStun.classList.remove('execute-mode');
+        btnStunIcon.src = './images/ui/icon_stun.png';
+        btnStunLabel.innerText = '电击';
+        btnStunCostNum.innerText = '2';
+    }
+}
 
+const btnShield = document.getElementById('btn-shield');
+const btnMower = document.getElementById('btn-mower');
+const btnStun = document.getElementById('btn-stun');
 
+const updateBtn = (btn, cost, condition) => {
+    if (this.state.pfCount >= cost && condition) {
+        btn.classList.add('affordable');
+        btn.classList.remove('disabled');
+    } else {
+        btn.classList.remove('affordable');
+        if (!condition) btn.classList.add('disabled');
+        else if (this.state.pfCount < cost) btn.classList.add('disabled');
+    }
+};
+
+updateBtn(btnShield, 2, !this.hasShield);
+updateBtn(btnMower, 5, !this.lawnMower);
+
+// 斩杀模式花费3，电击模式花费2
+const stunCost = (this.heroPlant && this.heroPlant.level >= 4) ? 3 : 2;
+updateBtn(btnStun, stunCost, true);
+    }
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -5673,9 +4727,6 @@ hideLevelUpPanel() {
             this.ctx.fillRect(0, 0, CONFIG.canvasW, CONFIG.canvasH);
         }
 
-
-
-
         this.ctx.save();
         this.ctx.translate(this.shakeOffset.x, this.shakeOffset.y);
         
@@ -5683,9 +4734,6 @@ hideLevelUpPanel() {
         if (spriteLayer) {
             spriteLayer.style.transform = `translate(${this.shakeOffset.x}px, ${this.shakeOffset.y}px)`;
         }
-
-
-
 
         this.ctx.strokeStyle = 'rgba(0,0,0,0.08)';
         this.ctx.lineWidth = 1;
@@ -5707,15 +4755,9 @@ hideLevelUpPanel() {
             this.ctx.lineWidth = 2;
             this.ctx.strokeRect(x + 5, y + 5, CELL_WIDTH - 10, CELL_HEIGHT - 10);
 
-
-
-
             this.ctx.fillStyle = 'rgba(0, 255, 234, 0.6)';
             this.ctx.font = '20px Arial';
             this.ctx.fillText('⚡', x + CELL_WIDTH/2 - 10, y + CELL_HEIGHT/2);
-
-
-
 
             if (tile.progress > 0) {
                 const pct = tile.progress / tile.maxProgress;
@@ -5724,23 +4766,17 @@ hideLevelUpPanel() {
             }
         });
 
-
-
-
         const dangerX = LEFT_MARGIN + 3 * CELL_WIDTH;
         this.ctx.fillStyle = 'rgba(255, 255, 0, 0.03)';
         this.ctx.fillRect(dangerX, TOP_MARGIN, CELL_WIDTH, LAWN_HEIGHT);
 
-
-
-
         this.ctx.fillStyle = 'rgba(255, 0, 0, 0.1)';
         this.ctx.fillRect(0, TOP_MARGIN, LEFT_MARGIN, LAWN_HEIGHT);
 
-
-
-
-        if (this.heroPlant && this.heroPlant.stunBuffTimer > 0) {
+        const hasStunBuff = this.heroPlant && this.heroPlant.stunBuffTimer > 0;
+        const hasExecuteBuff = this.heroPlant && this.heroPlant.executeBuffTimer > 0;
+        
+        if (hasStunBuff || hasExecuteBuff) {
             const ctx = this.ctx;
             const gridX = LEFT_MARGIN;
             const gridY = TOP_MARGIN;
@@ -5751,57 +4787,36 @@ hideLevelUpPanel() {
             const centerY = gridY + gridH / 2;
             const radius = Math.hypot(gridW/2, gridH/2) + 20; 
 
-
-
-
             const maxTime = 3000;
-            const progress = this.heroPlant.stunBuffTimer / maxTime;
-
-
-
+            const currentBuffTime = hasExecuteBuff ? this.heroPlant.executeBuffTimer : this.heroPlant.stunBuffTimer;
+            const progress = currentBuffTime / maxTime;
+            
+            const buffColor = hasExecuteBuff ? 'rgba(239, 68, 68,' : 'rgba(250, 204, 21,';
 
             ctx.save();
 
-
-
-
-            ctx.strokeStyle = 'rgba(250, 204, 21, 0.8)'; 
+            ctx.strokeStyle = `${buffColor}0.8)`; 
             ctx.lineWidth = 5;
             ctx.strokeRect(gridX, gridY, gridW, gridH);
-
-
-
 
             if (progress > 0) {
                 ctx.beginPath();
                 ctx.rect(gridX, gridY, gridW, gridH);
                 ctx.clip();
 
-
-
-
                 ctx.beginPath();
                 ctx.moveTo(centerX, centerY);
                 ctx.arc(centerX, centerY, radius, -Math.PI / 2, -Math.PI / 2 + (Math.PI * 2 * progress), false);
                 ctx.closePath();
                 
-                ctx.fillStyle = 'rgba(250, 204, 21, 0.15)'; 
+                ctx.fillStyle = `${buffColor}0.15)`; 
                 ctx.fill();
             }
-
-
-
 
             ctx.restore();
         }
 
-
-
-
         this.meteors.forEach(m => m.draw(this.ctx));
-
-
-
 
         let parryOpportunity = false;
         if (this.heroPlant) {
@@ -5824,16 +4839,10 @@ hideLevelUpPanel() {
             if (threateningGiant) parryOpportunity = true;
         }
 
-
-
-
         if (parryOpportunity) {
             this.ctx.fillStyle = `rgba(255, 255, 255, 0.1)`;
             this.ctx.fillRect(0, 0, CONFIG.canvasW, CONFIG.canvasH);
         }
-
-
-
 
         if(this.heroPlant) {
             this.heroPlant.draw(this.ctx);
@@ -5851,9 +4860,6 @@ hideLevelUpPanel() {
                 this.ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
                 this.ctx.fill();
 
-
-
-
                 this.ctx.fillStyle = '#fff';
                 this.ctx.font = 'bold 24px Arial';
                 this.ctx.shadowColor = 'black';
@@ -5863,9 +4869,6 @@ hideLevelUpPanel() {
                 
                 this.ctx.restore();
             }
-
-
-
 
             if (this.hasShield) {
                 this.ctx.save();
@@ -5884,9 +4887,6 @@ hideLevelUpPanel() {
             }
         }
 
-
-
-
         if (this.lawnMower) {
             this.lawnMower.draw(this.ctx);
         }
@@ -5897,21 +4897,12 @@ hideLevelUpPanel() {
             if (!(obj instanceof Projectile)) obj.draw(this.ctx);
         });
 
-
-
-
         this.projectiles.forEach(p => p.draw(this.ctx));
         this.enemyProjectiles.forEach(ep => ep.draw(this.ctx));
-
-
-
 
         this.ctx.restore(); 
     }
 }
-
-
-
 
 window.onload = () => { 
     SM.initContext();
