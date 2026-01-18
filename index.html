@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>超级机枪豌豆 - 性能优化版</title>
+    <title>超级机枪豌豆</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -59,7 +59,7 @@
             margin-right: 20px;
         }
         .heart {
-            width: 32px;
+            width: 40px;
             height: 32px;
             filter: drop-shadow(2px 2px 0 #000);
             transition: transform 0.2s;
@@ -292,15 +292,12 @@
             height: 110px;
             border-radius: 50%;
             pointer-events: auto;
-            background: radial-gradient(circle, #4ade80 0%, #16a34a 100%);
-            border: 6px solid #14532d;
             color: white;
             font-size: 1.3rem;
             font-weight: 900;
             cursor: pointer;
             display: none; 
             animation: pop-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
             text-shadow: 1px 1px 0 rgba(0,0,0,0.5);
             flex-direction: column;
             justify-content: center;
@@ -553,7 +550,6 @@
             transition: opacity 0.5s;
         }
 
-        /* 精灵层 - 覆盖在Canvas上方用于渲染WebP动画 */
         #sprite-layer {
             position: absolute;
             top: 0;
@@ -571,59 +567,163 @@
             transform-origin: center bottom;
             will-change: transform, left, top;
         }
-        
-        /* ========== 性能监控面板 ========== */
-        #perf-panel {
-            position: absolute;
-            top: 100px;
-            left: 10px;
-            background: rgba(0, 0, 0, 0.85);
-            color: #0f0;
-            font-family: monospace;
-            font-size: 12px;
-            padding: 10px;
-            border-radius: 5px;
-            z-index: 999;
-            pointer-events: auto;
-            min-width: 200px;
-            border: 1px solid #0f0;
-        }
-        #perf-panel.hidden { display: none; }
-        #perf-panel .warn { color: #ff0; }
-        #perf-panel .error { color: #f00; }
-        #perf-panel div { margin: 2px 0; }
-        #perf-toggle {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: #333;
-            color: #0f0;
-            border: 1px solid #0f0;
-            padding: 5px 10px;
-            cursor: pointer;
-            z-index: 1000;
-            font-family: monospace;
-            pointer-events: auto;
-        }
-        
-        /* 错误日志面板 */
-        #error-log {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            background: rgba(100, 0, 0, 0.9);
-            color: #fff;
-            font-family: monospace;
-            font-size: 11px;
-            padding: 10px;
-            border-radius: 5px;
-            z-index: 999;
-            max-width: 400px;
-            max-height: 200px;
-            overflow-y: auto;
-            display: none;
-            border: 1px solid #f00;
-        }
+
+        /* 升级提示面板样式 */
+#levelup-panel {
+    position: absolute;
+    bottom: 180px;
+    left: 30px;
+    background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(30,30,30,0.95) 100%);
+    border: 3px solid #facc15;
+    border-radius: 15px;
+    padding: 20px 30px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    z-index: 120;
+    box-shadow: 0 0 30px rgba(250, 204, 21, 0.5), inset 0 0 20px rgba(250, 204, 21, 0.1);
+    min-width: 200px;
+    pointer-events: none;
+}
+
+#levelup-panel.show {
+    display: flex !important;
+    animation: levelup-appear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+#levelup-panel.hide {
+    display: flex !important;
+    animation: levelup-disappear 0.8s ease-out forwards;
+}
+
+@keyframes levelup-appear {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translateY(30px);
+    }
+    60% {
+        opacity: 1;
+        transform: scale(1.1) translateY(-5px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes levelup-disappear {
+    0% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+    }
+}
+
+#levelup-icon {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px #facc15);
+    animation: levelup-icon-pulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes levelup-icon-pulse {
+    0% { transform: scale(1); filter: drop-shadow(0 0 15px #facc15); }
+    100% { transform: scale(1.1); filter: drop-shadow(0 0 25px #fff); }
+}
+
+#levelup-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #facc15;
+    text-shadow: 2px 2px 0 #000, 0 0 10px rgba(250, 204, 21, 0.5);
+    letter-spacing: 2px;
+}
+
+#levelup-effects {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.levelup-effect-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255,255,255,0.1);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.levelup-effect-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.levelup-effect-label {
+    font-size: 0.75rem;
+    color: #a3e635;
+    text-shadow: 1px 1px 0 #000;
+    white-space: nowrap;
+}
+
+#levelup-bonus {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.levelup-bonus-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.3) 0%, rgba(220, 38, 38, 0.4) 100%);
+    padding: 8px 15px;
+    border-radius: 8px;
+    border: 2px solid #ef4444;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+}
+
+.levelup-bonus-item.heal {
+    background: linear-gradient(135deg, rgba(74, 222, 128, 0.3) 0%, rgba(34, 197, 94, 0.4) 100%);
+    border-color: #4ade80;
+    box-shadow: 0 0 15px rgba(74, 222, 128, 0.4);
+}
+
+.levelup-bonus-item.doom {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(250, 204, 21, 0.4) 100%);
+    border-color: #fff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+    animation: doom-pulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes doom-pulse {
+    0% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
+    100% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.9), 0 0 60px rgba(250, 204, 21, 0.5); }
+}
+
+.levelup-bonus-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.levelup-bonus-label {
+    font-size: 0.8rem;
+    color: #fff;
+    text-shadow: 1px 1px 0 #000;
+    font-weight: bold;
+}
     </style>
 </head>
 <body>
@@ -631,26 +731,7 @@
 <div id="game-container">
     <canvas id="gameCanvas"></canvas>
     
-    <!-- 精灵层 - 用于渲染WebP动画 -->
     <div id="sprite-layer"></div>
-    
-    <!-- 性能监控 -->
-    <button id="perf-toggle">F3: 性能</button>
-    <div id="perf-panel" class="hidden">
-        <div>FPS: <span id="perf-fps">0</span></div>
-        <div>Frame: <span id="perf-frame">0</span>ms</div>
-        <div>Update: <span id="perf-update">0</span>ms</div>
-        <div>Draw: <span id="perf-draw">0</span>ms</div>
-        <div>---</div>
-        <div>Zombies: <span id="perf-zombies">0</span></div>
-        <div>Projectiles: <span id="perf-projectiles">0</span></div>
-        <div>Effects: <span id="perf-effects">0</span></div>
-        <div>DOM Sprites: <span id="perf-sprites">0</span></div>
-        <div>---</div>
-        <div>Heap: <span id="perf-heap">N/A</span></div>
-        <div>Chains/Frame: <span id="perf-chains">0</span></div>
-    </div>
-    <div id="error-log"></div>
     
     <div id="loading-overlay">
         <div>🎮 LOADING ASSETS...</div>
@@ -674,6 +755,14 @@
         <button id="restart-btn">重新开始 <span style="font-size: 0.6em">[R]</span></button>
     </div>
 
+    <!-- 升级提示面板 -->
+    <div id="levelup-panel">
+        <img id="levelup-icon" src="./images/ui/lv1_icon.png" alt="">
+        <div id="levelup-text">已升至 1 级</div>
+        <div id="levelup-effects"></div>
+        <div id="levelup-bonus"></div>
+    </div>
+
     <div id="ui-layer">
         <div class="hud-top">
             <div style="display:flex; flex-direction:column; gap: 10px;">
@@ -689,11 +778,11 @@
                 </div>
                 <div id="stats-panel">
                     <div class="stat-row">
-                        <span>LEVEL:</span>
+                        <span>等级:</span>
                         <span id="stat-level" class="text-green-400">1</span>
                     </div>
                     <div class="stat-row">
-                        <span>NEXT:</span>
+                        <span>下一级需要大招数:</span>
                         <span id="stat-xp" class="text-gray-300">0/5</span>
                     </div>
                     <div class="stat-row" id="buff-row" style="display:none;">
@@ -734,7 +823,10 @@
         <div id="wave-timer"><div id="wave-progress"></div></div>
         <div id="toast">WAVE 1</div>
 
-        <button id="next-wave-btn">下一波<span class="key-hint">[N]</span></button>
+        <button id="next-wave-btn">
+            <img class="btn-icon" src="./images/ui/next_wave.png" alt="下一波" style="width:240px; height:240px;">
+            <span class="key-hint">[N]</span>
+        </button>
 
         <div id="overflow-banner">能量豆已满，使用大招或购买道具</div>
 
@@ -784,141 +876,7 @@
 </div>
 
 <script>
-/* ========== 全局错误捕获 ========== */
-const ErrorLog = {
-    errors: [],
-    maxErrors: 50,
-    
-    log(msg, source = 'unknown') {
-        const entry = {
-            time: new Date().toISOString().substr(11, 12),
-            source,
-            msg: String(msg).substring(0, 200)
-        };
-        this.errors.push(entry);
-        if (this.errors.length > this.maxErrors) this.errors.shift();
-        this.updateUI();
-        console.error(`[${source}]`, msg);
-    },
-    
-    updateUI() {
-        const el = document.getElementById('error-log');
-        if (this.errors.length > 0) {
-            el.style.display = 'block';
-            el.innerHTML = this.errors.map(e => 
-                `<div>[${e.time}] ${e.source}: ${e.msg}</div>`
-            ).join('');
-            el.scrollTop = el.scrollHeight;
-        }
-    }
-};
-
-window.onerror = (msg, src, line, col, err) => {
-    ErrorLog.log(`${msg} (${src}:${line}:${col})`, 'window.onerror');
-    return false;
-};
-
-window.onunhandledrejection = (e) => {
-    ErrorLog.log(e.reason, 'unhandledrejection');
-};
-
-/* ========== 性能监控器 ========== */
-const PerfMonitor = {
-    fps: 0,
-    frameTime: 0,
-    updateTime: 0,
-    drawTime: 0,
-    frames: 0,
-    lastFpsUpdate: 0,
-    chainCount: 0,
-    
-    enabled: false,
-    
-    init() {
-        const toggle = document.getElementById('perf-toggle');
-        const panel = document.getElementById('perf-panel');
-        
-        toggle.addEventListener('click', () => {
-            this.enabled = !this.enabled;
-            panel.classList.toggle('hidden', !this.enabled);
-        });
-        
-        window.addEventListener('keydown', (e) => {
-            if (e.code === 'F3') {
-                e.preventDefault();
-                this.enabled = !this.enabled;
-                panel.classList.toggle('hidden', !this.enabled);
-            }
-        });
-    },
-    
-    startFrame() {
-        this._frameStart = performance.now();
-    },
-    
-    startUpdate() {
-        this._updateStart = performance.now();
-    },
-    
-    endUpdate() {
-        this.updateTime = performance.now() - this._updateStart;
-    },
-    
-    startDraw() {
-        this._drawStart = performance.now();
-    },
-    
-    endDraw() {
-        this.drawTime = performance.now() - this._drawStart;
-    },
-    
-    endFrame() {
-        this.frameTime = performance.now() - this._frameStart;
-        this.frames++;
-        
-        const now = performance.now();
-        if (now - this.lastFpsUpdate > 500) {
-            this.fps = Math.round(this.frames * 1000 / (now - this.lastFpsUpdate));
-            this.frames = 0;
-            this.lastFpsUpdate = now;
-        }
-    },
-    
-    update(game) {
-        if (!this.enabled) return;
-        
-        const setClass = (id, value, warnThreshold, errorThreshold) => {
-            const el = document.getElementById(id);
-            el.textContent = typeof value === 'number' ? value.toFixed(1) : value;
-            el.className = '';
-            if (errorThreshold && value >= errorThreshold) el.className = 'error';
-            else if (warnThreshold && value >= warnThreshold) el.className = 'warn';
-        };
-        
-        setClass('perf-fps', this.fps, null, null);
-        document.getElementById('perf-fps').className = this.fps < 30 ? 'error' : (this.fps < 50 ? 'warn' : '');
-        
-        setClass('perf-frame', this.frameTime, 20, 33);
-        setClass('perf-update', this.updateTime, 10, 20);
-        setClass('perf-draw', this.drawTime, 10, 20);
-        
-        document.getElementById('perf-zombies').textContent = game.zombies?.length || 0;
-        document.getElementById('perf-projectiles').textContent = game.projectiles?.length || 0;
-        document.getElementById('perf-effects').textContent = game.effects?.length || 0;
-        document.getElementById('perf-sprites').textContent = Sprites.sprites.size;
-        document.getElementById('perf-chains').textContent = this.chainCount;
-        
-        // 内存信息 (仅Chrome)
-        if (performance.memory) {
-            const heap = (performance.memory.usedJSHeapSize / 1048576).toFixed(1);
-            const limit = (performance.memory.jsHeapSizeLimit / 1048576).toFixed(0);
-            document.getElementById('perf-heap').textContent = `${heap}/${limit}MB`;
-        }
-        
-        this.chainCount = 0; // 重置每帧计数
-    }
-};
-
+/* --- 精灵配置系统 --- */
 /* --- 精灵配置系统 --- */
 const SPRITE_CONFIG = {
     'player_idle_lv1': { scale: 0.8, offsetY: 120 },
@@ -939,20 +897,29 @@ const SPRITE_CONFIG = {
     'player_damage_lv4': { scale: 0.8, offsetY: 120 },
     
     'basic_walk': { scale: 0.7, offsetY: 20 },
-    'cone_walk': {  scale: 0.7, offsetY: 20  },
-    'bucket_walk': {  scale: 0.7, offsetY: 20  },
+    'basic_stunned': { scale: 0.7, offsetY: 20 },
+    'cone_walk': { scale: 0.7, offsetY: 20 },
+    'cone_stunned': { scale: 0.7, offsetY: 20 },
+    'bucket_walk': { scale: 0.7, offsetY: 20 },
+    'bucket_stunned': { scale: 0.7, offsetY: 20 },
     'football_walk': { scale: 0.7, offsetY: 40 },
     'football_run': { scale: 0.7, offsetY: 40 },
     'football_attack': { scale: 0.7, offsetY: 40 },
+    'football_stunned': { scale: 0.7, offsetY: 40 },
     'imp_walk': { scale: 1.2, offsetY: 0 },
+    'imp_stunned': { scale: 1.2, offsetY: 0 },
     'phantom_walk': { scale: 0.6, offsetY: 20 },
+    'phantom_stunned': { scale: 0.6, offsetY: 20 },
     'gargantuar_walk': { scale: 0.6, offsetY: 40 },
     'gargantuar_throw': { scale: 0.6, offsetY: 40 },
     'gargantuar_walk_no_imp': { scale: 0.6, offsetY: 40 },
     'gargantuar_attack': { scale: 0.6, offsetY: 40 },
     'gargantuar_attack_no_imp': { scale: 0.6, offsetY: 40 },
+    'gargantuar_stunned': { scale: 0.6, offsetY: 40 },
+    'gargantuar_stunned_no_imp': { scale: 0.6, offsetY: 40 },
     'shooter_idle': { scale: 0.7, offsetY: 30 },
     'shooter_shoot': { scale: 0.7, offsetY: 30 },
+    'shooter_stunned': { scale: 0.7, offsetY: 30 },
     
     'power_bean': { scale: 1.0, offsetY: 0 },
     'mower': { scale: 0.6, offsetY: 100 },
@@ -960,7 +927,7 @@ const SPRITE_CONFIG = {
     
     'bullet_normal': { scale: 0.6, offsetY: 30 },
     'bullet_stun': { scale: 0.6, offsetY: 30 },
-    'bullet_enemy': { scale: 1.0, offsetY: 0 },
+    'bullet_enemy': { scale: 2.0, offsetY: 40 },
     
     'default': { scale: 1.0, offsetY: 0 }
 };
@@ -969,15 +936,13 @@ function getSpriteConfig(key) {
     return SPRITE_CONFIG[key] || SPRITE_CONFIG['default'];
 }
 
-/* --- 精灵管理器 - 优化版 --- */
+/* --- 精灵管理器 --- */
 class SpriteManager {
     constructor() {
         this.sprites = new Map();
         this.spriteLayer = null;
         this.canvasRect = null;
         this.scaleFactor = 1;
-        
-        // 图片缓存：同一个spriteKey共享同一个Image对象
         this.imageCache = new Map();
     }
     
@@ -990,7 +955,6 @@ class SpriteManager {
         this.scaleFactor = scaleFactor;
     }
     
-    // 获取或创建缓存的图片
     getOrCreateImage(spriteKey, src) {
         if (!this.imageCache.has(spriteKey)) {
             const img = new Image();
@@ -1031,12 +995,9 @@ class SpriteManager {
             this.sprites.set(entityId, sprite);
         }
         
-        // 优化：只在key变化时更新src，不再添加uid参数
-        // 动画同步问题通过CSS animation-delay随机化解决
         if (sprite.dataset.spriteKey !== spriteKey) {
             sprite.src = src;
             sprite.dataset.spriteKey = spriteKey;
-            // 使用随机延迟来打破同步
             sprite.style.animationDelay = `${-Math.random() * 1000}ms`;
         }
         
@@ -1046,12 +1007,10 @@ class SpriteManager {
         const screenX = x * this.scaleFactor;
         const screenY = (y + config.offsetY) * this.scaleFactor;
         
-        // 使用 transform3d 强制GPU加速
         let transform = `translate3d(${screenX}px, ${screenY}px, 0) translate(-50%, -100%) scale(${totalScale})`;
         if (flipX) transform += ' scaleX(-1)';
         if (rotation !== 0) transform += ` rotate(${rotation}rad)`;
         
-        // 批量设置样式减少重排
         sprite.style.cssText = `
             position: absolute;
             left: 0;
@@ -1084,7 +1043,6 @@ class SpriteManager {
         return new Set(this.sprites.keys());
     }
     
-    // 清理不再使用的精灵
     cleanup(activeIds) {
         const toRemove = [];
         this.sprites.forEach((sprite, id) => {
@@ -1098,6 +1056,7 @@ class SpriteManager {
 
 const Sprites = new SpriteManager();
 
+/* --- 资源管理器 --- */
 /* --- 资源管理器 --- */
 class AssetManager {
     constructor() {
@@ -1129,20 +1088,29 @@ class AssetManager {
             'player_damage_lv4': './images/player/mgp_damage_lv4.webp',
             
             'basic_walk': './images/zombies/basic_walk.webp',
+            'basic_stunned': './images/zombies/basic_stunned.webp',
             'cone_walk': './images/zombies/cone_walk.webp',
+            'cone_stunned': './images/zombies/cone_stunned.webp',
             'bucket_walk': './images/zombies/bucket_walk.webp',
+            'bucket_stunned': './images/zombies/bucket_stunned.webp',
             'football_walk': './images/zombies/football_walk.webp',
             'football_run': './images/zombies/football_run.webp',
             'football_attack': './images/zombies/football_attack.webp',
+            'football_stunned': './images/zombies/football_stunned.webp',
             'imp_walk': './images/zombies/imp_walk.webp',
+            'imp_stunned': './images/zombies/imp_stunned.webp',
             'phantom_walk': './images/zombies/phantom_walk.webp',
+            'phantom_stunned': './images/zombies/phantom_stunned.webp',
             'gargantuar_walk': './images/zombies/gargantuar_walk.webp',
             'gargantuar_throw': './images/zombies/gargantuar_throw.webp',
             'gargantuar_walk_no_imp': './images/zombies/gargantuar_walk_no_imp.webp',
             'gargantuar_attack': './images/zombies/gargantuar_attack.webp',
             'gargantuar_attack_no_imp': './images/zombies/gargantuar_attack_no_imp.webp',
+            'gargantuar_stunned': './images/zombies/gargantuar_stunned.webp',
+            'gargantuar_stunned_no_imp': './images/zombies/gargantuar_stunned_no_imp.webp',
             'shooter_idle': './images/zombies/shooter_idle.webp',
             'shooter_shoot': './images/zombies/shooter_shoot.webp',
+            'shooter_stunned': './images/zombies/shooter_stunned.webp',
             
             'power_bean': './images/effects/power_bean.webp',
             'mower': './images/effects/mower.webp',
@@ -1158,7 +1126,17 @@ class AssetManager {
             
             'bullet_normal': './images/effects/bullet_normal.webp',
             'bullet_stun': './images/effects/bullet_stun.webp',
-            'bullet_enemy': './images/effects/bullet_enemy.webp'
+            'bullet_enemy': './images/effects/bullet_enemy.webp',
+            
+            'lv1_icon': './images/ui/lv1_icon.png',
+            'lv2_icon': './images/ui/lv2_icon.png',
+            'lv3_icon': './images/ui/lv3_icon.png',
+            'lv4_icon': './images/ui/lv4_icon.png',
+            'bullet_plus_icon': './images/ui/bullet_plus_icon.png',
+            'passive_ult_icon': './images/ui/passive_ult_icon.png',
+            'stun_bullet_icon': './images/ui/stun_bullet_icon.png',
+            'heal_icon': './images/ui/heal_icon.png',
+            'doom_icon': './images/ui/doom_icon.png'
         };
     }
 
@@ -1322,7 +1300,7 @@ class WebAudioManager {
             this.masterGain = this.ctx.createGain();
             this.masterGain.connect(this.ctx.destination);
         } catch (e) {
-            ErrorLog.log('AudioContext init failed: ' + e.message, 'Audio');
+            console.error('AudioContext init failed:', e);
         }
     }
 
@@ -1374,9 +1352,7 @@ class WebAudioManager {
 
     resumeContext() {
         if (this.ctx && this.ctx.state === 'suspended') {
-            this.ctx.resume().catch(e => {
-                ErrorLog.log('AudioContext resume failed', 'Audio');
-            });
+            this.ctx.resume().catch(e => {});
         }
         if (!this.isInitialized) {
             this.playBGM();
@@ -1396,9 +1372,7 @@ class WebAudioManager {
             this.bgmNode.connect(gainNode);
             gainNode.connect(this.masterGain);
             this.bgmNode.start(0);
-        } catch (e) {
-            ErrorLog.log('BGM play failed', 'Audio');
-        }
+        } catch (e) {}
     }
 
     stopBGM() {
@@ -1561,13 +1535,12 @@ const CONFIG = {
     passiveUltRate: 0.05, 
     bulletSpeed: 14,
     
-    // 优化后的连锁闪电配置
     chainRange: 200,
     chainCount: 1,
     chainHitCooldown: 800,
     chainSourceCooldown: 1500,
-    chainGlobalCooldown: 80, // 全局冷却
-    chainMaxPerFrame: 2,     // 每帧最大连锁数
+    chainGlobalCooldown: 80,
+    chainMaxPerFrame: 2,
     
     bulletAuraRange: 180, 
     meteorStartWave: 5, 
@@ -1576,10 +1549,26 @@ const CONFIG = {
     meteorDamage: 500,
     ultDuration: 2500,
     
-    // 性能限制
-    maxZombies: 60,
-    maxProjectiles: 100,
+    maxZombies: 100,
+    maxProjectiles: 140,
     maxEffects: 80
+};
+
+/* --- 升级效果配置 --- */
+const LEVELUP_EFFECTS = {
+    2: [
+        { icon: 'bullet_plus_icon', label: '子弹+1' },
+        { icon: 'passive_ult_icon', label: '被动概率↑' }
+    ],
+    3: [
+        { icon: 'bullet_plus_icon', label: '子弹+1' },
+        { icon: 'passive_ult_icon', label: '被动概率↑' }
+    ],
+    4: [
+        { icon: 'bullet_plus_icon', label: '子弹+1' },
+        { icon: 'stun_bullet_icon', label: '眩晕子弹' },
+        { icon: 'passive_ult_icon', label: '被动概率↑' }
+    ]
 };
 
 /* --- 僵尸类型定义 --- */
@@ -1590,70 +1579,42 @@ const ZOMBIE_TYPES = {
     },
     CONE: { 
         id: 'CONE', hp: 380, speed: 0.075, color: '#64748b', scale: 1.0, cost: 2, score: 200,
-        accessory: 'cone', name: "CONEHEAD",
+        accessory: 'cone', name: "路障头僵尸",
         spriteKey: 'cone_walk'
     },
     BUCKET: { 
         id: 'BUCKET', hp: 800, speed: 0.07, color: '#64748b', scale: 1.0, cost: 3, score: 300,
-        accessory: 'bucket', name: "BUCKETHEAD",
+        accessory: 'bucket', name: "铁桶头僵尸",
         spriteKey: 'bucket_walk'
     },
     FOOTBALL: { 
         id: 'FOOTBALL', hp: 450, speed: 0.18, color: '#ef4444', scale: 1.0, cost: 4, score: 400,
-        accessory: 'helmet', name: "FOOTBALL",
+        accessory: 'helmet', name: "橄榄球僵尸",
         spriteKey: 'football_walk',
         chargeSpeed: 0.25,
         walkSpeed: 0.08
     },
     GIANT: { 
         id: 'GIANT', hp: 2000, speed: 0.04, color: '#475569', scale: 1.4, cost: 10, score: 1000,
-        accessory: 'none', name: "GARGANTUAR",
+        accessory: 'none', name: "巨人僵尸",
         spriteKey: 'gargantuar_walk'
     },
     IMP: {
         id: 'IMP', hp: 120, speed: 0.12, color: '#a3e635', scale: 0.6, cost: 1, score: 100,
-        accessory: 'none', name: "IMP",
+        accessory: 'none', name: "小鬼僵尸",
         spriteKey: 'imp_walk'
     },
     PHANTOM: {
         id: 'PHANTOM', hp: 800, speed: 0.07, color: 'rgba(100, 200, 255, 0.5)', scale: 1.0, cost: 5, score: 500, 
-        accessory: 'none', name: "PHANTOM",
+        accessory: 'none', name: "幽灵",
         spriteKey: 'phantom_walk'
     },
     GUNNER: {
         id: 'GUNNER', hp: 200, speed: 0.0, color: '#a855f7', scale: 1.0, cost: 6, score: 600,
-        accessory: 'gun', name: "GUNNER",
+        accessory: 'gun', name: "枪手",
         spriteKey: 'shooter_idle'
     }
 };
-
-/* --- 对象池系统 --- */
-class ObjectPool {
-    constructor(factory, reset, initialSize = 20) {
-        this.factory = factory;
-        this.reset = reset;
-        this.pool = [];
-        
-        for (let i = 0; i < initialSize; i++) {
-            this.pool.push(factory());
-        }
-    }
-    
-    acquire(...args) {
-        let obj = this.pool.pop();
-        if (!obj) {
-            obj = this.factory();
-        }
-        this.reset(obj, ...args);
-        return obj;
-    }
-    
-    release(obj) {
-        if (this.pool.length < 100) { // 限制池大小
-            this.pool.push(obj);
-        }
-    }
-}
 
 /* --- 基础实体类 --- */
 
@@ -1934,7 +1895,6 @@ class AshEffect {
         this.y = y;
         this.particles = [];
         this.life = 1.0;
-        // 减少粒子数量
         for(let i=0; i<25; i++) {
             const size = Math.random()*5 + 2;
             this.particles.push({
@@ -1981,7 +1941,6 @@ class MeteorExplosion {
         this.maxLife = 1.0;
         this.particles = [];
         
-        // 减少粒子数量
         for(let i = 0; i < 15; i++) {
             const angle = Math.random() * Math.PI * 2;
             const speed = 2 + Math.random() * 6;
@@ -2339,6 +2298,7 @@ class PFOrb {
         this.onComplete = onComplete;
         this.dead = false;
         this.trail = [];
+        this.isImportant = true;
     }
 
     update(dt) {
@@ -2388,6 +2348,7 @@ class HPOrb {
         this.onComplete = onComplete;
         this.dead = false;
         this.trail = [];
+        this.isImportant = true;
     }
 
     update(dt) {
@@ -2436,6 +2397,7 @@ class DoomSeed {
         this.onComplete = onComplete;
         this.dead = false;
         this.trail = [];
+        this.isImportant = true;
     }
 
     update(dt) {
@@ -2553,12 +2515,12 @@ class Zombie {
         
         this.isDropping = false;
         this.targetY = 0;
-        this.dropSpeed = 0.3; 
+        this.dropSpeed = 0.3;
 
         this.shootTimer = 2000 + Math.random() * 2000;
         this.isShooting = false;
         this.shootAnimTimer = 0;
-        this.stunTimer = 0; 
+        this.stunTimer = 0;
         
         if (this.type.id === 'FOOTBALL') {
             this.footballState = 'charging';
@@ -2585,7 +2547,7 @@ class Zombie {
         if (!this.isDead) {
             if (this.stunTimer > 0) {
                 this.stunTimer -= dt;
-                return; 
+                return;
             }
 
             this.animTime += dt * 0.005 * (1 + this.speed * 5);
@@ -2603,7 +2565,7 @@ class Zombie {
                 if (this.y >= this.targetY) {
                     this.y = this.targetY;
                     this.isDropping = false;
-                    game.addEffect(new Particle(this.x, this.y + 40, '#aaa', 20, 3)); 
+                    game.addEffect(new Particle(this.x, this.y + 40, '#aaa', 20, 3));
                 }
             } else {
                 if (this.type.id === 'FOOTBALL') {
@@ -2624,8 +2586,8 @@ class Zombie {
                     this.shootTimer -= dt;
                     if (this.shootTimer <= 0) {
                         game.enemyProjectiles.push(new EnemyProjectile(this.x - 20, this.y - 40, this.row));
-                        SM.play('gun_fire'); 
-                        this.shootTimer = 3000 + Math.random() * 1000; 
+                        SM.play('gun_fire');
+                        this.shootTimer = 3000 + Math.random() * 1000;
                         this.isShooting = true;
                         this.shootAnimTimer = 0;
                     }
@@ -2733,7 +2695,7 @@ class Zombie {
     }
 
     takeDamage(amount, game, damageType) {
-        if (this.isDead || this.isDropping) return; 
+        if (this.isDead || this.isDropping) return;
 
         if (this.type.id === 'PHANTOM') {
             if (damageType === 'direct') {
@@ -2751,10 +2713,10 @@ class Zombie {
 
         this.hp -= amount;
         
-        const armorThreshold = this.maxHp * 0.3; 
+        const armorThreshold = this.maxHp * 0.3;
         if (this.hp > armorThreshold) {
             if (this.type.id === 'BUCKET') {
-                SM.play('metal', 80); 
+                SM.play('metal', 80);
             } else if (this.type.id === 'CONE' || this.type.id === 'FOOTBALL') {
                 SM.play('plastic', 80);
             }
@@ -2775,40 +2737,72 @@ class Zombie {
         
         let spriteKey = this.type.spriteKey;
         
-        if (this.type.id === 'FOOTBALL') {
-            if (this.footballState === 'attacking') {
-                spriteKey = 'football_attack';
-            } else if (this.footballState === 'charging') {
-                spriteKey = 'football_run';
-            } else {
-                spriteKey = 'football_walk';
+        // 优先检查眩晕状态
+        if (this.stunTimer > 0) {
+            switch (this.type.id) {
+                case 'BASIC':
+                    spriteKey = 'basic_stunned';
+                    break;
+                case 'CONE':
+                    spriteKey = 'cone_stunned';
+                    break;
+                case 'BUCKET':
+                    spriteKey = 'bucket_stunned';
+                    break;
+                case 'FOOTBALL':
+                    spriteKey = 'football_stunned';
+                    break;
+                case 'IMP':
+                    spriteKey = 'imp_stunned';
+                    break;
+                case 'PHANTOM':
+                    spriteKey = 'phantom_stunned';
+                    break;
+                case 'GIANT':
+                    spriteKey = this.hasThrownImp ? 'gargantuar_stunned_no_imp' : 'gargantuar_stunned';
+                    break;
+                case 'GUNNER':
+                    spriteKey = 'shooter_stunned';
+                    break;
             }
-        } else if (this.type.id === 'GIANT') {
-            if (this.giantState === 'attacking') {
-                spriteKey = this.hasThrownImp ? 'gargantuar_attack_no_imp' : 'gargantuar_attack';
-            } else if (this.giantState === 'throwing') {
-                spriteKey = 'gargantuar_throw';
-            } else {
-                spriteKey = this.hasThrownImp ? 'gargantuar_walk_no_imp' : 'gargantuar_walk';
+        } else {
+            // 正常状态的动画选择逻辑
+            if (this.type.id === 'FOOTBALL') {
+                if (this.footballState === 'attacking') {
+                    spriteKey = 'football_attack';
+                } else if (this.footballState === 'charging') {
+                    spriteKey = 'football_run';
+                } else {
+                    spriteKey = 'football_walk';
+                }
+            } else if (this.type.id === 'GIANT') {
+                if (this.giantState === 'attacking') {
+                    spriteKey = this.hasThrownImp ? 'gargantuar_attack_no_imp' : 'gargantuar_attack';
+                } else if (this.giantState === 'throwing') {
+                    spriteKey = 'gargantuar_throw';
+                } else {
+                    spriteKey = this.hasThrownImp ? 'gargantuar_walk_no_imp' : 'gargantuar_walk';
+                }
+            } else if (this.type.id === 'GUNNER') {
+                spriteKey = this.isShooting ? 'shooter_shoot' : 'shooter_idle';
             }
-        } else if (this.type.id === 'GUNNER') {
-            spriteKey = this.isShooting ? 'shooter_shoot' : 'shooter_idle';
         }
         
         let filter = '';
         if (this.hitFlash > 0) {
             filter = 'brightness(2)';
             this.hitFlash--;
-        }
-        if (this.type.id === 'PHANTOM') {
+        } else if (this.type.id === 'PHANTOM') {
             filter = 'hue-rotate(180deg) brightness(1.5)';
+        } else if (this.stunTimer > 0) {
+            filter = 'brightness(1.2) saturate(0.7)';
         }
         
         const alpha = this.type.id === 'PHANTOM' ? 0.6 : 1;
         
         const rendered = Sprites.updateSprite(this.id, spriteKey, this.x, this.y, {
             scale: this.scale,
-            rotation: sway * 0.02,
+            rotation: this.stunTimer > 0 ? 0 : sway * 0.02,
             alpha: alpha,
             filter: filter,
             zIndex: Math.floor(this.y)
@@ -2817,7 +2811,7 @@ class Zombie {
         if (!rendered) {
             ctx.save();
             ctx.translate(this.x, this.y);
-            ctx.scale(this.scale, this.scale); 
+            ctx.scale(this.scale, this.scale);
 
             if (this.isDropping) {
                 ctx.save();
@@ -2834,15 +2828,15 @@ class Zombie {
                 ctx.restore();
             }
 
-            ctx.rotate(sway * 0.02);
+            ctx.rotate(this.stunTimer > 0 ? 0 : sway * 0.02);
             
             if (this.type.id === 'PHANTOM') {
                 ctx.shadowBlur = 15;
                 ctx.shadowColor = 'cyan';
-                ctx.globalAlpha = 0.6; 
+                ctx.globalAlpha = 0.6;
             }
 
-            ctx.fillStyle = this.type.color; 
+            ctx.fillStyle = this.type.color;
             ctx.fillRect(-15, -50, 30, 50);
             
             ctx.fillStyle = this.type.id === 'PHANTOM' ? '#aee' : (this.type.id === 'GUNNER' ? '#d8b4fe' : '#84cc16');
@@ -2858,7 +2852,7 @@ class Zombie {
 
             if (this.type.accessory === 'cone') {
                 if (this.hp > this.maxHp * 0.3) {
-                    ctx.fillStyle = '#f97316'; 
+                    ctx.fillStyle = '#f97316';
                     ctx.beginPath();
                     ctx.moveTo(-15, -80);
                     ctx.lineTo(15, -80);
@@ -2868,15 +2862,15 @@ class Zombie {
                 }
             } else if (this.type.accessory === 'bucket') {
                 if (this.hp > this.maxHp * 0.3) {
-                    ctx.fillStyle = '#94a3b8'; 
+                    ctx.fillStyle = '#94a3b8';
                     ctx.fillRect(-16, -95, 32, 25);
                 }
             } else if (this.type.accessory === 'helmet') {
-                ctx.fillStyle = '#b91c1c'; 
+                ctx.fillStyle = '#b91c1c';
                 ctx.beginPath(); ctx.arc(0, -65, 22, Math.PI, 0); ctx.fill();
             } else if (this.type.accessory === 'gun') {
                 ctx.fillStyle = '#581c87';
-                ctx.fillRect(-25, -45, 20, 8); 
+                ctx.fillRect(-25, -45, 20, 8);
             }
 
             ctx.restore();
@@ -3011,7 +3005,6 @@ class Plant {
                 const hasBuff = this.stunBuffTimer > 0;
                 const stunMode = (isMaxLevel || hasBuff) ? 2 : 0; 
                 
-                // 限制子弹数量
                 if (game.projectiles.length < CONFIG.maxProjectiles) {
                     game.projectiles.push(new Projectile(this.x + 40, this.y - 20, angle, true, stunMode));
                 }
@@ -3040,7 +3033,7 @@ class Plant {
                 if (Math.random() < currentPassiveRate) {
                     this.startUlt(game);
                     SM.play('use_power');
-                    game.addEffect(new FloatText("LUCKY!", this.x, this.y-60, "#60a5fa"));
+                    game.addEffect(new FloatText("自动开大!", this.x, this.y-60, "#60a5fa"));
                     this.burstQueue = 0; 
                     return;
                 } else {
@@ -3063,31 +3056,46 @@ class Plant {
     }
 
     startUlt(game) {
-        this.isUltimating = true;
-        this.ultTimer = 0;
-        this.ultStartTime = Date.now(); 
-        this.preInputUlt = false;
+    this.isUltimating = true;
+    this.ultTimer = 0;
+    this.ultStartTime = Date.now(); 
+    this.preInputUlt = false;
+    
+    this.ultUseCount++;
+    const oldLevel = this.level;
+
+    let newLevel = 1;
+    if (this.ultUseCount >= 20) newLevel = 4;
+    else if (this.ultUseCount >= 10) newLevel = 3;
+    else if (this.ultUseCount >= 3) newLevel = 2;
+
+    if (newLevel > oldLevel) {
+        this.level = newLevel;
+        SM.play('levelup'); 
+        game.addEffect(new LevelUpEffect(this.x, this.y));
+        game.addEffect(new FloatText("LEVEL UP!", this.x, this.y - 80, "#facc15"));
+        game.shakeTimer = 300;
         
-        this.ultUseCount++;
-        const oldLevel = this.level;
-
-        let newLevel = 1;
-        if (this.ultUseCount >= 20) newLevel = 4;
-        else if (this.ultUseCount >= 10) newLevel = 3;
-        else if (this.ultUseCount >= 3) newLevel = 2;
-
-        if (newLevel > oldLevel) {
-            this.level = newLevel;
-            SM.play('levelup'); 
-            game.addEffect(new LevelUpEffect(this.x, this.y));
-            game.addEffect(new FloatText("LEVEL UP!", this.x, this.y - 80, "#facc15"));
-            game.shakeTimer = 300;
-            game.recoverLife();
-        } 
-        else if (this.level === 4 && this.ultUseCount > 20 && (this.ultUseCount % 10 === 0)) {
-             game.recoverLife();
-        }
+        // 先判断附加效果类型，再调用 recoverLife
+        const willDoom = game.state.lives >= 3;
+        const bonusType = willDoom ? 'doom' : 'heal';
+        
+        // 显示升级面板（在 recoverLife 之前，避免被覆盖）
+        game.showLevelUpPanel(newLevel, bonusType);
+        
+        game.recoverLife();
+    } 
+    else if (this.level === 4 && this.ultUseCount > 20 && (this.ultUseCount % 10 === 0)) {
+        // 先判断附加效果类型
+        const willDoom = game.state.lives >= 3;
+        const bonusType = willDoom ? 'doom' : 'heal';
+        
+        // MAX等级，只显示附加效果
+        game.showLevelUpPanel(4, bonusType, true);
+        
+        game.recoverLife();
     }
+}
 
     shoot(game) {
         this.recoil = 8;
@@ -3255,7 +3263,6 @@ class Game {
         this.canvas.height = CONFIG.canvasH;
         
         Sprites.init('sprite-layer');
-        PerfMonitor.init();
         
         this.fitScreen();
         window.addEventListener('resize', () => this.fitScreen());
@@ -3263,9 +3270,10 @@ class Game {
         this.heroPlant = null;
         this.pendingGiantAttacks = [];
         
-        // 连锁闪电状态
         this.chainsCalculatedThisFrame = 0;
         this.lastGlobalChainTime = 0;
+        
+        this.levelUpPanelTimer = null;
         
         this.initGame();
         this.bindInputs();
@@ -3334,6 +3342,9 @@ class Game {
         
         document.getElementById('pause-menu').style.display = 'none';
         document.getElementById('overflow-banner').style.display = 'none';
+        
+        // 隐藏升级面板
+        this.hideLevelUpPanel();
     }
 
     reset() {
@@ -3516,7 +3527,7 @@ class Game {
         const targetX = (rect.left - canvasRect.left + rect.width/2) / this.scaleFactor;
         const targetY = (rect.top - canvasRect.top + rect.height/2) / this.scaleFactor;
 
-        this.addEffect(new HPOrb(this.heroPlant.x, this.heroPlant.y, targetX, targetY, () => {
+        this.addImportantEffect(new HPOrb(this.heroPlant.x, this.heroPlant.y, targetX, targetY, () => {
             this.onHPOrbArrive();
         }));
     }
@@ -3533,23 +3544,26 @@ class Game {
     }
 
     triggerDoomSequence() {
-        const hearts = document.querySelectorAll('.heart');
-        hearts.forEach(h => h.classList.add('glowing'));
+    const hearts = document.querySelectorAll('.heart');
+    hearts.forEach(h => h.classList.add('glowing'));
 
-        const startEl = document.getElementById('lives-container');
-        const rect = startEl.getBoundingClientRect();
-        const canvasRect = this.canvas.getBoundingClientRect();
-        const startX = (rect.left - canvasRect.left + rect.width/2) / this.scaleFactor;
-        const startY = (rect.top - canvasRect.top + rect.height/2) / this.scaleFactor;
+    const startEl = document.getElementById('lives-container');
+    const rect = startEl.getBoundingClientRect();
+    const canvasRect = this.canvas.getBoundingClientRect();
+    const startX = (rect.left - canvasRect.left + rect.width/2) / this.scaleFactor;
+    const startY = (rect.top - canvasRect.top + rect.height/2) / this.scaleFactor;
 
-        const centerX = CONFIG.canvasW / 2;
-        const centerY = CONFIG.canvasH / 2;
+    const centerX = CONFIG.canvasW / 2;
+    const centerY = CONFIG.canvasH / 2;
 
-        this.addEffect(new DoomSeed(startX, startY, centerX, centerY, () => {
-            hearts.forEach(h => h.classList.remove('glowing'));
-            this.triggerScreenClear();
-        }));
-    }
+    this.addImportantEffect(new DoomSeed(startX, startY, centerX, centerY, () => {
+        hearts.forEach(h => h.classList.remove('glowing'));
+        this.triggerScreenClear();
+    }));
+    
+    // 移除这行，因为升级面板已经在 startUlt 中显示了
+    // this.showLevelUpPanel(4, 'doom', true);
+}
 
     triggerScreenClear() {
         SM.play('doom'); 
@@ -3566,6 +3580,100 @@ class Game {
             }
         });
     }
+
+    // 显示升级面板
+    // 显示升级面板
+showLevelUpPanel(level, bonusType, onlyBonus = false) {
+    const panel = document.getElementById('levelup-panel');
+    const iconEl = document.getElementById('levelup-icon');
+    const textEl = document.getElementById('levelup-text');
+    const effectsEl = document.getElementById('levelup-effects');
+    const bonusEl = document.getElementById('levelup-bonus');
+    
+    // 清除之前的定时器
+    if (this.levelUpPanelTimer) {
+        clearTimeout(this.levelUpPanelTimer);
+    }
+    
+    // 设置等级图标
+    iconEl.src = `./images/ui/lv${level}_icon.png`;
+    
+    if (onlyBonus) {
+        // MAX等级只显示附加效果
+        iconEl.style.display = 'none';
+        textEl.style.display = 'none';
+        effectsEl.innerHTML = '';
+    } else {
+        iconEl.style.display = 'block';
+        textEl.style.display = 'block';
+        textEl.innerText = `已升至 ${level} 级`;
+        
+        // 构建升级效果列表
+        effectsEl.innerHTML = '';
+        const effects = LEVELUP_EFFECTS[level] || [];
+        effects.forEach(effect => {
+            const item = document.createElement('div');
+            item.className = 'levelup-effect-item';
+            item.innerHTML = `
+                <img class="levelup-effect-icon" src="./images/ui/${effect.icon}.png" alt="">
+                <span class="levelup-effect-label">${effect.label}</span>
+            `;
+            effectsEl.appendChild(item);
+        });
+    }
+    
+    // 构建附加效果
+    bonusEl.innerHTML = '';
+    if (bonusType === 'heal') {
+        const item = document.createElement('div');
+        item.className = 'levelup-bonus-item heal';
+        item.innerHTML = `
+            <img class="levelup-bonus-icon" src="./images/ui/heal_icon.png" alt="">
+            <span class="levelup-bonus-label">+1 生命</span>
+        `;
+        bonusEl.appendChild(item);
+    } else if (bonusType === 'doom') {
+        const item = document.createElement('div');
+        item.className = 'levelup-bonus-item doom';
+        item.innerHTML = `
+            <img class="levelup-bonus-icon" src="./images/ui/doom_icon.png" alt="">
+            <span class="levelup-bonus-label">DOOM!</span>
+        `;
+        bonusEl.appendChild(item);
+    }
+    
+    // 关键修复：先清除内联样式，让CSS类生效
+    panel.style.display = '';
+    
+    // 显示面板
+    panel.classList.remove('hide');
+    void panel.offsetWidth; // 强制重排，确保动画生效
+    panel.classList.add('show');
+    
+    // 设置淡出定时器
+    this.levelUpPanelTimer = setTimeout(() => {
+        panel.classList.remove('show');
+        panel.classList.add('hide');
+        
+        // 动画结束后隐藏
+        setTimeout(() => {
+            if (panel.classList.contains('hide')) {
+                panel.style.display = 'none';
+                panel.classList.remove('hide');
+            }
+        }, 800);
+    }, 2500);
+}
+    
+hideLevelUpPanel() {
+    const panel = document.getElementById('levelup-panel');
+    panel.classList.remove('show', 'hide');
+    panel.style.display = 'none';
+    if (this.levelUpPanelTimer) {
+        clearTimeout(this.levelUpPanelTimer);
+        this.levelUpPanelTimer = null;
+    }
+}
 
     buyShield() {
         if (this.state.pfCount >= 2 && !this.hasShield && !this.state.gameOver) {
@@ -3728,14 +3836,14 @@ class Game {
 
             if (possibleThemes.length > 0) {
                 themeZombie = possibleThemes[Math.floor(Math.random() * possibleThemes.length)];
-                themeText = `\n${themeZombie.name} RUSH`;
+                themeText = `\n${themeZombie.name}来袭!`;
             }
         }
 
         if (this.state.wave === CONFIG.meteorStartWave) {
-            this.showToast("METEOR INCOMING!");
+            this.showToast("陨石来袭!");
         } else {
-            this.showToast(`WAVE ${this.state.wave}${themeText}`);
+            this.showToast(`第 ${this.state.wave} 波僵尸正在接近!${themeText}`);
         }
         
         const currentTileCount = this.energyTiles.length;
@@ -3845,7 +3953,6 @@ class Game {
         if (this.state.gameOver) return;
         this.state.wave++;
         this.startWave();
-        this.addEffect(new FloatText(reason === "BUTTON" ? "RUSH!" : "NEXT!", CONFIG.canvasW/2, CONFIG.canvasH/2, "#facc15"));
     }
 
     addScore(amount) {
@@ -3918,7 +4025,7 @@ class Game {
         const targetY = giant.y;
         
         SM.play('imp_throw'); 
-        this.addEffect(new FlyingImp(giant.x, giant.y - 60, targetX, targetY, giant.row, (row, x, y) => {
+        this.addImportantEffect(new FlyingImp(giant.x, giant.y - 60, targetX, targetY, giant.row, (row, x, y) => {
             const imp = new Zombie(row, ZOMBIE_TYPES.IMP, this.state.wave);
             imp.x = x;
             imp.y = y;
@@ -4083,8 +4190,6 @@ class Game {
     }
 
     loop(timestamp) {
-        PerfMonitor.startFrame();
-        
         if (!this.lastTime) this.lastTime = timestamp;
         let dt = timestamp - this.lastTime;
         this.lastTime = timestamp;
@@ -4092,23 +4197,15 @@ class Game {
         if (dt > 100) dt = 100; 
 
         if (!this.paused && !this.state.gameOver) {
-            PerfMonitor.startUpdate();
             this.update(dt, Date.now());
-            PerfMonitor.endUpdate();
         }
         
-        PerfMonitor.startDraw();
         this.draw();
-        PerfMonitor.endDraw();
-        
-        PerfMonitor.endFrame();
-        PerfMonitor.update(this);
         
         requestAnimationFrame(this.loop);
     }
 
     update(dt, now) {
-        // 重置每帧计数器
         this.chainsCalculatedThisFrame = 0;
         
         if (this.shakeTimer > 0) {
@@ -4300,7 +4397,7 @@ class Game {
             const z = this.zombies[i];
             z.update(dt, this); 
             
-            if (z.x < LEFT_MARGIN - 20) {
+            if (z.x < LEFT_MARGIN - 120) {
                  this.triggerGameOver('ZOMBIE');
             }
 
@@ -4313,11 +4410,15 @@ class Game {
             }
         }
 
-        // 限制特效数量
-        while (this.effects.length > CONFIG.maxEffects) {
-            const oldest = this.effects.shift();
+        const normalEffects = this.effects.filter(e => !e.isImportant);
+        const importantEffects = this.effects.filter(e => e.isImportant);
+        
+        while (normalEffects.length > CONFIG.maxEffects - 20) {
+            const oldest = normalEffects.shift();
             if (oldest && oldest.cleanup) oldest.cleanup();
         }
+        
+        this.effects = [...importantEffects, ...normalEffects];
 
         for(let i=this.effects.length-1; i>=0; i--) {
             const e = this.effects[i];
@@ -4332,20 +4433,16 @@ class Game {
     }
 
     triggerChainLightning(sourceZombie, damage, game) {
-        // 帧预算检查
         if (this.chainsCalculatedThisFrame >= CONFIG.chainMaxPerFrame) return;
 
         const now = Date.now();
 
-        // 全局冷却
         if (this.lastGlobalChainTime && now - this.lastGlobalChainTime < CONFIG.chainGlobalCooldown) return;
 
-        // 源头冷却
         if (sourceZombie.lastChainSourceTime && now - sourceZombie.lastChainSourceTime < CONFIG.chainSourceCooldown) return;
 
         this.chainsCalculatedThisFrame++;
         this.lastGlobalChainTime = now;
-        PerfMonitor.chainCount++;
 
         let closestZombie = null;
         let minDistSq = CONFIG.chainRange * CONFIG.chainRange;
@@ -4387,6 +4484,13 @@ class Game {
     }
 
     spawnPFOrb(startX, startY) {
+        const normalEffectsCount = this.effects.filter(e => !e.isImportant).length;
+        if (normalEffectsCount >= CONFIG.maxEffects - 10) {
+            SM.play('power_drop');
+            this.actualGainPF();
+            return;
+        }
+        
         SM.play('power_drop'); 
         const targetSlotIndex = Math.min(this.state.pfCount, 4);
         const targetEl = document.getElementById(`pf-slot-${targetSlotIndex}`);
@@ -4395,9 +4499,12 @@ class Game {
             const canvasRect = this.canvas.getBoundingClientRect();
             const targetX = (rect.left - canvasRect.left + rect.width/2) / this.scaleFactor;
             const targetY = (rect.top - canvasRect.top + rect.height/2) / this.scaleFactor;
-            this.addEffect(new PFOrb(startX, startY, targetX, targetY, () => {
+            
+            this.addImportantEffect(new PFOrb(startX, startY, targetX, targetY, () => {
                 this.actualGainPF();
             }));
+        } else {
+            this.actualGainPF();
         }
     }
 
@@ -4456,6 +4563,11 @@ class Game {
         if (this.effects.length < CONFIG.maxEffects) {
             this.effects.push(e); 
         }
+    }
+    
+    addImportantEffect(e) {
+        e.isImportant = true;
+        this.effects.push(e);
     }
 
     showToast(text) {
